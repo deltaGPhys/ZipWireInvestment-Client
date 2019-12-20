@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +9,6 @@ export class AppComponent {
   title: string = 'FinanceAppFrontEnd';
 
   ngOnInit() {
-      console.log("hiApp");
+      
   }
 }
