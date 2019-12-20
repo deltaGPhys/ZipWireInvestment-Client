@@ -1,9 +1,8 @@
 <p>transaction-list-test works!</p>
+<p>{{text}}</p>
 <ul class="transactions">
     <li *ngFor="let transaction of transactions">
-      <a routerLink="/detail/{{transaction.id}}">
         <span class="badge">{{transaction.id}}</span> {{transaction.transactionType}} ${{transaction.amount}} {{transaction.account}} {{transaction.comment}}
-      </a>
     </li>
   </ul>
   

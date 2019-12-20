@@ -19,7 +19,10 @@ export class TransactionListTestComponent implements OnInit {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { 
+  private text: string = "hiii";
+
+  constructor() { 
+    console.log(apiUrl);
 
   }
 
@@ -28,12 +31,17 @@ export class TransactionListTestComponent implements OnInit {
     this.getTransactions();
   }
 
-  getTransactions(): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(apiUrl+"/transactions")
-      .pipe(
-        tap(_ => console.log('fetched transactions')),
-        catchError(this.handleError<Transaction[]>('getTransactions', []))
-      );
+  getTransactions() {
+    this.transactions = [
+      new Transaction(2,"DEPOSIT",123.45,"Jar of coins"),
+      new Transaction(7,"WITHDRAWAL",45.67,"Online purchase from catsweaters.com")
+    ];
+    return this.transactions;
+    // return this.http.get<Transaction[]>(apiUrl+"/transactions")
+    //   .pipe(
+    //     tap(_ => console.log('fetched transactions')),
+    //     catchError(this.handleError<Transaction[]>('getTransactions', []))
+    //   );
   }
 
   /**

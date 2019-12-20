@@ -1,11 +1,10 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
-
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', component: TransactionListTestComponent }
+    { path: '/', component: AppComponent }
 ];
 
 @NgModule({
