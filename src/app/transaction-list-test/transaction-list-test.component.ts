@@ -14,7 +14,7 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionListTestComponent implements OnInit {
 
   transactions: Transaction[];
-  
+   
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,16 +28,17 @@ export class TransactionListTestComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getTransactions();
+    console.log("here");
+    this.transactionService.getTransactions().subscribe(transactions => this.transactions = transactions);
   }
 
-  getTransactions() {
-    this.transactions = [
-      new Transaction(2,"DEPOSIT",123.45,"Jar of coins"),
-      new Transaction(7,"WITHDRAWAL",45.67,"Online purchase from catsweaters.com")
-    ];
-    return this.transactions;
+  // getTransactions() {
+  //   this.transactions = [
+  //     new Transaction(2,"DEPOSIT",123.45,"Jar of coins"),
+  //     new Transaction(7,"WITHDRAWAL",45.67,"Online purchase from catsweaters.com")
+  //   ];
+  //   return this.transactions;
 
-  }
+  // }
 
 }

@@ -21,10 +21,11 @@ export class TransactionService {
 
     /** GET Transactiones from the server */
     getTransactions (): Observable<Transaction[]> {
+        console.log(apiUrl);
         return this.http.get<Transaction[]>(apiUrl+"/transactions")
         .pipe(
-            tap(_ => console.log('fetched Transactiones')),
-            catchError(this.handleError<Transaction[]>('getTransactiones', []))
+            tap(_ => console.log('fetched Transactions')),
+            catchError(this.handleError<Transaction[]>('getTransactions', []))
         );
     }
 

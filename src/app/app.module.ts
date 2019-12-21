@@ -4,18 +4,22 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TransViewComponent } from './trans-view/trans-view.component';
+import { TransactionService } from './services/transaction.service';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TransViewComponent
+    TransactionListTestComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,11 +2,12 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { TransViewComponent } from './trans-view/trans-view.component';
+import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-    { path: '/', component: AppComponent },
-    { path: '/transactions', component: TransViewComponent }
+    { path: '', component: LoginComponent },
+    { path: 'transactions', component: TransactionListTestComponent }
 ];
 
 @NgModule({
