@@ -12,21 +12,47 @@ import { Transaction } from '../models/Transaction';
 export class TransactionService {
     
     @Inject(apiUrl) private apiUrl: string;
-    
+    private transactionsUrl: string = apiUrl+"/transactions";
+    transTypes: string[] = []; 
+
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        //console.log("asdasdasdasdas");
+        this.refreshTransTypes();
+        console.log(this.transTypes);
+    }
 
-    /** GET Transactiones from the server */
+
+
+    /** GET Transactions from the server */
     getTransactions (): Observable<Transaction[]> {
-        console.log(apiUrl);
-        return this.http.get<Transaction[]>(apiUrl+"/transactions")
-        .pipe(
-            tap(_ => console.log('fetched Transactions')),
-            catchError(this.handleError<Transaction[]>('getTransactions', []))
-        );
+        
+        return this.http.get<Transaction[]>(this.transactionsUrl)
+            .pipe(
+                tap(_ => console.log('fetched Transactions')),
+                catchError(this.handleError<Transaction[]>('getTransactions', []))
+            );
+    }
+
+    /** GET Transaction types from the server */
+    refreshTransTypes (): void {
+        const promise = this.http.get(apiUrl+"/transactiontypes").toPromise();
+          
+        promise.then((data)=>{
+        let respData: Object = data;
+        
+        for (let i=0; i < Object.keys(respData).length;i++)  {
+            this.transTypes.push(respData[i]);
+        }
+        console.log('ref');
+        }).catch((error)=>{
+        console.log("Promise rejected with " + JSON.stringify(error));
+        });
+        
+
     }
 
 //   /** GET Transaction by id. Return `undefined` when id not found */
@@ -66,13 +92,13 @@ export class TransactionService {
 
 //   //////// Save methods //////////
 
-//   /** POST: add a new Transaction to the server */
-//   addTransaction (Transaction: Transaction): Observable<Transaction> {
-//     return this.http.post<Transaction>(this.TransactionesUrl, Transaction, this.httpOptions).pipe(
-//       tap((newTransaction: Transaction) => this.log(`added Transaction w/ id=${newTransaction.id}`)),
-//       catchError(this.handleError<Transaction>('addTransaction'))
-//     );
-//   }
+  /** POST: add a new Transaction to the server */
+  addTransaction (Transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(this.transactionsUrl, Transaction, this.httpOptions).pipe(
+      tap((newTransaction: Transaction) => console.log(`added Transaction w/ id=${newTransaction.id}`)),
+      catchError(this.handleError<Transaction>('addTransaction'))
+    );
+  }
 
 //   /** DELETE: delete the Transaction from the server */
 //   deleteTransaction (Transaction: Transaction | number): Observable<Transaction> {

@@ -14,13 +14,11 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionListTestComponent implements OnInit {
 
   transactions: Transaction[];
-   
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private text: string = "hiii";
 
   constructor(private transactionService: TransactionService) { 
 
