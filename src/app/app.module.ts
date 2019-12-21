@@ -7,12 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { TransactionService } from './services/transaction.service';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { GoalsComponent } from './goals/goals.component';
+import { AccountsComponent } from './accounts/accounts.component';
+import { InvestmentsComponent } from './investments/investments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TransactionListTestComponent,
-    LoginComponent
+    LoginComponent,
+    GoalsComponent,
+    AccountsComponent,
+    InvestmentsComponent
   ],
   imports: [
     BrowserModule,
