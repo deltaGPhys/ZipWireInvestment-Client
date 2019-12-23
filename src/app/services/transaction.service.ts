@@ -20,9 +20,7 @@ export class TransactionService {
     };
 
     constructor(private http: HttpClient) { 
-        //console.log("asdasdasdasdas");
         this.refreshTransTypes();
-        console.log(this.transTypes);
     }
 
 
@@ -34,6 +32,15 @@ export class TransactionService {
             .pipe(
                 tap(_ => console.log('fetched Transactions')),
                 catchError(this.handleError<Transaction[]>('getTransactions', []))
+            );
+    }
+
+    /** GET Transaction types from the server */
+    getTransTypes (): Observable<string[]> {
+      return this.http.get<string[]>(apiUrl+"/transactiontypes")
+            .pipe(
+                tap(_ => console.log('fetched Transactions')),
+                catchError(this.handleError<string[]>('getTransactions', []))
             );
     }
 
@@ -51,8 +58,6 @@ export class TransactionService {
         }).catch((error)=>{
         console.log("Promise rejected with " + JSON.stringify(error));
         });
-        
-
     }
 
 //   /** GET Transaction by id. Return `undefined` when id not found */
@@ -93,8 +98,15 @@ export class TransactionService {
 //   //////// Save methods //////////
 
   /** POST: add a new Transaction to the server */
-  addTransaction (Transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(this.transactionsUrl, Transaction, this.httpOptions).pipe(
+  addTransaction (transaction: Transaction): Observable<Transaction> {
+    console.log(transaction.comment);
+    console.log("transaction.comment");
+    console.log(transaction.amount);
+    transaction.id = null;
+    transaction.account = null;
+    console.log(transaction);
+    
+    return this.http.post<Transaction>(this.transactionsUrl, transaction, this.httpOptions).pipe(
       tap((newTransaction: Transaction) => console.log(`added Transaction w/ id=${newTransaction.id}`)),
       catchError(this.handleError<Transaction>('addTransaction'))
     );
@@ -127,7 +139,7 @@ export class TransactionService {
    */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
+      console.log('error');
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 

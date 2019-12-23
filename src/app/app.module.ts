@@ -1,6 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
@@ -16,6 +17,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
 import { InvestmentHeaderComponent } from './investments/investment-header/investment-header.component';
 import { HoldingsListComponent } from './investments/holdings-list/holdings-list.component';
+import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
 
 
 @NgModule({
@@ -31,13 +33,15 @@ import { HoldingsListComponent } from './investments/holdings-list/holdings-list
     HoldingsListComponent,
     DashboardComponent,
     CreateAccountComponent,
-    TransactionFormComponent
+    TransactionFormComponent,
+    InvestmentBuyFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
   ],
   providers: [TransactionService, Title],
   bootstrap: [AppComponent]

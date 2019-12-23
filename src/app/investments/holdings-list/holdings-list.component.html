@@ -27,8 +27,7 @@
             <label>Shares Held</label>: {{holding.numShares}}<br>
             <label>Shares Purchased</label>: {{holding.purchaseDate}}<br>
             <label>Purchase Price</label>: {{holding.purchaseCost * holding.numShares | currency}} ({{holding.purchaseCost | currency}}/share)<br>
-            <label>Position Value</label>: {{holding.value | currency}} ({{holding.purchaseCost | currency}}/share)<br>
-
+            <label>Position Value</label>: {{holding.value | currency}} ({{holding.security.currentPrice | currency}}/share)<br>
 
         </ng-template>
     </ngb-panel>

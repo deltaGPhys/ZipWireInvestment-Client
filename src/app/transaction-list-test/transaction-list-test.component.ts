@@ -14,6 +14,7 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionListTestComponent implements OnInit {
 
   transactions: Transaction[];
+  transTypes: string[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,6 +28,8 @@ export class TransactionListTestComponent implements OnInit {
 
   ngOnInit() {
     this.transactionService.getTransactions().subscribe(transactions => this.transactions = transactions);
+    this.transactionService.getTransTypes().subscribe(transTypes => this.transTypes = transTypes);
+    
   }
 
   // getTransactions() {
