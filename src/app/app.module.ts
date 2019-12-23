@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +24,9 @@ import { TransactionFormComponent } from './transaction-form/transaction-form.co
     AccountsComponent,
     InvestmentsComponent,
     DashboardComponent,
-    CreateAccountComponent
-=======
+    CreateAccountComponent,
     TransactionFormComponent
->>>>>>> 8ef4c7dcf7418a8ab45bb08d540d93b8fa889eb0
+
   ],
   imports: [
     BrowserModule,

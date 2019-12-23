@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: 'investments', component: InvestmentsComponent },
     { path: 'register', component: CreateAccountComponent},
     
+    
 ];
 
 @NgModule({
