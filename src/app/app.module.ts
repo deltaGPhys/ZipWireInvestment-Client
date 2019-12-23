@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,9 +11,12 @@ import { LoginComponent } from './login/login.component';
 import { GoalsComponent } from './goals/goals.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { InvestmentsComponent } from './investments/investments.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
 import { InvestmentHeaderComponent } from './investments/investment-header/investment-header.component';
 import { HoldingsListComponent } from './investments/holdings-list/holdings-list.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { HoldingsListComponent } from './investments/holdings-list/holdings-list
     InvestmentsComponent,
     TransactionFormComponent,
     InvestmentHeaderComponent,
-    HoldingsListComponent
+    HoldingsListComponent,
+    DashboardComponent,
+    CreateAccountComponent,
+    TransactionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,7 @@ import { HoldingsListComponent } from './investments/holdings-list/holdings-list
     AppRoutingModule,
     NgbModule,
   ],
-  providers: [TransactionService],
+  providers: [TransactionService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

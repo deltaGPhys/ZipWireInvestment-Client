@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  public constructor(private titleService: Title) { }
 
+  public setTitle(newTitle : string) {
+    this.titleService.setTitle(newTitle)
+  }
+  
   ngOnInit() {
   }
 

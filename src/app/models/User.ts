@@ -1,18 +1,22 @@
 
 export class User {
     id: number;
-    lastName: string;
-    firstName: string;
-    accounts: Account[];
-    email: string;
-    
+    firstName : string;
+    lastName : string;
+    email : string;
+    password: string;
+    accounts: Array<Account> [];
+    rent : number;
+    salary : number;
 
-    constructor(id: number, lastName: string, firstName: string, email: string){
+    constructor(id:number, firstName:string, lastname:string, email:string, password:string, accounts:Array<Account> [], rent:number, salary: number){
         this.id = id;
-        this.lastName = lastName;
         this.firstName = firstName;
-        this.accounts = null;
+        this.lastName = lastname;
         this.email = email;
+        this.password = password;
+        this.accounts = accounts;
+        this.rent = rent;
+        this.salary = salary;
     }
-    
 }
