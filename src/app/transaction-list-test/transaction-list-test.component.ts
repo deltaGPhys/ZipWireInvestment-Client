@@ -26,7 +26,6 @@ export class TransactionListTestComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log("here");
     this.transactionService.getTransactions().subscribe(transactions => this.transactions = transactions);
   }
 

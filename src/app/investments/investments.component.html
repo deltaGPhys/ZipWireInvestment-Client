@@ -1,1 +1,26 @@
-<p>investments works!</p>
+
+
+<div class="row" style="max-width: 100%; margin:10px;">
+    <div class="col">
+        <app-investment-header
+        [account]="account">
+        </app-investment-header>
+    <button type="button" class="btn btn-primary" (click)="acctTest()">
+    Test
+  </button>
+    </div>
+</div>
+<div class="row" style="max-width: 100%; margin:10px;" *ngIf="account">
+    <div class="col-md-4" style="border: 1px solid black;">
+        <h3>Security Holdings</h3>
+        <app-holdings-list
+        [account]="account">
+        </app-holdings-list>
+    </div>
+    <div class="col-md-4" style="border: 1px solid black;">
+    </div>
+    <div class="col-md-4" style="border: 1px solid black;">
+    <h3>Buy/sell Stocks</h3>
+    </div>
+</div>
+

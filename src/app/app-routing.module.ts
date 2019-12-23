@@ -14,7 +14,8 @@ const routes: Routes = [
     { path: 'goals', component: GoalsComponent },
     { path: 'accounts', component: AccountsComponent },
     { path: 'investments', component: InvestmentsComponent },
-];
+    
+  ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

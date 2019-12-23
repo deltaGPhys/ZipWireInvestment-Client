@@ -1,8 +1,8 @@
 <div class="container">
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
+      <div class="navbar-header" >
         <img src="./assets/images/logo.png" style="height:50px;">
       </div>
       
@@ -15,8 +15,10 @@
     <li role="tab" data-toggle="tab"><a routerLink="/accounts">Accounts</a></li>
     <li role="tab" data-toggle="tab"><a routerLink="/investments">Investments</a></li>
   </ul>
-
-  <router-outlet></router-outlet>
+  <div class="container" style="border: 1px solid #ddd; border-top: 0px; max-width: 100%; ">
+    <router-outlet></router-outlet>
+  </div>
+  
 </div>
 
 <div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModal" aria-hidden="true">
