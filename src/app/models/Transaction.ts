@@ -1,13 +1,15 @@
 import { Account } from "./Account";
+import { TransactionType } from './TransactionType';
+
 
 export class Transaction {
     id: number;
-    transactionType: string;
+    transactionType: TransactionType; 
     amount: number;
     account: Account = null;
     comment: string;
 
-    constructor(id:number,transactionType:string,amount:number,comment:string){
+    constructor(id:number,transactionType:TransactionType,amount:number,comment:string){
         this.id = id;
         this.transactionType = transactionType;
         this.amount = amount;

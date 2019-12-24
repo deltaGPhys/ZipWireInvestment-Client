@@ -1,7 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
@@ -42,6 +42,7 @@ import { InvestmentBuyFormComponent } from './investments/investment-buy-form/in
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [TransactionService, Title],
   bootstrap: [AppComponent]

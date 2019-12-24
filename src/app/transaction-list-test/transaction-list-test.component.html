@@ -3,12 +3,12 @@
     Add Transaction
   </button>
   <app-transaction-form
-  [transTypes]="transTypes">
-  </app-transaction-form
-    >
+  [transTypes]="transTypes"
+  [(transactions)]="transactions">
+  </app-transaction-form>
 <ul class="transactions">
     <li *ngFor="let transaction of transactions">
-        <span class="badge">{{transaction.id}}</span> {{transaction.transactionType}} ${{transaction.amount}} {{transaction.account}} {{transaction.comment}}
+        <span class="badge">{{transaction.id}}</span> <span *ngIf="transaction.type"> {{transaction.type}}</span> {{transaction.amount | currency}} {{transaction.account}} {{transaction.comment}}
     </li>
 </ul>
   

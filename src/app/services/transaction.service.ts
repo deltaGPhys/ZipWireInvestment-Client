@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Transaction } from '../models/Transaction';
+import { TransactionType } from '../models/TransactionType';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,14 +14,16 @@ export class TransactionService {
     
     @Inject(apiUrl) private apiUrl: string;
     private transactionsUrl: string = apiUrl+"/transactions";
-    transTypes: string[] = []; 
+    transTypes: TransactionType[] = []; 
+    transactions: Transaction[];
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(private http: HttpClient) { 
-        this.refreshTransTypes();
+      this.getTransactions().subscribe(transactions => {this.transactions = transactions; console.log(transactions);});
+      this.getTransTypes();
     }
 
 
@@ -28,31 +31,41 @@ export class TransactionService {
     /** GET Transactions from the server */
     getTransactions (): Observable<Transaction[]> {
         
-        return this.http.get<Transaction[]>(this.transactionsUrl)
-            .pipe(
-                tap(_ => console.log('fetched Transactions')),
-                catchError(this.handleError<Transaction[]>('getTransactions', []))
-            );
+      return this.http.get<Transaction[]>(this.transactionsUrl)
+          .pipe(
+              tap(_ => console.log('fetched Transactions')),
+              map(val => this.mapTypes(val)),
+              catchError(this.handleError<Transaction[]>('getTransactions', []))
+          );
     }
 
+    mapTypes(trans: Transaction[]) {
+      console.log("zarp");
+      for (let t of trans) {
+        console.log(t);
+        //t.transactionType = this.transTypes[t.transactionType.id];    
+      }
+      return trans;
+    } 
+    
     /** GET Transaction types from the server */
-    getTransTypes (): Observable<string[]> {
-      return this.http.get<string[]>(apiUrl+"/transactiontypes")
-            .pipe(
-                tap(_ => console.log('fetched Transactions')),
-                catchError(this.handleError<string[]>('getTransactions', []))
-            );
-    }
+    // getTransTypes (): Observable<string[]> {
+    //   return this.http.get<string[]>(apiUrl+"/transactiontypes")
+    //         .pipe(
+    //             tap(_ => console.log('fetched Transactions')),
+    //             catchError(this.handleError<string[]>('getTransactions', []))
+    //         );
+    // }
 
     /** GET Transaction types from the server */
-    refreshTransTypes (): void {
+    getTransTypes (): void {
         const promise = this.http.get(apiUrl+"/transactiontypes").toPromise();
           
         promise.then((data)=>{
         let respData: Object = data;
         
         for (let i=0; i < Object.keys(respData).length;i++)  {
-            this.transTypes.push(respData[i]);
+            this.transTypes.push(new TransactionType(i+1,respData[i]));
         }
         console.log('ref');
         }).catch((error)=>{
@@ -99,17 +112,17 @@ export class TransactionService {
 
   /** POST: add a new Transaction to the server */
   addTransaction (transaction: Transaction): Observable<Transaction> {
-    console.log(transaction.comment);
-    console.log("transaction.comment");
-    console.log(transaction.amount);
-    transaction.id = null;
-    transaction.account = null;
+
     console.log(transaction);
     
-    return this.http.post<Transaction>(this.transactionsUrl, transaction, this.httpOptions).pipe(
-      tap((newTransaction: Transaction) => console.log(`added Transaction w/ id=${newTransaction.id}`)),
-      catchError(this.handleError<Transaction>('addTransaction'))
+    return this.http.post<Transaction>(this.transactionsUrl, transaction, this.httpOptions)
+    .pipe(
+      catchError(this.handleError('addTransaction', transaction))
     );
+    // return this.http.post<Transaction>(this.transactionsUrl, transaction, this.httpOptions).pipe(
+    //   tap((newTransaction: Transaction) => console.log(`added Transaction w/ id=${newTransaction.id}`)),
+    //   catchError(this.handleError<Transaction>('addTransaction'))
+    // );
   }
 
 //   /** DELETE: delete the Transaction from the server */

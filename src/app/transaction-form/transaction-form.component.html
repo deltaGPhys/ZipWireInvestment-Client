@@ -1,26 +1,18 @@
 <p>transaction-form works!</p>
 <div class = "container" style="width:400px;">
 
-    <form #newTransactionForm="ngForm" (ngSubmit)="submitTransactionForm(newTransactionForm.form);">
-        <input type="number" 
-        class="form-control" 
-        name="amount"
-        ngModel #amountField="ngModel">
-        
-        <input type="text" 
-        class="form-control" 
-        name="comment"
-        ngModel #commentField="ngModel">
-        
+    <form [formGroup]="newTransactionForm" (ngSubmit)="submitTransactionForm(newTransactionForm.value)">
+        <input id="amount" type="number" formControlName="amount"><br>
+        <input id="comment" type="text" formControlName="comment"><br>
         <select class="form-control" 
-        name="transactionType"
-        ngModel #typeField="ngModel" required>
+        name="transactionType" required>
             <option *ngFor="let transactionType of transTypes" 
             [value]="transactionType">
-            {{ transactionType }}
+            {{ transactionType.name }}
             </option>  
         </select>
+        
 
-        <button class="btn btn-primary" [disabled]="!newTransactionForm.valid">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!newTransactionForm.valid">Submit</button>
     </form>
 </div>

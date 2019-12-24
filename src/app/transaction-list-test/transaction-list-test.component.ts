@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Transaction } from '../models/Transaction';
 import { TransactionService } from '../services/transaction.service';
+import { TransactionType } from '../models/TransactionType';
 
 @Component({
   selector: 'app-transaction-list-test',
@@ -14,7 +15,7 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionListTestComponent implements OnInit {
 
   transactions: Transaction[];
-  transTypes: string[] = [];
+  transTypes: TransactionType[];
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,14 +23,14 @@ export class TransactionListTestComponent implements OnInit {
 
 
   constructor(private transactionService: TransactionService) { 
-
+    this.transactions = this.transactionService.transactions;
   }
 
 
   ngOnInit() {
     this.transactionService.getTransactions().subscribe(transactions => this.transactions = transactions);
-    this.transactionService.getTransTypes().subscribe(transTypes => this.transTypes = transTypes);
     
+    this.transTypes = this.transactionService.transTypes;
   }
 
   // getTransactions() {
