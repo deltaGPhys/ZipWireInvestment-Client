@@ -6,7 +6,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Investment } from '../models/Investment';
-
+import { Security } from '../models/Security';
+import { SecurityHolding } from '../models/SecurityHolding';
 
 @Injectable({ providedIn: 'root' })
 export class InvestmentService {
@@ -14,8 +15,6 @@ export class InvestmentService {
     @Inject(apiUrl) private apiUrl: string;
     private investmentUrl: string = apiUrl+"/investment/";
     
-
-
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -26,14 +25,34 @@ export class InvestmentService {
 
 
 
-    /** GET Transactions from the server */
+    /** GET Account from the server */
     getAccount (id): Observable<Investment> {
         console.log(this.investmentUrl+id);
         return this.http.get<Investment>(this.investmentUrl+id)
             .pipe(
-                tap(_ => console.log('fetched Acct')),
+                tap(_ => console.log('fetched InvAcct')),
                 catchError(this.handleError<Investment>('getAcct'))
             );
+    }
+
+    /** GET Securities from the server */
+    getSecurities (): Observable<Security[]> {
+      console.log(this.investmentUrl+"securities");
+      return this.http.get<Security[]>(this.investmentUrl+"securities")
+          .pipe(
+              tap(_ => console.log('fetched Securities')),
+              catchError(this.handleError<Security[]>('getSec'))
+          );
+    }
+
+    /** GET holding for this user from the server */
+    getHoldings (accountId): Observable<SecurityHolding[]> {
+      console.log(this.investmentUrl+"holdings/"+accountId);
+      return this.http.get<SecurityHolding[]>(this.investmentUrl+"holdings/"+accountId)
+          .pipe(
+              tap(_ => console.log('fetched Holdings')),
+              catchError(this.handleError<SecurityHolding[]>('getHold'))
+          );
     }
 
 

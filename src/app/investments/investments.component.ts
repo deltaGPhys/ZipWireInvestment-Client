@@ -5,6 +5,7 @@ import { User } from '../models/User';
 import { InvestmentService } from '../services/investment.service';
 import { Investment } from '../models/Investment';
 import { SecurityHolding } from '../models/SecurityHolding';
+import { Security } from '../models/Security';
 
 
 @Component({
@@ -14,8 +15,10 @@ import { SecurityHolding } from '../models/SecurityHolding';
 })
 export class InvestmentsComponent implements OnInit {
 
-  user: User;
+  user: User = new User(1,"Jim","Jones","aol@aol.com","salty",null,1000.0,2000.0);
   account: Investment;
+  securities: Security[];
+  holdings: SecurityHolding[];
 
   constructor(private investmentService: InvestmentService) { }
 
@@ -24,6 +27,11 @@ export class InvestmentsComponent implements OnInit {
       .subscribe(account => {
         this.account = account; 
       });
+    this.investmentService.getSecurities()
+      .subscribe(x => this.securities = x);
+    this.investmentService.getHoldings(27)
+      .subscribe(y => {this.holdings = y;console.log('holdings');console.log(y);});
+    
   }
 
   acctTest():void {

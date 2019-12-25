@@ -5,7 +5,6 @@ export class User {
     lastName : string;
     email : string;
     password: string;
-    accounts: Array<Account> [];
     rent : number;
     salary : number;
 

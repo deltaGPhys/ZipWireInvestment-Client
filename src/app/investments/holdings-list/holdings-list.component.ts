@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SecurityHolding } from 'src/app/models/SecurityHolding';
+import { Security } from 'src/app/models/Security';
 
 @Component({
   selector: 'app-holdings-list',
@@ -9,7 +10,9 @@ import { SecurityHolding } from 'src/app/models/SecurityHolding';
 export class HoldingsListComponent implements OnInit {
 
   @Input() account: Account;
-
+  @Input() securities: Security[];
+  @Input() holdings: SecurityHolding[];
+  
   constructor() { }
 
   ngOnInit() {

@@ -4,6 +4,9 @@
     <input type="text" 
     class="form-control" 
     name="company-name">
-    
+    <select >
+        <option *ngFor="let security of securities">{{security.symbol}} {{security.name}} {{security.currentPrice | currency}}</option>
+    </select>
+
     <button class="btn btn-primary" [disabled]="!newHoldingForm.valid">Submit</button>
 </form>

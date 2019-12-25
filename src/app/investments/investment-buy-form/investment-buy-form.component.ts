@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Security } from 'src/app/models/Security';
 
 @Component({
   selector: 'app-investment-buy-form',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvestmentBuyFormComponent implements OnInit {
 
+  @Input() securities: Security[];
+  @Input() account: Account;
+  
   constructor() { }
 
   ngOnInit() {

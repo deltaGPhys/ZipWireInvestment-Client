@@ -7,7 +7,7 @@
         <select class="form-control" 
         name="transactionType" required>
             <option *ngFor="let transactionType of transTypes" 
-            [value]="transactionType">
+            [value]="transactionType.id">
             {{ transactionType.name }}
             </option>  
         </select>

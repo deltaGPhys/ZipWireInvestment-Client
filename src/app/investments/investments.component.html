@@ -14,13 +14,18 @@
     <div class="col-md-4" style="border: 1px solid black;">
         <h3>Security Holdings</h3>
         <app-holdings-list
-        [account]="account">
+        [account]="account"
+        [holdings]="holdings">
         </app-holdings-list>
     </div>
     <div class="col-md-4" style="border: 1px solid black;">
     </div>
     <div class="col-md-4" style="border: 1px solid black;">
-    <h3>Buy/sell Stocks</h3>
+        <h3>Buy/sell Stocks</h3>
+        <app-investment-buy-form
+        [securities]="securities"
+        [account]="account">
+        </app-investment-buy-form>
     </div>
 </div>
 

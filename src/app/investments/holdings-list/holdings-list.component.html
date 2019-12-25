@@ -17,7 +17,7 @@
 </div> -->
 
 <ngb-accordion [closeOthers]="true" >
-    <ngb-panel id="static-{{holding.id}}" *ngFor="let holding of account.holdings">
+    <ngb-panel id="static-{{holding.id}}" *ngFor="let holding of holdings">
         <ng-template ngbPanelTitle style="width:100%;">
             <!-- <div class="card title" style="width:100%;"> -->
                 <span style="float:left;">{{holding.security.symbol}} ({{holding.security.name}})</span> 
