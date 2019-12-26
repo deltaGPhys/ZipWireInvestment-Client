@@ -23,8 +23,6 @@ export class InvestmentService {
     
     }
 
-
-
     /** GET Account from the server */
     getAccount (id): Observable<Investment> {
         console.log(this.investmentUrl+id);

@@ -38,4 +38,5 @@ export class InvestmentsComponent implements OnInit {
     this.account.balance=567.67;
   }
 
+
 }
