@@ -1,20 +1,20 @@
 <p>investment-buy-form works!</p>
 
 <form #newHoldingForm="ngForm" (ngSubmit)="submitPurchaseForm(newHoldingForm.form);">
-    <select >
-        <option *ngFor="let security of securities">{{security.symbol}} {{security.name}} {{security.currentPrice | currency}}</option>
+    <select formControlname="security">
+        <option *ngFor="let security of securities" [value]="security">{{security.symbol}} {{security.name}} {{security.currentPrice | currency}}</option>
     </select><br>
     
         <div >
             <label># of Shares </label> 
         <input type="number" 
         class="form-control" 
-        name="numShares">
+        formControlname="numShares">
          or 
         <label>Total Cost </label> 
         <input type="number" 
         class="form-control" 
-        name="totalCost">
+        formControlname="totalCost">
 
     </div>
     
