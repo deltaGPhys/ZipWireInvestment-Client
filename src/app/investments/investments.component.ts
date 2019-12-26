@@ -15,7 +15,7 @@ import { Security } from '../models/Security';
 })
 export class InvestmentsComponent implements OnInit {
 
-  user: User = new User(1,"Jim","Jones","aol@aol.com","salty",null,1000.0,2000.0);
+  user: User = new User(1,"Jim","Jones","aol@aol.com","salty",1000.0,2000.0);
   account: Investment;
   securities: Security[];
   holdings: SecurityHolding[];
@@ -23,6 +23,7 @@ export class InvestmentsComponent implements OnInit {
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit() {
+    console.log("investments init");
     this.investmentService.getAccount(27)
       .subscribe(account => {
         this.account = account; 

@@ -1,6 +1,6 @@
-<p>investment-buy-form works!</p>
 
-<form [formGroup]="buyStockForm" (ngSubmit)="submitPurchaseForm(buyStockForm.form);">
+
+<form [formGroup]="buyStockForm" (ngSubmit)="onSubmit();">
     <select formControlName="security">
         <option *ngFor="let security of securities" [value]="security.id">{{security.symbol}} {{security.name}} {{security.currentPrice | currency}}</option>
     </select><br>

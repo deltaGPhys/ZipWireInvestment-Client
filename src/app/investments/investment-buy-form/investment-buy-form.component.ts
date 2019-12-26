@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Security } from 'src/app/models/Security';
 import { FormGroup, FormControl } from '@angular/forms';
+import { InvestmentService } from 'src/app/services/investment.service';
+import { InvestmentsComponent } from 'src/app/investments/investments.component'
+import { Account } from 'src/app/models/Account';
 
 
 @Component({
@@ -15,7 +18,7 @@ export class InvestmentBuyFormComponent implements OnInit {
   buyStockForm: FormGroup;
   selectedStock: Security;
   
-  constructor() { 
+  constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
   }
 
@@ -46,7 +49,8 @@ export class InvestmentBuyFormComponent implements OnInit {
   }
 
   onSubmit() {
-
+    console.log(this.buyStockForm);
+    this.investmentService.addHolding(this.selectedStock.id, this.buyStockForm.controls['numShares'].value, this.account.id).subscribe(data => {console.log(data); });
   }
 
   getSecurity(id: number): Security {

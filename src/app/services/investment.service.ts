@@ -91,6 +91,15 @@ export class InvestmentService {
 
 //   //////// Save methods //////////
 
+  /** POST: add a new SecurityHolding to the server */
+  addHolding (securityId: number, numShares: number, accountId: number): Observable<SecurityHolding> {
+    let data: Object = {"securityId": securityId, "numShares": numShares.toString(), "accountId": accountId};
+    return this.http.post<SecurityHolding>(this.investmentUrl+"holdings", data, this.httpOptions).pipe(
+      tap((newHolding: SecurityHolding) => console.log(`added Holding w/ id=${newHolding.id}`)),
+      catchError(this.handleError<SecurityHolding>('addHolding'))
+    );
+  }
+
   // /** POST: add a new Transaction to the server */
   // addTransaction (Transaction: Transaction): Observable<Transaction> {
   //   return this.http.post<Transaction>(this.transactionsUrl, Transaction, this.httpOptions).pipe(
