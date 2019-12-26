@@ -48,9 +48,18 @@ export class InvestmentService {
       console.log(this.investmentUrl+"holdings/"+accountId);
       return this.http.get<SecurityHolding[]>(this.investmentUrl+"holdings/"+accountId)
           .pipe(
-              tap(_ => console.log('fetched Holdings')),
+              tap(_ => {console.log('fetched Holdings');}),
+              map(data => this.calculateHoldingValues(data)),
               catchError(this.handleError<SecurityHolding[]>('getHold'))
           );
+    }
+
+    calculateHoldingValues (holdings: SecurityHolding[]): SecurityHolding[] {
+      for (let holding of holdings) {
+          holding.purchaseValue = holding.purchaseCost * holding.numShares;
+          holding.value = holding.security.currentPrice * holding.numShares;
+      }
+      return holdings;
     }
 
 
