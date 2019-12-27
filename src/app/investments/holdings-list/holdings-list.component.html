@@ -28,7 +28,9 @@
             <label>Purchased on</label>: {{holding.purchaseDate | date: shortDate}}<br>
             <label>Purchase Value</label>: {{holding.purchaseValue | currency}} ({{holding.purchaseCost | currency}}/share)<br>
             <label>Current Position Value</label>: {{holding.value | currency}} ({{holding.security.currentPrice | currency}}/share)<br>
-
+            <button type="button" class="btn btn-primary" (click)="sellHolding(holding.id)">
+              Liquidate Position
+            </button>
         </ng-template>
     </ngb-panel>
 </ngb-accordion>

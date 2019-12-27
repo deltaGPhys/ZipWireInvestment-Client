@@ -109,6 +109,12 @@ export class InvestmentService {
     );
   }
 
+  sellHolding (holdingId: number): Observable<SecurityHolding> {
+    return this.http.post<SecurityHolding>(this.investmentUrl+"holdings/"+holdingId, null, this.httpOptions).pipe(
+      catchError(this.handleError<SecurityHolding>('addHolding'))
+    );
+  }
+
   // /** POST: add a new Transaction to the server */
   // addTransaction (Transaction: Transaction): Observable<Transaction> {
   //   return this.http.post<Transaction>(this.transactionsUrl, Transaction, this.httpOptions).pipe(

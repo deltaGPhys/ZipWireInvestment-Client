@@ -31,7 +31,7 @@ export class InvestmentsComponent implements OnInit {
     this.investmentService.getSecurities()
       .subscribe(x => this.securities = x);
     this.investmentService.getHoldings(27)
-      .subscribe(y => {this.holdings = y;console.log('holdings');console.log(y);});
+      .subscribe(y => {this.holdings = y;});
     
   }
 
