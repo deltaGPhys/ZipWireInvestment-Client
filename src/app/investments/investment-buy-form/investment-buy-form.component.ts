@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Security } from 'src/app/models/Security';
 import { FormGroup, FormControl } from '@angular/forms';
 import { InvestmentService } from 'src/app/services/investment.service';
-import { InvestmentsComponent } from 'src/app/investments/investments.component'
 import { Account } from 'src/app/models/Account';
 import { SecurityHolding } from 'src/app/models/SecurityHolding';
 
@@ -14,7 +13,7 @@ import { SecurityHolding } from 'src/app/models/SecurityHolding';
 })
 export class InvestmentBuyFormComponent implements OnInit {
 
-  @Input() securities: Security[];
+  securities: Security[];
   @Input() account: Account;
   holdings: SecurityHolding[];
   buyStockForm: FormGroup;
@@ -25,6 +24,7 @@ export class InvestmentBuyFormComponent implements OnInit {
     this.buyStockForm = this.createFormGroup();
     investmentService.numsChange.subscribe(value => {console.log(value);this.numbers = value;});
     this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
+    this.investmentService.secChange.subscribe(value => {this.securities= value;});
   }
 
   acctTest():void {

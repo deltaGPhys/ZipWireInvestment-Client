@@ -16,6 +16,7 @@ export class InvestmentService {
     private investmentUrl: string = apiUrl+"/investment/";
     numsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     hldgsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    secChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,6 +24,7 @@ export class InvestmentService {
 
     constructor(private http: HttpClient) { 
       this.initialHoldings();
+      this.getSecurities();
     }
 
     numbersChange(data: number[]) {
@@ -38,7 +40,11 @@ export class InvestmentService {
     }
 
     holdingsChange(data: SecurityHolding[]) {
-      this.hldgsChange.next(data);
+      this.hldgsChange.next(this.calculateHoldingValues(data));
+    }
+
+    securitiesChange(data: Security[]) {
+      this.secChange.next(data);
     }
 
     /** GET Account from the server */
@@ -56,7 +62,7 @@ export class InvestmentService {
       console.log(this.investmentUrl+"securities");
       return this.http.get<Security[]>(this.investmentUrl+"securities")
           .pipe(
-              tap(_ => console.log('fetched Securities')),
+              tap(data => {console.log('fetched Securities');this.securitiesChange(data);}),
               catchError(this.handleError<Security[]>('getSec'))
           );
     }

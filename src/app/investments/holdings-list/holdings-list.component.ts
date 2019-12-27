@@ -12,7 +12,7 @@ import { InvestmentService } from 'src/app/services/investment.service';
 export class HoldingsListComponent implements OnInit {
 
   @Input() account: Account;
-  @Input() securities: Security[];
+  securities: Security[] = this.investmentService.secChange.getValue();;
   holdings: SecurityHolding[] = this.investmentService.hldgsChange.getValue();
   numbers: number[];
   
@@ -20,6 +20,7 @@ export class HoldingsListComponent implements OnInit {
   constructor(private investmentService: InvestmentService) { 
     this.investmentService.numsChange.subscribe(value => {this.numbers = value; });
     this.investmentService.hldgsChange.subscribe(value => {this.holdings = value;});
+    this.investmentService.secChange.subscribe(value => {this.securities= value;});
   }
 
   acctTest():void {
