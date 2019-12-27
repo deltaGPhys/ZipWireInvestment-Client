@@ -17,14 +17,17 @@ export class InvestmentService {
     numsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     hldgsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     secChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    valChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(private http: HttpClient) { 
+      this.valueChange(0);
       this.initialHoldings();
       this.getSecurities();
+      
     }
 
     numbersChange(data: number[]) {
@@ -40,11 +43,17 @@ export class InvestmentService {
     }
 
     holdingsChange(data: SecurityHolding[]) {
-      this.hldgsChange.next(this.calculateHoldingValues(data));
+      let newH = this.calculateHoldingValues(data);
+      this.hldgsChange.next(newH);
+      this.valChange.next(this.calculatePortfolioValue(newH));
     }
 
     securitiesChange(data: Security[]) {
       this.secChange.next(data);
+    }
+
+    valueChange(data: number) {
+      this.valChange.next(data);
     }
 
     /** GET Account from the server */
@@ -74,6 +83,7 @@ export class InvestmentService {
           .pipe(
               tap(data => {console.log('fetched Holdings');console.log(data);}),
               map(data => this.calculateHoldingValues(data)),
+              tap(data => {this.valueChange(this.calculatePortfolioValue(data));}),
               catchError(this.handleError<SecurityHolding[]>('getHold'))
           );
     }
@@ -84,6 +94,15 @@ export class InvestmentService {
           holding.value = holding.security.currentPrice * holding.numShares;
       }
       return holdings;
+    }
+
+    calculatePortfolioValue(holdings: SecurityHolding[]) {
+      let total = 0;
+      for (let holding of holdings) {
+        total += holding.value;
+      }
+
+      return total;
     }
 
 
@@ -135,7 +154,7 @@ export class InvestmentService {
   }
 
   sellHolding (holdingId: number): Observable<SecurityHolding> {
-    return this.http.post<SecurityHolding>(this.investmentUrl+"holdings/"+holdingId, null, this.httpOptions).pipe(
+    return this.http.put<SecurityHolding>(this.investmentUrl+"holdings/"+holdingId, null, this.httpOptions).pipe(
       catchError(this.handleError<SecurityHolding>('addHolding'))
     );
   }

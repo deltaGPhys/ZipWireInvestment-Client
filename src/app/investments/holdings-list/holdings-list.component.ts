@@ -12,7 +12,7 @@ import { InvestmentService } from 'src/app/services/investment.service';
 export class HoldingsListComponent implements OnInit {
 
   @Input() account: Account;
-  securities: Security[] = this.investmentService.secChange.getValue();;
+  securities: Security[] = this.investmentService.secChange.getValue();
   holdings: SecurityHolding[] = this.investmentService.hldgsChange.getValue();
   numbers: number[];
   
