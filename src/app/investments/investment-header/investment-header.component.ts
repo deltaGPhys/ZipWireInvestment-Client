@@ -19,4 +19,6 @@ export class InvestmentHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }

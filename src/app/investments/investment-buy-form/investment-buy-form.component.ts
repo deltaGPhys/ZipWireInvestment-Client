@@ -17,11 +17,23 @@ export class InvestmentBuyFormComponent implements OnInit {
   @Input() account: Account;
   buyStockForm: FormGroup;
   selectedStock: Security;
+  numbers: number[];
   
   constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
+    investmentService.numsChange.subscribe(value => {console.log(value);this.numbers = value;});
   }
 
+  acctTest():void {
+    if (this.numbers == null) {
+      console.log('null');
+      this.numbers = [1];
+    }
+    
+    this.numbers = [...this.numbers, this.numbers.length+1];
+    this.investmentService.numbersChange(this.numbers);
+  }
+  
   ngOnInit() {
     console.log(this.buyStockForm.controls['numShares']);
     

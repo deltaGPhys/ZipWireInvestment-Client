@@ -5,9 +5,10 @@
         <app-investment-header
         [account]="account">
         </app-investment-header>
-    <button type="button" class="btn btn-primary" (click)="acctTest()">
-    Test
-  </button>
+        <button type="button" class="btn btn-primary" (click)="acctTest()">
+            Test
+        </button>
+        <p>{{numbers}}</p>
     </div>
 </div>
 <div class="row" style="max-width: 100%; margin:10px;" *ngIf="account">
@@ -28,4 +29,5 @@
         </app-investment-buy-form>
     </div>
 </div>
+
 

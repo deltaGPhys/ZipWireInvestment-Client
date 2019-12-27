@@ -19,8 +19,11 @@ export class InvestmentsComponent implements OnInit {
   account: Investment;
   securities: Security[];
   holdings: SecurityHolding[];
+  numbers: number[];
 
-  constructor(private investmentService: InvestmentService) { }
+  constructor(private investmentService: InvestmentService) { 
+    this.investmentService.numsChange.subscribe(value => this.numbers= value);
+  }
 
   ngOnInit() {
     console.log("investments init");
@@ -36,7 +39,12 @@ export class InvestmentsComponent implements OnInit {
   }
 
   acctTest():void {
-    this.account.balance=567.67;
+    if (this.numbers == null) {
+      console.log('null');
+      this.numbers = [1];
+    }
+    this.numbers = [...this.numbers, this.numbers.length+1];
+    this.investmentService.numbersChange(this.numbers);
   }
 
 

@@ -2,7 +2,7 @@ import { Injectable, Inject, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'; export const apiUrl = environment.apiUrl;
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Investment } from '../models/Investment';
@@ -14,13 +14,19 @@ export class InvestmentService {
     
     @Inject(apiUrl) private apiUrl: string;
     private investmentUrl: string = apiUrl+"/investment/";
+    numsChange: Subject<any> = new Subject<any>();
     
+
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(private http: HttpClient) { 
-    
+      
+    }
+
+    numbersChange(data: number[]) {
+      this.numsChange.next(data);
     }
 
     /** GET Account from the server */
