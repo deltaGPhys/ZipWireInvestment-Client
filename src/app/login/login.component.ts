@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { LoginService} from 'src/app/services/login.service';
+import {User} from '../models/User';
 
 
 @Component({
@@ -9,10 +10,13 @@ import { LoginService} from 'src/app/services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
 
   public constructor(private loginService: LoginService, private formBuilder: FormBuilder) { }  
 
   ngOnInit() {
   }
+
+  
 
 }

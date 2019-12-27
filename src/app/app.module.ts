@@ -18,6 +18,7 @@ import { TransactionFormComponent } from './transaction-form/transaction-form.co
 import { InvestmentHeaderComponent } from './investments/investment-header/investment-header.component';
 import { HoldingsListComponent } from './investments/holdings-list/holdings-list.component';
 import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
+import { LoginService } from './services/login.service';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { InvestmentBuyFormComponent } from './investments/investment-buy-form/in
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [TransactionService, Title],
+  providers: [TransactionService, LoginService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
