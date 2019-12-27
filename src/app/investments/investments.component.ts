@@ -23,6 +23,7 @@ export class InvestmentsComponent implements OnInit {
 
   constructor(private investmentService: InvestmentService) { 
     this.investmentService.numsChange.subscribe(value => this.numbers= value);
+    this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
   }
 
   ngOnInit() {
@@ -33,8 +34,7 @@ export class InvestmentsComponent implements OnInit {
       });
     this.investmentService.getSecurities()
       .subscribe(x => this.securities = x);
-    this.investmentService.getHoldings(27)
-      .subscribe(y => {this.holdings = y;});
+    
     
   }
 

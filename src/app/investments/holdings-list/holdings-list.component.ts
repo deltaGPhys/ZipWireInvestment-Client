@@ -13,12 +13,13 @@ export class HoldingsListComponent implements OnInit {
 
   @Input() account: Account;
   @Input() securities: Security[];
-  @Input() holdings: SecurityHolding[];
+  holdings: SecurityHolding[] = this.investmentService.hldgsChange.getValue();
   numbers: number[];
   
 
   constructor(private investmentService: InvestmentService) { 
-    this.investmentService.numsChange.subscribe(value => {this.numbers= value; });
+    this.investmentService.numsChange.subscribe(value => {this.numbers = value; });
+    this.investmentService.hldgsChange.subscribe(value => {this.holdings = value;});
   }
 
   acctTest():void {
@@ -31,11 +32,18 @@ export class HoldingsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    
   }
 
   sellHolding(holdingId: number) {
-    this.investmentService.sellHolding(holdingId).subscribe();
-    this.investmentService.getHoldings(27).subscribe(data => this.holdings = data);
+    
+    this.investmentService.sellHolding(holdingId)
+      .subscribe(data => {this.investmentService.holdingsChange(
+        this.holdings.filter(holding => holding.id != holdingId))
+        this.investmentService.holdingsChange(this.holdings);
+      });
+    
   }
 
 }

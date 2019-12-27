@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { InvestmentService } from 'src/app/services/investment.service';
 import { InvestmentsComponent } from 'src/app/investments/investments.component'
 import { Account } from 'src/app/models/Account';
+import { SecurityHolding } from 'src/app/models/SecurityHolding';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class InvestmentBuyFormComponent implements OnInit {
 
   @Input() securities: Security[];
   @Input() account: Account;
+  holdings: SecurityHolding[];
   buyStockForm: FormGroup;
   selectedStock: Security;
   numbers: number[];
@@ -22,6 +24,7 @@ export class InvestmentBuyFormComponent implements OnInit {
   constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
     investmentService.numsChange.subscribe(value => {console.log(value);this.numbers = value;});
+    this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
   }
 
   acctTest():void {
@@ -35,7 +38,6 @@ export class InvestmentBuyFormComponent implements OnInit {
   }
   
   ngOnInit() {
-    console.log(this.buyStockForm.controls['numShares']);
     
     this.buyStockForm.get('numShares').valueChanges.subscribe(
       numShares => {console.log(numShares);this.updateTotalCost();}
@@ -61,8 +63,16 @@ export class InvestmentBuyFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.buyStockForm);
-    this.investmentService.addHolding(this.selectedStock.id, this.buyStockForm.controls['numShares'].value, this.account.id).subscribe(data => {console.log(data); });
+    this.investmentService.addHolding(
+      this.selectedStock.id, 
+      this.buyStockForm.controls['numShares'].value, 
+      this.account.id)
+      .subscribe(data => {
+        let newHoldings: SecurityHolding[] = this.holdings.slice();
+        newHoldings.push(data);
+        this.investmentService.holdingsChange(newHoldings);
+        this.revert();
+      });
   }
 
   getSecurity(id: number): Security {
