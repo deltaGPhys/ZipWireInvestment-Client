@@ -9,4 +9,5 @@ export class SecurityHolding {
     purchaseDate: string;
     numShares: number;
     purchaseCost: number;
+    purchaseValue: number;
 }

@@ -15,27 +15,36 @@ import { Security } from '../models/Security';
 })
 export class InvestmentsComponent implements OnInit {
 
-  user: User = new User(1,"Jim","Jones","aol@aol.com","salty",null,1000.0,2000.0);
+  user: User = new User(1,"Jim","Jones","aol@aol.com","salty",1000.0,2000.0);
   account: Investment;
   securities: Security[];
   holdings: SecurityHolding[];
+  numbers: number[];
 
-  constructor(private investmentService: InvestmentService) { }
+  constructor(private investmentService: InvestmentService) { 
+    this.investmentService.numsChange.subscribe(value => this.numbers= value);
+    this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
+  }
 
   ngOnInit() {
+    console.log("investments init");
     this.investmentService.getAccount(27)
       .subscribe(account => {
         this.account = account; 
       });
     this.investmentService.getSecurities()
       .subscribe(x => this.securities = x);
-    this.investmentService.getHoldings(27)
-      .subscribe(y => {this.holdings = y;console.log('holdings');console.log(y);});
+    
     
   }
 
   acctTest():void {
-    this.account.balance=567.67;
+    if (this.numbers == null) {
+      console.log('null');
+      this.numbers = [1];
+    }
+    this.numbers = [...this.numbers, this.numbers.length+1];
+    this.investmentService.numbersChange(this.numbers);
   }
 
 

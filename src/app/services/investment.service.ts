@@ -2,7 +2,7 @@ import { Injectable, Inject, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'; export const apiUrl = environment.apiUrl;
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Investment } from '../models/Investment';
@@ -14,13 +14,37 @@ export class InvestmentService {
     
     @Inject(apiUrl) private apiUrl: string;
     private investmentUrl: string = apiUrl+"/investment/";
-    
+    numsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    hldgsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    secChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(private http: HttpClient) { 
-    
+      this.initialHoldings();
+      this.getSecurities();
+    }
+
+    numbersChange(data: number[]) {
+      this.numsChange.next(data);
+    }
+
+    initialHoldings(): void {
+      let holdingsInit: SecurityHolding[] = [];
+      this.getHoldings(27).subscribe(data => {
+        holdingsInit = data;
+        this.hldgsChange.next(holdingsInit);
+      });
+    }
+
+    holdingsChange(data: SecurityHolding[]) {
+      this.hldgsChange.next(this.calculateHoldingValues(data));
+    }
+
+    securitiesChange(data: Security[]) {
+      this.secChange.next(data);
     }
 
     /** GET Account from the server */
@@ -38,19 +62,28 @@ export class InvestmentService {
       console.log(this.investmentUrl+"securities");
       return this.http.get<Security[]>(this.investmentUrl+"securities")
           .pipe(
-              tap(_ => console.log('fetched Securities')),
+              tap(data => {console.log('fetched Securities');this.securitiesChange(data);}),
               catchError(this.handleError<Security[]>('getSec'))
           );
     }
 
     /** GET holding for this user from the server */
     getHoldings (accountId): Observable<SecurityHolding[]> {
-      console.log(this.investmentUrl+"holdings/"+accountId);
+      //console.log(this.investmentUrl+"holdings/"+accountId);
       return this.http.get<SecurityHolding[]>(this.investmentUrl+"holdings/"+accountId)
           .pipe(
-              tap(_ => console.log('fetched Holdings')),
+              tap(data => {console.log('fetched Holdings');console.log(data);}),
+              map(data => this.calculateHoldingValues(data)),
               catchError(this.handleError<SecurityHolding[]>('getHold'))
           );
+    }
+
+    calculateHoldingValues (holdings: SecurityHolding[]): SecurityHolding[] {
+      for (let holding of holdings) {
+          holding.purchaseValue = holding.purchaseCost * holding.numShares;
+          holding.value = holding.security.currentPrice * holding.numShares;
+      }
+      return holdings;
     }
 
 
@@ -90,6 +123,22 @@ export class InvestmentService {
 //   }
 
 //   //////// Save methods //////////
+
+  /** POST: add a new SecurityHolding to the server */
+  addHolding (securityId: number, numShares: number, accountId: number): Observable<SecurityHolding> {
+    let data: Object = {"securityId": securityId, "numShares": numShares.toString(), "accountId": accountId};
+    return this.http.post<SecurityHolding>(this.investmentUrl+"holdings", data, this.httpOptions).pipe(
+      tap((newHolding: SecurityHolding) => {console.log(`added Holding w/ id=${newHolding.id}`);}),
+
+      catchError(this.handleError<SecurityHolding>('addHolding'))
+    );
+  }
+
+  sellHolding (holdingId: number): Observable<SecurityHolding> {
+    return this.http.post<SecurityHolding>(this.investmentUrl+"holdings/"+holdingId, null, this.httpOptions).pipe(
+      catchError(this.handleError<SecurityHolding>('addHolding'))
+    );
+  }
 
   // /** POST: add a new Transaction to the server */
   // addTransaction (Transaction: Transaction): Observable<Transaction> {

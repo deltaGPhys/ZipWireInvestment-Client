@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Security } from 'src/app/models/Security';
 import { FormGroup, FormControl } from '@angular/forms';
+import { InvestmentService } from 'src/app/services/investment.service';
+import { Account } from 'src/app/models/Account';
+import { SecurityHolding } from 'src/app/models/SecurityHolding';
 
 
 @Component({
@@ -10,17 +13,31 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class InvestmentBuyFormComponent implements OnInit {
 
-  @Input() securities: Security[];
+  securities: Security[];
   @Input() account: Account;
+  holdings: SecurityHolding[];
   buyStockForm: FormGroup;
   selectedStock: Security;
+  numbers: number[];
   
-  constructor() { 
+  constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
+    investmentService.numsChange.subscribe(value => {console.log(value);this.numbers = value;});
+    this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
+    this.investmentService.secChange.subscribe(value => {this.securities= value;});
   }
 
+  acctTest():void {
+    if (this.numbers == null) {
+      console.log('null');
+      this.numbers = [1];
+    }
+    
+    this.numbers = [...this.numbers, this.numbers.length+1];
+    this.investmentService.numbersChange(this.numbers);
+  }
+  
   ngOnInit() {
-    console.log(this.buyStockForm.controls['numShares']);
     
     this.buyStockForm.get('numShares').valueChanges.subscribe(
       numShares => {console.log(numShares);this.updateTotalCost();}
@@ -46,7 +63,16 @@ export class InvestmentBuyFormComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.investmentService.addHolding(
+      this.selectedStock.id, 
+      this.buyStockForm.controls['numShares'].value, 
+      this.account.id)
+      .subscribe(data => {
+        let newHoldings: SecurityHolding[] = this.holdings.slice();
+        newHoldings.push(data);
+        this.investmentService.holdingsChange(newHoldings);
+        this.revert();
+      });
   }
 
   getSecurity(id: number): Security {
