@@ -22,7 +22,7 @@ export class InvestmentBuyFormComponent implements OnInit {
   
   constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
-    investmentService.numsChange.subscribe(value => {console.log(value);this.numbers = value;});
+    investmentService.numsChange.subscribe(value => {this.numbers = value;});
     this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
     this.investmentService.secChange.subscribe(value => {this.securities= value;});
   }

@@ -11,12 +11,14 @@ import { InvestmentService } from 'src/app/services/investment.service';
 export class InvestmentHeaderComponent implements OnInit {
 
   @Input() account: Investment; 
+  portfolioValue: number = this.investmentService.valChange.getValue();
 
   constructor(private investmentService: InvestmentService) { 
-    
+    this.investmentService.valChange.subscribe(value => {this.portfolioValue = value;});
   }
 
   ngOnInit() {
+    
   }
 
   
