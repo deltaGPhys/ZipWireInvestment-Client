@@ -14,7 +14,7 @@ import { User} from '../models/User';
 export class LoginService {
   
   @Inject(apiUrl) private apiUrl: string;
-  private registerUrl: String = apiUrl+"/register";
+  private registerUrl: string = apiUrl+"/login/register";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -24,8 +24,12 @@ export class LoginService {
 
 //Add a new user to the database
 addUser(user: User): Observable<User>{
-  return this.http.post<User>(this.apiUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
+  //console.log(apiUrl);
+  //console.log(this.registerUrl);
+  return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
 }
+
+
 
 // getUser(id:number):Observable<User>{
 
