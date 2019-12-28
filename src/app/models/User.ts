@@ -17,4 +17,5 @@ export class User {
         this.rent = rent;
         this.salary = salary;
     }
+
 }

@@ -1,37 +1,39 @@
-<form [formGroup]="createUserForm" (ngSubmit)="onSubmit(buyStockForm.form)">
+<form [formGroup]="createUserForm" (ngSubmit)="onSubmit(createUserForm)">
 
+  
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputFirstName">First Name:</label>
-      <input type="text" class="form-control" id="inputFirstName" placeholder="First">
+      <input type="text" formControlName = "firstName" class="form-control" id="firstName" required placeholder="First">
     </div>
     <div class="form-group col-md-6">
       <label for="inputLastName">Last Name:</label>
-      <input type="text" class="form-control" id="inputLastName" placeholder="Last">
+      <input type="text" formControlName = "lastName" class="form-control" id="lastName" required placeholder="Last">
     </div>
   </div>  
   
   <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputEmail4">Email:</label>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+        <input type="email" formControlName = "email"class="form-control" id="email" required placeholder="Email">
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword">Password:</label>
-        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+        <input type="password" formControlName = "password" class="form-control" id="password" required placeholder="Password">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputRent">Monthly Rent:</label>
-        <input type="number" class="form-control" id="inputRent" placeholder="1250.00">
+        <input type="number" formControlName = "rent" class="form-control" id="rent" required placeholder="1250.00">
       </div>
       <div class="form-group col-md-6">
         <label for="inputSalary">Annual Salary:</label>
-        <input type="number" class="form-control" id="inputSalary" placeholder="57000.00">
+        <input type="number" formControlName = "salary" class="form-control" id="salary" required placeholder="57000.00">
       </div>
     </div>
+  
 
     <!--
     <div class="form-row">
@@ -125,7 +127,7 @@
     </div>
    -->
    <div class="form-group col-md-6">
-    <button type="submit" class="btn btn-primary" [disabled]="!buyStockForm.valid">Create Account</button>
+    <button type="submit" class="btn btn-primary" >Create Account</button>
   </div>
   </form>
 
