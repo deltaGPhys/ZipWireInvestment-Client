@@ -23,9 +23,9 @@ export class InvestmentBuyFormComponent implements OnInit {
   constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
     investmentService.numsChange.subscribe(value => {this.numbers = value;});
-    this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
-    this.investmentService.secChange.subscribe(value => {this.securities= value;});
-    this.investmentService.stkChange.subscribe(value => {this.selectedStock= value;});
+    this.investmentService.hldgsChange.subscribe(value => {this.holdings = value;});
+    this.investmentService.secChange.subscribe(value => {this.securities = value;});
+    this.investmentService.stkChange.subscribe(value => {this.selectedStock = value[0];});
   }
 
   acctTest():void {
@@ -47,7 +47,7 @@ export class InvestmentBuyFormComponent implements OnInit {
       totalCost => {console.log(totalCost);this.updateNumShares();}
     );
     this.buyStockForm.get('security').valueChanges.subscribe(
-      sec => {this.selectedStock=this.getSecurity(sec);this.investmentService.stockChange(this.selectedStock);this.updateTotalCost();}
+      sec => {this.selectedStock=this.getSecurity(sec);this.investmentService.stockChange([this.selectedStock,null]);this.updateTotalCost();}
     );
   }
 

@@ -20,6 +20,8 @@ import { InvestmentHeaderComponent } from './investments/investment-header/inves
 import { HoldingsListComponent } from './investments/holdings-list/holdings-list.component';
 import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
+import { LoginService } from './services/login.service';
+
 
 
 @NgModule({
@@ -48,7 +50,7 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
     ReactiveFormsModule,
     ChartsModule,
   ],
-  providers: [TransactionService, Title],
+  providers: [TransactionService, LoginService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

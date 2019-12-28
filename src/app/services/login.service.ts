@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-export class UserServiceService {
+export class LoginService {
   
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
@@ -20,7 +20,9 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) { }
 
-//Add a new user to the database
+//Get all users from the database
+
+  //Add a new user to the database
 //addUser(user: User): Observable<User>{
   //console.log(apiUrl);
   //console.log(this.registerUrl);

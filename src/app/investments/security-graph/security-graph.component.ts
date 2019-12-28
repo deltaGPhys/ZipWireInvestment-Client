@@ -19,7 +19,7 @@ export class SecurityGraphComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   constructor(private investmentService: InvestmentService) { 
     this.investmentService.stkChange.subscribe(value => {
-      this.selectedStock = value;
+      this.selectedStock = value[0];
     });
     this.investmentService.histChange.subscribe(value => {
       this.priceHistory = value;
@@ -32,6 +32,7 @@ export class SecurityGraphComponent implements OnInit {
 
   chartUpdate() {
     if (this.priceHistory != null) {
+      console.log(this.priceHistory.dates);
       this.priceHistory.dates.forEach(date => {
         this.lineChartLabels.push(date[0]+"-"+date[1]+"-"+date[2]);
       });

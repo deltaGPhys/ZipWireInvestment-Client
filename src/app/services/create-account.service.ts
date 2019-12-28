@@ -5,14 +5,20 @@ import { environment } from 'src/environments/environment'; export const apiUrl 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { User} from '../models/User';
+import {Email} from '../models/Email.model'
+
 @Injectable({
   providedIn: 'root'
 })
 
-export class UserServiceService {
+export class CreateAccountService {
   
   @Inject(apiUrl) private apiUrl: string;
-  private registerUrl: string = apiUrl+"/login";
+  private registerUrl: string = apiUrl+"/login/register";
+  private getEmailsUrl: string = apiUrl+"/login/users/email";
+  private emailObservable: Observable<string[]>;
+  private allEmails : string[];
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -21,11 +27,15 @@ export class UserServiceService {
   constructor(private http: HttpClient) { }
 
 //Add a new user to the database
-//addUser(user: User): Observable<User>{
+addUser(user: User): Observable<User>{
   //console.log(apiUrl);
   //console.log(this.registerUrl);
-//   return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
-// }
+  return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
+}
+
+getUserEmails(){
+  return this.http.get(this.getEmailsUrl, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<string>('getAllEmails')));
+}
 
 
 
