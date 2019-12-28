@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import{User} from '../models/User';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {LoginService} from '../services/login.service'
+import {CreateAccountService} from '../services/create-account.service'
 import { Router } from '@angular/router';
 
 
@@ -12,15 +12,16 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent implements OnInit {
 
+  private userEmails: string []; 
   private user: User;
   private createUserForm: FormGroup;
  
-  constructor(private loginService: LoginService, private router: Router) { 
+  constructor(private createAccountService: CreateAccountService, private router: Router) { 
     this.createUserForm = this.createFormGroup();
   }
 
   ngOnInit() {
-  
+    let userEmails = this.createAccountService.getUserEmails;
   }
 
   createFormGroup() {
@@ -39,6 +40,8 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onSubmit() {
+    let email: string = this.createUserForm.controls.email.value;
+
     let user : User = new User (
       null,
       this.createUserForm.controls.firstName.value,
@@ -50,12 +53,11 @@ export class CreateAccountComponent implements OnInit {
    
     console.log(user);
     
-    this.loginService.addUser(user)
+    this.createAccountService.addUser(user)
       .subscribe(data => {this.user = data;});
       
       this.revert();
 
       this.router.navigate(['/accounts']);
-    
   }
 }

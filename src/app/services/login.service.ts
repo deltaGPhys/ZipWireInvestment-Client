@@ -1,11 +1,9 @@
-import { Injectable, Inject, Input } from '@angular/core';
+import { Injectable, Inject} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'; export const apiUrl = environment.apiUrl;
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-
-import { User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +12,7 @@ import { User} from '../models/User';
 export class LoginService {
   
   @Inject(apiUrl) private apiUrl: string;
-  private registerUrl: string = apiUrl+"/login/register";
+  private registerUrl: string = apiUrl+"/login";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -22,12 +20,14 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-//Add a new user to the database
-addUser(user: User): Observable<User>{
+//Get all users from the database
+
+  //Add a new user to the database
+//addUser(user: User): Observable<User>{
   //console.log(apiUrl);
   //console.log(this.registerUrl);
-  return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
-}
+//   return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
+// }
 
 
 
