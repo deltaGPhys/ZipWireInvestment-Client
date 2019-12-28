@@ -15,12 +15,14 @@ export class HoldingsListComponent implements OnInit {
   securities: Security[] = this.investmentService.secChange.getValue();
   holdings: SecurityHolding[] = this.investmentService.hldgsChange.getValue();
   numbers: number[];
+  selectedStock: Security;
   
 
   constructor(private investmentService: InvestmentService) { 
     this.investmentService.numsChange.subscribe(value => {this.numbers = value; });
     this.investmentService.hldgsChange.subscribe(value => {this.holdings = value;});
-    this.investmentService.secChange.subscribe(value => {this.securities= value;});
+    this.investmentService.secChange.subscribe(value => {this.securities = value;});
+    this.investmentService.stkChange.subscribe(value => {this.selectedStock= value;});
   }
 
   acctTest():void {

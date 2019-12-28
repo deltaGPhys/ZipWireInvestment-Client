@@ -20,6 +20,7 @@ export class InvestmentsComponent implements OnInit {
   securities: Security[];
   holdings: SecurityHolding[];
   numbers: number[];
+  selectedStock: Security;
 
   constructor(private investmentService: InvestmentService) { 
     this.investmentService.numsChange.subscribe(value => this.numbers= value);

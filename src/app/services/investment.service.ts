@@ -8,6 +8,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Investment } from '../models/Investment';
 import { Security } from '../models/Security';
 import { SecurityHolding } from '../models/SecurityHolding';
+import { PriceHistory } from '../models/PriceHistory';
+
+import { SecurityGraphComponent } from '../investments/security-graph/security-graph.component'
 
 @Injectable({ providedIn: 'root' })
 export class InvestmentService {
@@ -18,16 +21,19 @@ export class InvestmentService {
     hldgsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     secChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     valChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    stkChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    histChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
+  
     constructor(private http: HttpClient) { 
       this.valueChange(0);
       this.initialHoldings();
       this.getSecurities();
-      
+      this.historyChange(null);
     }
 
     numbersChange(data: number[]) {
@@ -56,6 +62,16 @@ export class InvestmentService {
       this.valChange.next(data);
     }
 
+    stockChange(data: Security) {
+      this.getSecurityHistory(data, null).subscribe(data => {this.historyChange(new PriceHistory(data.id,data.dates,data.prices,data.startDate));});
+      this.stkChange.next(data);
+    }
+
+    historyChange(data: PriceHistory) {
+      console.log("in history change", data);
+      this.histChange.next(data);
+    }
+
     /** GET Account from the server */
     getAccount (id): Observable<Investment> {
         console.log(this.investmentUrl+id);
@@ -73,6 +89,17 @@ export class InvestmentService {
           .pipe(
               tap(data => {console.log('fetched Securities');this.securitiesChange(data);}),
               catchError(this.handleError<Security[]>('getSec'))
+          );
+    }
+
+    /** GET history for this security from the server */
+    getSecurityHistory (security: Security, startDate: string): Observable<PriceHistory> {
+      console.log(apiUrl+"/security/"+security.id);
+      let data: Object = {"startDate": startDate};
+      return this.http.get<PriceHistory>(apiUrl+"/security/"+security.id, data)
+          .pipe(
+              tap(data => {console.log('fetched Security history', data);}),
+              catchError(this.handleError<PriceHistory>('getSecH'))
           );
     }
 
@@ -153,6 +180,7 @@ export class InvestmentService {
     );
   }
 
+  /** PUT: sell a SecurityHolding */
   sellHolding (holdingId: number): Observable<SecurityHolding> {
     return this.http.put<SecurityHolding>(this.investmentUrl+"holdings/"+holdingId, null, this.httpOptions).pipe(
       catchError(this.handleError<SecurityHolding>('addHolding'))
