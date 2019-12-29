@@ -5,7 +5,6 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import { PriceHistory } from 'src/app/models/PriceHistory';
 
-
 @Component({
   selector: 'app-security-graph',
   templateUrl: './security-graph.component.html',
@@ -15,11 +14,16 @@ export class SecurityGraphComponent implements OnInit {
 
   selectedStock: Security = null;
   priceHistory: PriceHistory = this.investmentService.histChange.getValue();
+  chartData: boolean = true;
+  dataStartDate = null;
+  
+  @ViewChild(BaseChartDirective, { static: true }) 
+  chart: BaseChartDirective;
 
-  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   constructor(private investmentService: InvestmentService) { 
     this.investmentService.stkChange.subscribe(value => {
       this.selectedStock = value[0];
+      this.dataStartDate = (value[1] != null) ? this.investmentService.parseDate(value[1]) : null;
     });
     this.investmentService.histChange.subscribe(value => {
       this.priceHistory = value;
@@ -27,16 +31,23 @@ export class SecurityGraphComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
   }
 
   chartUpdate() {
     if (this.priceHistory != null) {
-      console.log(this.priceHistory.dates);
       this.priceHistory.dates.forEach(date => {
-        this.lineChartLabels.push(date[0]+"-"+date[1]+"-"+date[2]);
+        this.lineChartLabels.push(this.investmentService.parseDate(date));
       });
       this.lineChartData = [{data:this.priceHistory.prices}];
+      // if (this.dataStartDate != null) {
+      //   this.lineChartOptions.scales.xAxes[0].ticks.min = this.dataStartDate;
+      // } else {
+      //   this.lineChartOptions.scales.xAxes[0].ticks.min = this.priceHistory.dates[this.priceHistory.dates.length-1];
+      // }
+      this.chartData = false;
+      this.chartData = true;
     }
   }
 
@@ -65,13 +76,37 @@ export class SecurityGraphComponent implements OnInit {
       xAxes: [{
         type: 'time',
         time: {
-          unit: 'day'
-        }
+          unit: 'month',
+          displayFormats: {
+            'millisecond': 'MMM DD',
+            'second': 'MMM DD',
+            'minute': 'MMM DD',
+            'hour': 'MMM DD',
+            'day': 'MMM DD',
+            'week': 'MMM DD',
+            'month': 'MMM',
+            'quarter': 'MMM DD',
+            'year': 'MMM DD',
+          }
+        },
+        ticks: {
+          
+        },
+        
       }],
       yAxes: [
         {
           id: 'y-axis-0',
           position: 'left',
+          ticks: {
+            callback: function(value, index, values) {
+              if(parseInt(value) >= 1000){
+                return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              } else {
+                return '$' + value;
+              }
+            }
+          }
         },
       ]
     },
@@ -79,6 +114,9 @@ export class SecurityGraphComponent implements OnInit {
       display: false
     },
   };
+
+  
+
   public lineChartColors: Color[] = [
     { // blue
       backgroundColor: 'rgba(0,0,255,0.3)',
@@ -90,4 +128,9 @@ export class SecurityGraphComponent implements OnInit {
     }
   ];
   public lineChartType = 'line';
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
 }

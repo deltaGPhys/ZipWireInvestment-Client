@@ -23,7 +23,7 @@ export class InvestmentsComponent implements OnInit {
   selectedStock: Security;
 
   constructor(private investmentService: InvestmentService) { 
-    this.investmentService.numsChange.subscribe(value => this.numbers= value);
+    // this.investmentService.numsChange.subscribe(value => this.numbers= value);
     this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
   }
 
@@ -39,14 +39,14 @@ export class InvestmentsComponent implements OnInit {
     
   }
 
-  acctTest():void {
-    if (this.numbers == null) {
-      console.log('null');
-      this.numbers = [1];
-    }
-    this.numbers = [...this.numbers, this.numbers.length+1];
-    this.investmentService.numbersChange(this.numbers);
-  }
+  // acctTest():void {
+  //   if (this.numbers == null) {
+  //     console.log('null');
+  //     this.numbers = [1];
+  //   }
+  //   this.numbers = [...this.numbers, this.numbers.length+1];
+  //   this.investmentService.numbersChange(this.numbers);
+  // }
 
 
 }

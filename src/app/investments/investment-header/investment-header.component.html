@@ -1,8 +1,34 @@
-<h2>Your Investment Profile</h2>
-    <div *ngIf="portfolioValue">
-        
-        <h3>{{portfolioValue | currency}}</h3>
+<h2>Your Investment Portfolio</h2>
+    <div *ngIf="portfolioValues.current">
+        <h3>{{portfolioValues.current | currency}}</h3>
     </div>
-    <p>+ $50 since yesterday</p>
+   
+    <div *ngIf="portfolioValues.dayChange">
+        <ng-template [ngIf]="portfolioValues.dayChange > 0" [ngIfElse]="loss">
+            <div>
+                Day change: +{{portfolioValues.dayChange | currency}}<span style="color:#0a720a" class="glyphicon glyphicon-arrow-up" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
+            </div>
+        </ng-template>
+          
+        <ng-template #loss>
+            <div>
+                Day change: -{{portfolioValues.dayChange | currency}}<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
+            </div>
+        </ng-template>
+    </div>
+    <div *ngIf="portfolioValues.cumChange">
+        <ng-template [ngIf]="portfolioValues.cumChange > 0" [ngIfElse]="cumLoss">
+            <div>
+                Cumulative change: +{{portfolioValues.cumChange | currency}}<span style="color:#0a720a" class="glyphicon glyphicon-arrow-up" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
+            </div>
+        </ng-template>
+          
+        <ng-template #cumLoss>
+            <div>
+                Cumulative change: -{{portfolioValues.cumChange | currency}}<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
+            </div>
+        </ng-template>
+    </div>
+    
 
     

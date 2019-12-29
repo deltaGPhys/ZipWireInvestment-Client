@@ -22,21 +22,21 @@ export class InvestmentBuyFormComponent implements OnInit {
   
   constructor(private investmentService: InvestmentService) { 
     this.buyStockForm = this.createFormGroup();
-    investmentService.numsChange.subscribe(value => {this.numbers = value;});
+    // this.investmentService.numsChange.subscribe(value => {this.numbers = value;});
     this.investmentService.hldgsChange.subscribe(value => {this.holdings = value;});
     this.investmentService.secChange.subscribe(value => {this.securities = value;});
     this.investmentService.stkChange.subscribe(value => {this.selectedStock = value[0];});
   }
 
-  acctTest():void {
-    if (this.numbers == null) {
-      console.log('null');
-      this.numbers = [1];
-    }
+  // acctTest():void {
+  //   if (this.numbers == null) {
+  //     console.log('null');
+  //     this.numbers = [1];
+  //   }
     
-    this.numbers = [...this.numbers, this.numbers.length+1];
-    this.investmentService.numbersChange(this.numbers);
-  }
+  //   this.numbers = [...this.numbers, this.numbers.length+1];
+  //   this.investmentService.numbersChange(this.numbers);
+  // }
   
   ngOnInit() {
     

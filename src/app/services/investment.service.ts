@@ -20,7 +20,7 @@ export class InvestmentService {
     numsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     hldgsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     secChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-    valChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    portValsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     stkChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     histChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
@@ -30,7 +30,6 @@ export class InvestmentService {
 
   
     constructor(private http: HttpClient) { 
-      this.valueChange(0);
       this.initialHoldings();
       this.getSecurities();
       this.historyChange(null);
@@ -49,22 +48,30 @@ export class InvestmentService {
     }
 
     holdingsChange(data: SecurityHolding[]) {
+      console.log('hchange');
       let newH = this.calculateHoldingValues(data);
       this.hldgsChange.next(newH);
-      this.valChange.next(this.calculatePortfolioValue(newH));
+
+      this.portfolioValuesChange(newH);
     }
 
     securitiesChange(data: Security[]) {
       this.secChange.next(data);
     }
 
-    valueChange(data: number) {
-      this.valChange.next(data);
+    portfolioValuesChange(data: SecurityHolding[]) {
+      console.log(typeof data);
+      let portData: Object = {
+        'current':this.calculatePortfolioValue(data),
+        'dayChange':this.calculatePortfolioValueChange(data),
+        'cumChange':this.calculatePortfolioGains(data)
+      };
+      console.log(portData);
+      this.portValsChange.next(portData);
     }
 
     stockChange(data: [Security,string]) {
       let date = (data[1] != null) ? this.parseDate(data[1]): null;
-      console.log(data[1], date);
       this.getSecurityHistory(data[0], date).subscribe(data => {this.historyChange(new PriceHistory(data.id,data.dates,data.prices,data.startDate));});
       this.stkChange.next(data);
     }
@@ -78,7 +85,6 @@ export class InvestmentService {
     }
 
     historyChange(data: PriceHistory) {
-      console.log("in history change", data);
       this.histChange.next(data);
     }
 
@@ -103,7 +109,6 @@ export class InvestmentService {
     /** GET history for this security from the server */
     getSecurityHistory (security: Security, startDate: string): Observable<PriceHistory> {
       let data: Object = {"startDate": startDate};
-      console.log(startDate);
       let params = new HttpParams()
         .set('startDate', startDate);
       return this.http.get<PriceHistory>(apiUrl+"/security/"+security.id, {params: params})
@@ -117,13 +122,14 @@ export class InvestmentService {
     getHoldings (accountId): Observable<SecurityHolding[]> {
       return this.http.get<SecurityHolding[]>(this.investmentUrl+"holdings/"+accountId)
           .pipe(
-              tap(data => {console.log('fetched Holdings');console.log(data);}),
+              tap(data => {console.log('fetched Holdings');}),
               map(data => this.calculateHoldingValues(data)),
-              tap(data => {this.valueChange(this.calculatePortfolioValue(data));}),
+              tap(data => {this.portfolioValuesChange(data);}),
               catchError(this.handleError<SecurityHolding[]>('getHold'))
           );
     }
 
+    /** Calculate current values of each stock holding */
     calculateHoldingValues (holdings: SecurityHolding[]): SecurityHolding[] {
       for (let holding of holdings) {
           holding.purchaseValue = holding.purchaseCost * holding.numShares;
@@ -132,12 +138,30 @@ export class InvestmentService {
       return holdings;
     }
 
+    /** Calculate total value of current holdings */
     calculatePortfolioValue(holdings: SecurityHolding[]) {
       let total = 0;
       for (let holding of holdings) {
         total += holding.value;
       }
+      return total;
+    }
 
+    /** Calculate change from previous values for portfolio */
+    calculatePortfolioValueChange(holdings: SecurityHolding[]) {
+      let total = 0;
+      for (let holding of holdings) {
+        total += holding.numShares * holding.security.dayChange;
+      }
+      return total;
+    }
+
+    /** Calculate change from purchase values for portfolio */
+    calculatePortfolioGains(holdings: SecurityHolding[]) {
+      let total = 0;
+      for (let holding of holdings) {
+        total += holding.value - holding.purchaseValue;
+      }
       return total;
     }
 
