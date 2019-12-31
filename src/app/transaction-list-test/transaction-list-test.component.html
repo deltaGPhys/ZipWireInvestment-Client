@@ -1,9 +1,14 @@
 <p>transaction-list-test works!</p>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainModal">
+    Add Transaction
+  </button>
+  <app-transaction-form
+  [transTypes]="transTypes"
+  [(transactions)]="transactions">
+  </app-transaction-form>
 <ul class="transactions">
     <li *ngFor="let transaction of transactions">
-      <a routerLink="/detail/{{transaction.id}}">
-        <span class="badge">{{transaction.id}}</span> {{transaction.transactionType}} ${{transaction.amount}} {{transaction.account}} {{transaction.comment}}
-      </a>
+        <span class="badge">{{transaction.id}}</span> <span *ngIf="transaction.type"> {{transaction.type}}</span> {{transaction.amount | currency}} {{transaction.account}} {{transaction.comment}}
     </li>
-  </ul>
+</ul>
   

@@ -19,9 +19,11 @@ __________________________________________
 This command will compile a production ready version of your application in the dist/ folder.
 
 	$ ng build
+	ng build
 
 __________________________________________
 
+# Serving Angular Project
 
 # Install Bootstrap
 
@@ -47,3 +49,6 @@ This command will allow you to gain access to charts/graphing within your Angula
 
 	$ npm install ng2-charts
 	$ npm install chart.js
+Make sure you're in the project's root directory. This command will run a local server at http://localhost:4200 by default. It will also watch for changes in your project and refresh the page automatically. Run this command from within the project directory:
+
+	ng serve
