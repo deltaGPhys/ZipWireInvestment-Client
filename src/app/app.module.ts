@@ -21,6 +21,7 @@ import { HoldingsListComponent } from './investments/holdings-list/holdings-list
 import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
 import { LoginService } from './services/login.service';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 
 
 
@@ -39,7 +40,8 @@ import { LoginService } from './services/login.service';
     CreateAccountComponent,
     TransactionFormComponent,
     InvestmentBuyFormComponent,
-    SecurityGraphComponent
+    SecurityGraphComponent,
+    AddGoalComponent
   ],
   imports: [
     BrowserModule,

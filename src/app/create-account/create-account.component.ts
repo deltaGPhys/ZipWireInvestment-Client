@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import{User} from '../models/User';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {CreateAccountService} from '../services/create-account.service'
 import { Router } from '@angular/router';
 
@@ -12,16 +12,23 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent implements OnInit {
 
-  private userEmails: string []; 
+  private userEmails: any;
   private user: User;
+  allEmails: string[] = [];
   private createUserForm: FormGroup;
+  //private userEmail: string = "";
+  //private allUsers: User [];
+  emailAlreadyTaken : boolean = false;
  
   constructor(private createAccountService: CreateAccountService, private router: Router) { 
     this.createUserForm = this.createFormGroup();
+    this.userEmails = this.createAccountService.getAllEmails()
+    .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
+  
   }
 
   ngOnInit() {
-    let userEmails = this.createAccountService.getUserEmails;
+    
   }
 
   createFormGroup() {
@@ -40,9 +47,10 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    let email: string = this.createUserForm.controls.email.value;
-
-    let user : User = new User (
+    //this.userEmail = this.createUserForm.controls.email.value;
+    //if(this.checkForEmail(this.allEmails, this.userEmail)){
+    console.log("Trying to make a new user");
+      var user: User = new User (
       null,
       this.createUserForm.controls.firstName.value,
       this.createUserForm.controls.lastName.value,
@@ -50,14 +58,55 @@ export class CreateAccountComponent implements OnInit {
       this.createUserForm.controls.password.value,
       this.createUserForm.controls.rent.value,
       this.createUserForm.controls.salary.value);
-   
-    console.log(user);
     
-    this.createAccountService.addUser(user)
+   
+    console.log(this.user);
+    
+    this.createAccountService.addUser(this.user)
       .subscribe(data => {this.user = data;});
       
       this.revert();
 
       this.router.navigate(['/accounts']);
+    //}
+
+    // else {
+    //     this.emailAlreadyTaken = true;
+    //     this.router.navigate(['/register']);
+    // }
+}
+
+  checkForEmail(allEmails, email): boolean{
+    for (let i = 0; i < allEmails.length; i++) {
+      if(email === allEmails[i]){
+      console.log ("This email NOT available");
+      return false;
+      }
+    }
+    return true;
+  }
+
+  // emailAlreadyExist = "";
+  // emailCheckUnique () {
+  //   this.ss.emailCheckUnique(this.angForm.controls['s_email'].value).subscribe(res => {
+  //     this.studentEmailcheck = res;
+  //     if (this.studentEmailcheck.length > 0) {
+  //       this.emailAlreadyExist = "Email Alredy Exist";
+  //     }
+  //     else{
+  //       this.emailAlreadyExist = "";
+  //     }
+  //   });
+
+  // }
+
+  // private validateUsername() {
+  //   this.createAccountService.
+     
+  // }
+
+
+  loadUserEmails(){
+    this.createAccountService.getAllEmails();
   }
 }
