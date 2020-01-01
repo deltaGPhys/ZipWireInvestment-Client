@@ -5,10 +5,10 @@
         <input id="amount" type="number" formControlName="amount"><br>
         <input id="comment" type="text" formControlName="comment"><br>
         <select class="form-control" 
-        name="transactionType" required>
-            <option *ngFor="let transactionType of transTypes" 
-            [value]="transactionType.id">
-            {{ transactionType.name }}
+        formControlName="type" required>
+            <option *ngFor="let transactionType of transTypes | async"
+            [value]=transactionType>
+            {{ transactionType }}
             </option>  
         </select>
         
