@@ -1,0 +1,25 @@
+
+<div class="list-group-item flex-column align-items-start" style="width:500px; display: inline-block; text-align: left;">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{dateCreated | date: shortDate}} 
+        <ng-template [ngIf]="transaction.amount > 0" [ngIfElse]="debit">
+            <span style="color:#0a720a">+{{transaction.amount | currency}}</span>
+        </ng-template>
+        <ng-template #debit>
+            <span style="color:#a11414">{{transaction.amount | currency}}</span>
+        </ng-template> 
+        {{transaction.type}}
+      </h5>
+      <h4>
+        <ng-template [ngIf]="transaction.accountBalance > 0" [ngIfElse]="negative">
+            {{transaction.accountBalance | currency}}
+        </ng-template>
+        <ng-template #negative>
+            <span style="color:#a11414">{{transaction.accountBalance | currency}}</span>
+        </ng-template> 
+          
+      </h4>
+    </div>
+    
+    <small>{{transaction.comment}}</small>
+</div>

@@ -1,0 +1,17 @@
+<p>transaction-list-test works!</p>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainModal">
+    Add Transaction
+  </button>
+  <app-transaction-form
+  [transTypes]="transTypes"
+  [(transactions)]="transactions">
+  </app-transaction-form>
+  <br>
+  
+<ul class="transactions">
+    <div  *ngFor="let transaction of transactions" style="text-align:center;">
+        <app-transaction-view [transaction]="transaction"></app-transaction-view>
+        <!-- <span class="badge">{{transaction.id}}</span> <span *ngIf="transaction.type"> {{transaction.type}}</span> {{transaction.amount | currency}} {{transaction.account}} {{transaction.comment}} -->
+    </div>
+</ul>
+  

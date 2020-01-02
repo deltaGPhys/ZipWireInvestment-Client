@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SavingGoal} from '../models/Saving-goal.model';
+import { GoalServiceService } from '../services/goal-service.service';
 
 @Component({
   selector: 'app-goals',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./goals.component.css']
 })
 export class GoalsComponent implements OnInit {
+  private allGoals: SavingGoal[] = [];
+  id : number = null;
+  goals: any;
 
-  constructor() { }
+  constructor(private goalService: GoalServiceService) { 
+    this.goals =this.goalService.getAllGoals(this.id)
+    .subscribe(value => {this.allGoals = value; console.log(this.allGoals);});
+  
+  }
 
   ngOnInit() {
+
   }
 
 }

@@ -6,15 +6,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Transaction } from '../models/Transaction';
-import { TransactionType } from '../models/TransactionType';
-
 
 @Injectable({ providedIn: 'root' })
 export class TransactionService {
     
     @Inject(apiUrl) private apiUrl: string;
     private transactionsUrl: string = apiUrl+"/transactions";
-    transTypes: TransactionType[] = []; 
+    transTypes: Observable<string[]>; 
     transactions: Transaction[];
 
     httpOptions = {
@@ -23,54 +21,25 @@ export class TransactionService {
 
     constructor(private http: HttpClient) { 
       this.getTransactions().subscribe(transactions => {this.transactions = transactions; console.log(transactions);});
-      this.getTransTypes();
+      this.transTypes = this.getTransTypes();
     }
-
-
 
     /** GET Transactions from the server */
     getTransactions (): Observable<Transaction[]> {
-        
       return this.http.get<Transaction[]>(this.transactionsUrl)
           .pipe(
               tap(_ => console.log('fetched Transactions')),
-              map(val => this.mapTypes(val)),
               catchError(this.handleError<Transaction[]>('getTransactions', []))
           );
     }
 
-    mapTypes(trans: Transaction[]) {
-      console.log("zarp");
-      for (let t of trans) {
-        console.log(t);
-        //t.transactionType = this.transTypes[t.transactionType.id];    
-      }
-      return trans;
-    } 
-    
     /** GET Transaction types from the server */
-    // getTransTypes (): Observable<string[]> {
-    //   return this.http.get<string[]>(apiUrl+"/transactiontypes")
-    //         .pipe(
-    //             tap(_ => console.log('fetched Transactions')),
-    //             catchError(this.handleError<string[]>('getTransactions', []))
-    //         );
-    // }
-
-    /** GET Transaction types from the server */
-    getTransTypes (): void {
-        const promise = this.http.get(apiUrl+"/transactiontypes").toPromise();
-          
-        promise.then((data)=>{
-        let respData: Object = data;
-        
-        for (let i=0; i < Object.keys(respData).length;i++)  {
-            this.transTypes.push(new TransactionType(i+1,respData[i]));
-        }
-        console.log('ref');
-        }).catch((error)=>{
-        console.log("Promise rejected with " + JSON.stringify(error));
-        });
+    getTransTypes(): Observable<string[]> {
+      return this.http.get<string[]>(apiUrl+"/transactiontypes")
+      .pipe(
+          tap(_ => console.log('fetched Transaction Types')),
+          catchError(this.handleError<string[]>('getTransactionTypes', []))
+      );
     }
 
 //   /** GET Transaction by id. Return `undefined` when id not found */
