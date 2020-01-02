@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Transaction } from '../models/Transaction';
-import { TransactionService } from '../services/transaction.service';
+import { Transaction } from '../../models/Transaction';
+import { TransactionService } from '../../services/transaction.service';
 
 @Component({
   selector: 'app-transaction-list-test',

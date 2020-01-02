@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
-import { TransactionFormComponent } from './transaction-form/transaction-form.component';
-import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
+import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
+import { TransactionListTestComponent } from './transactions/transaction-list-test/transaction-list-test.component';
 
 import { LoginService } from './services/login.service';
 import { LoginComponent } from './login/login.component';
@@ -28,6 +28,7 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
 import {AddGoalComponent} from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
@@ -47,8 +48,12 @@ import { GoalServiceService } from './services/goal-service.service';
     CreateAccountComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
+<<<<<<< HEAD
     AddGoalComponent
     
+=======
+    TransactionViewComponent
+>>>>>>> bcf64d970d45cf4e3151c2e0a75bacca7b9af4ee
   ],
   imports: [
     BrowserModule,
