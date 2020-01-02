@@ -48,12 +48,8 @@ import { GoalServiceService } from './services/goal-service.service';
     CreateAccountComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
-<<<<<<< HEAD
     AddGoalComponent
     
-=======
-    TransactionViewComponent
->>>>>>> bcf64d970d45cf4e3151c2e0a75bacca7b9af4ee
   ],
   imports: [
     BrowserModule,
