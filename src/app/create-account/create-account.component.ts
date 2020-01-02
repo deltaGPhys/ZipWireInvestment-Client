@@ -16,7 +16,7 @@ export class CreateAccountComponent implements OnInit {
   private user: User;
   allEmails: string[] = [];
   private createUserForm: FormGroup;
-  //private userEmail: string = "";
+  private userEmail: string = "";
   //private allUsers: User [];
   emailAlreadyTaken : boolean = false;
  
@@ -47,8 +47,8 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    //this.userEmail = this.createUserForm.controls.email.value;
-    //if(this.checkForEmail(this.allEmails, this.userEmail)){
+    this.userEmail = this.createUserForm.controls.email.value;
+    if(this.checkForEmail(this.allEmails, this.userEmail)){
     console.log("Trying to make a new user");
       let user: User = new User (
       null,
@@ -68,13 +68,14 @@ export class CreateAccountComponent implements OnInit {
       this.revert();
 
       this.router.navigate(['/accounts']);
-    //}
+      }
 
-    // else {
-    //     this.emailAlreadyTaken = true;
-    //     this.router.navigate(['/register']);
-    // }
-}
+    else {
+        this.emailAlreadyTaken = true;
+        this.router.navigate(['/register']);
+    }
+  }
+
 
   checkForEmail(allEmails, email): boolean{
     for (let i = 0; i < allEmails.length; i++) {
@@ -84,9 +85,5 @@ export class CreateAccountComponent implements OnInit {
       }
     }
     return true;
-  }
-
-  loadUserEmails(){
-    this.createAccountService.getAllEmails();
   }
 }
