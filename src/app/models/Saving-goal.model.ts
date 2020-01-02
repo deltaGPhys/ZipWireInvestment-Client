@@ -1,5 +1,5 @@
 import {User} from './User';
-import {GoalAccount} from './goal-account.model'
+import {GoalAccount} from './Goal-account.model'
 
 export class SavingGoal {
     id: number;

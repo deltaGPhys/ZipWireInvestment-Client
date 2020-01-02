@@ -1,5 +1,5 @@
 import { Injectable, Inject, Input } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment'; export const apiUrl = environment.apiUrl;
 
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
@@ -8,6 +8,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Investment } from '../models/Investment';
 import { Security } from '../models/Security';
 import { SecurityHolding } from '../models/SecurityHolding';
+import { PriceHistory } from '../models/PriceHistory';
+
+import { SecurityGraphComponent } from '../investments/security-graph/security-graph.component'
 
 @Injectable({ providedIn: 'root' })
 export class InvestmentService {
@@ -17,17 +20,19 @@ export class InvestmentService {
     numsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     hldgsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     secChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-    valChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    portValsChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    stkChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    histChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
+  
     constructor(private http: HttpClient) { 
-      this.valueChange(0);
       this.initialHoldings();
       this.getSecurities();
-      
+      this.historyChange(null);
     }
 
     numbersChange(data: number[]) {
@@ -43,22 +48,48 @@ export class InvestmentService {
     }
 
     holdingsChange(data: SecurityHolding[]) {
+      console.log('hchange');
       let newH = this.calculateHoldingValues(data);
       this.hldgsChange.next(newH);
-      this.valChange.next(this.calculatePortfolioValue(newH));
+
+      this.portfolioValuesChange(newH);
     }
 
     securitiesChange(data: Security[]) {
       this.secChange.next(data);
     }
 
-    valueChange(data: number) {
-      this.valChange.next(data);
+    portfolioValuesChange(data: SecurityHolding[]) {
+      console.log(typeof data);
+      let portData: Object = {
+        'current':this.calculatePortfolioValue(data),
+        'dayChange':this.calculatePortfolioValueChange(data),
+        'cumChange':this.calculatePortfolioGains(data)
+      };
+      console.log(portData);
+      this.portValsChange.next(portData);
+    }
+
+    stockChange(data: [Security,string]) {
+      let date = (data[1] != null) ? this.parseDate(data[1]): null;
+      this.getSecurityHistory(data[0], date).subscribe(data => {this.historyChange(new PriceHistory(data.id,data.dates,data.prices,data.startDate));});
+      this.stkChange.next(data);
+    }
+
+    parseDate(array) : string {
+      let result: string = array[0] + "-";
+      result += (array[1] >= 10) ? array[1] : ("0" + array[1]);
+      result += "-";
+      result += (array[2] >= 10) ? array[2] : ("0" + array[2]);
+      return result;
+    }
+
+    historyChange(data: PriceHistory) {
+      this.histChange.next(data);
     }
 
     /** GET Account from the server */
     getAccount (id): Observable<Investment> {
-        console.log(this.investmentUrl+id);
         return this.http.get<Investment>(this.investmentUrl+id)
             .pipe(
                 tap(_ => console.log('fetched InvAcct')),
@@ -68,7 +99,6 @@ export class InvestmentService {
 
     /** GET Securities from the server */
     getSecurities (): Observable<Security[]> {
-      console.log(this.investmentUrl+"securities");
       return this.http.get<Security[]>(this.investmentUrl+"securities")
           .pipe(
               tap(data => {console.log('fetched Securities');this.securitiesChange(data);}),
@@ -76,18 +106,30 @@ export class InvestmentService {
           );
     }
 
+    /** GET history for this security from the server */
+    getSecurityHistory (security: Security, startDate: string): Observable<PriceHistory> {
+      let data: Object = {"startDate": startDate};
+      let params = new HttpParams()
+        .set('startDate', startDate);
+      return this.http.get<PriceHistory>(apiUrl+"/security/"+security.id, {params: params})
+          .pipe(
+              tap(data => {console.log('fetched Security history', data);}),
+              catchError(this.handleError<PriceHistory>('getSecH'))
+          );
+    }
+
     /** GET holding for this user from the server */
     getHoldings (accountId): Observable<SecurityHolding[]> {
-      //console.log(this.investmentUrl+"holdings/"+accountId);
       return this.http.get<SecurityHolding[]>(this.investmentUrl+"holdings/"+accountId)
           .pipe(
-              tap(data => {console.log('fetched Holdings');console.log(data);}),
-              map(data => this.calculateHoldingValues(data)),
-              tap(data => {this.valueChange(this.calculatePortfolioValue(data));}),
+              tap(data => {console.log('fetched Holdings');}),
+              tap(data => this.calculateHoldingValues(data)),
+              tap(data => {this.portfolioValuesChange(data);}),
               catchError(this.handleError<SecurityHolding[]>('getHold'))
           );
     }
 
+    /** Calculate current values of each stock holding */
     calculateHoldingValues (holdings: SecurityHolding[]): SecurityHolding[] {
       for (let holding of holdings) {
           holding.purchaseValue = holding.purchaseCost * holding.numShares;
@@ -96,12 +138,35 @@ export class InvestmentService {
       return holdings;
     }
 
+    /** Calculate total value of current holdings */
     calculatePortfolioValue(holdings: SecurityHolding[]) {
       let total = 0;
       for (let holding of holdings) {
         total += holding.value;
       }
+      return total;
+    }
 
+    /** PUT modify investment account balance */
+    updateInvestmentBalance(acctId: number, balance: number) {
+      return
+    }
+
+    /** Calculate change from previous values for portfolio */
+    calculatePortfolioValueChange(holdings: SecurityHolding[]) {
+      let total = 0;
+      for (let holding of holdings) {
+        total += holding.numShares * holding.security.dayChange;
+      }
+      return total;
+    }
+
+    /** Calculate change from purchase values for portfolio */
+    calculatePortfolioGains(holdings: SecurityHolding[]) {
+      let total = 0;
+      for (let holding of holdings) {
+        total += holding.value - holding.purchaseValue;
+      }
       return total;
     }
 
@@ -153,6 +218,7 @@ export class InvestmentService {
     );
   }
 
+  /** PUT: sell a SecurityHolding */
   sellHolding (holdingId: number): Observable<SecurityHolding> {
     return this.http.put<SecurityHolding>(this.investmentUrl+"holdings/"+holdingId, null, this.httpOptions).pipe(
       catchError(this.handleError<SecurityHolding>('addHolding'))

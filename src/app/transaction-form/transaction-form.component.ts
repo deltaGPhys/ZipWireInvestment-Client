@@ -22,7 +22,7 @@ export class TransactionFormComponent implements OnInit{
       account: null,
       comment: "",
       amount: 0,
-      transType: ""
+      type: ""
     });
   }
 
