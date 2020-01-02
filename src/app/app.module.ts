@@ -29,6 +29,9 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import {AddGoalComponent} from './add-goal/add-goal.component';
+import { GoalServiceService } from './services/goal-service.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +47,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CreateAccountComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
+    AddGoalComponent
     
   ],
   imports: [
@@ -55,7 +59,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     ChartsModule,
   ],
-  providers: [TransactionService, LoginService, Title],
+  providers: [TransactionService, LoginService, GoalServiceService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
