@@ -1,1 +1,39 @@
 <p>goals works!</p>
+
+
+<h2>My Savings Goals</h2>
+
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>Goal Amount</th>
+        <th>Goal Account</th>
+        <th>End Date</th>
+        <th>Description</th>
+    </tr>
+    <tr *ngFor="let goal of goals; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{goal.goalAmount}}</td>
+        <td>{{goal.goalAccount}}</td>
+        <td>{{goal.endDate}}</td>
+        <td>{{goal.description}}</td>
+    </tr>
+</table>
+<!--
+    <form [formGroup]="savingGoalForm" (ngSubmit)="onSubmit(savingGoalForm)">
+<ul class="goals">
+  <li *ngFor = "let goal of goals">
+
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+</form>
+-->
+
+    <div>
+        Want to Create a new Saving Goal?
+    <p>
+        <a class="btn btn-primary" href="/createGoal" role="button">Click Here!</a>
+    </p>
+    </div>
+

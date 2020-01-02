@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User} from '../models/User';
-import {Email} from '../models/Email.model'
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,8 @@ export class CreateAccountService {
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login/register";
   private getEmailsUrl: string = apiUrl+"/login/users/email";
+  private getAllUsersUrl: string = apiUrl+"/login/users";
+  private checkEmailExists: string = apiUrl + "/login/users/{userName}"
   private emailObservable: Observable<string[]>;
   private allEmails : string[];
 
@@ -28,14 +30,29 @@ export class CreateAccountService {
 
 //Add a new user to the database
 addUser(user: User): Observable<User>{
-  //console.log(apiUrl);
-  //console.log(this.registerUrl);
+  console.log(apiUrl);
+  console.log(this.registerUrl);
   return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
 }
 
-getUserEmails(){
-  return this.http.get(this.getEmailsUrl, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<string>('getAllEmails')));
+getUserEmails(): Observable<string[]>{
+  return this.http.get<string[]>(this.getEmailsUrl).pipe(tap(data => console.log('fetched emails')),catchError(this.handleError<string[]>('getUserEmails', [])));
 }
+
+getAllEmails() : Observable<string[]>{
+  return this.http.get<string[]>(this.getEmailsUrl, this.httpOptions)
+          .pipe(tap(data => console.log(data)), 
+          catchError(this.handleError<string[]>('getAllUserEmails', [])));
+}
+
+getAllUsers(){
+  return this.http.get(this.getAllUsersUrl, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<string>('getAllUsers')));
+}
+
+// allTheEmails(){
+//   return this.http.get(this.getEmailsUrl).subscribe(data => {this.data = data.results})
+
+// }
 
 
 

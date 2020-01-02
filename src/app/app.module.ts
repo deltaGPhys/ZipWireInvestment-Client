@@ -26,8 +26,12 @@ import { HoldingsListComponent } from './investments/holdings-list/holdings-list
 import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
 
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
+
+import {AddGoalComponent} from './add-goal/add-goal.component';
+import { GoalServiceService } from './services/goal-service.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
     CreateAccountComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
-    TransactionViewComponent
+    AddGoalComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,7 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
     ReactiveFormsModule,
     ChartsModule,
   ],
-  providers: [TransactionService, LoginService, Title],
+  providers: [TransactionService, LoginService, GoalServiceService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
