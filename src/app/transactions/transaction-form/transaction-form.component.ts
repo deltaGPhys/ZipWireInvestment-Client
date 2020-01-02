@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Transaction } from '../models/Transaction';
-import { TransactionService } from '../services/transaction.service';
+import { Transaction } from '../../models/Transaction';
+import { TransactionService } from '../../services/transaction.service';
 import { Form } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 

@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
-import { TransactionFormComponent } from './transaction-form/transaction-form.component';
-import { TransactionListTestComponent } from './transaction-list-test/transaction-list-test.component';
+import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
+import { TransactionListTestComponent } from './transactions/transaction-list-test/transaction-list-test.component';
 
 import { LoginService } from './services/login.service';
 import { LoginComponent } from './login/login.component';
@@ -27,6 +27,7 @@ import { InvestmentBuyFormComponent } from './investments/investment-buy-form/in
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
     CreateAccountComponent,
     InvestmentBuyFormComponent,
-    SecurityGraphComponent
+    SecurityGraphComponent,
+    TransactionViewComponent
   ],
   imports: [
     BrowserModule,

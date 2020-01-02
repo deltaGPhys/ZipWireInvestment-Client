@@ -6,6 +6,8 @@ export class Transaction {
     amount: number;
     account: Account = null;
     comment: string;
+    dateCreated: string;
+    accountBalance: number;
 
     constructor(id:number,transactionType:string,amount:number,comment:string){
         this.id = id;
