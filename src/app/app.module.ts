@@ -25,12 +25,7 @@ import { InvestmentHeaderComponent } from './investments/investment-header/inves
 import { HoldingsListComponent } from './investments/holdings-list/holdings-list.component';
 import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
-<<<<<<< HEAD
-import { LoginService } from './services/login.service';
-import { AddGoalComponent } from './add-goal/add-goal.component';
 
-=======
->>>>>>> 7be11ae8a614e5dd8274905759551a4a3ea40346
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -49,7 +44,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CreateAccountComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
-    AddGoalComponent
+    
   ],
   imports: [
     BrowserModule,
