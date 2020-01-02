@@ -6,6 +6,8 @@
   [transTypes]="transTypes"
   [(transactions)]="transactions">
   </app-transaction-form>
+  <br>
+  
 <ul class="transactions">
     <div  *ngFor="let transaction of transactions" style="text-align:center;">
         <app-transaction-view [transaction]="transaction"></app-transaction-view>
