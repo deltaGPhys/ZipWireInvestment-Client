@@ -50,7 +50,7 @@ export class CreateAccountComponent implements OnInit {
     //this.userEmail = this.createUserForm.controls.email.value;
     //if(this.checkForEmail(this.allEmails, this.userEmail)){
     console.log("Trying to make a new user");
-      var user: User = new User (
+      let user: User = new User (
       null,
       this.createUserForm.controls.firstName.value,
       this.createUserForm.controls.lastName.value,
@@ -60,7 +60,7 @@ export class CreateAccountComponent implements OnInit {
       this.createUserForm.controls.salary.value);
     
    
-    console.log(this.user);
+    console.log(user);
     
     this.createAccountService.addUser(this.user)
       .subscribe(data => {this.user = data;});
