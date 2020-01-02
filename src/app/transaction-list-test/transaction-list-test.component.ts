@@ -5,7 +5,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Transaction } from '../models/Transaction';
 import { TransactionService } from '../services/transaction.service';
-import { TransactionType } from '../models/TransactionType';
 
 @Component({
   selector: 'app-transaction-list-test',
@@ -15,7 +14,7 @@ import { TransactionType } from '../models/TransactionType';
 export class TransactionListTestComponent implements OnInit {
 
   transactions: Transaction[];
-  transTypes: TransactionType[];
+  transTypes: Observable<string[]>;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

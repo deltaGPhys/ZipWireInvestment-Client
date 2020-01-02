@@ -123,7 +123,7 @@ export class InvestmentService {
       return this.http.get<SecurityHolding[]>(this.investmentUrl+"holdings/"+accountId)
           .pipe(
               tap(data => {console.log('fetched Holdings');}),
-              map(data => this.calculateHoldingValues(data)),
+              tap(data => this.calculateHoldingValues(data)),
               tap(data => {this.portfolioValuesChange(data);}),
               catchError(this.handleError<SecurityHolding[]>('getHold'))
           );
@@ -145,6 +145,11 @@ export class InvestmentService {
         total += holding.value;
       }
       return total;
+    }
+
+    /** PUT modify investment account balance */
+    updateInvestmentBalance(acctId: number, balance: number) {
+      return
     }
 
     /** Calculate change from previous values for portfolio */
