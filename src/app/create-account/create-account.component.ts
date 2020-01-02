@@ -62,7 +62,7 @@ export class CreateAccountComponent implements OnInit {
    
     console.log(user);
     
-    this.createAccountService.addUser(this.user)
+    this.createAccountService.addUser(user)
       .subscribe(data => {this.user = data;});
       
       this.revert();
@@ -85,26 +85,6 @@ export class CreateAccountComponent implements OnInit {
     }
     return true;
   }
-
-  // emailAlreadyExist = "";
-  // emailCheckUnique () {
-  //   this.ss.emailCheckUnique(this.angForm.controls['s_email'].value).subscribe(res => {
-  //     this.studentEmailcheck = res;
-  //     if (this.studentEmailcheck.length > 0) {
-  //       this.emailAlreadyExist = "Email Alredy Exist";
-  //     }
-  //     else{
-  //       this.emailAlreadyExist = "";
-  //     }
-  //   });
-
-  // }
-
-  // private validateUsername() {
-  //   this.createAccountService.
-     
-  // }
-
 
   loadUserEmails(){
     this.createAccountService.getAllEmails();
