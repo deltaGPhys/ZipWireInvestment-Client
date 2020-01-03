@@ -32,15 +32,12 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
 import {AddGoalComponent} from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    TransactionListTestComponent,
-=======
     TransactionListComponent,
->>>>>>> 674b337035f77112d0b70dbab6cd539fc52a968c
     TransactionViewComponent,
     LoginComponent,
     GoalsComponent,
@@ -53,7 +50,8 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
     CreateAccountComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
-    AddGoalComponent
+    AddGoalComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
