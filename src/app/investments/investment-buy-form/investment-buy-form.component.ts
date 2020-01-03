@@ -27,16 +27,6 @@ export class InvestmentBuyFormComponent implements OnInit {
     this.investmentService.secChange.subscribe(value => {this.securities = value;});
     this.investmentService.stkChange.subscribe(value => {this.selectedStock = value[0];});
   }
-
-  // acctTest():void {
-  //   if (this.numbers == null) {
-  //     console.log('null');
-  //     this.numbers = [1];
-  //   }
-    
-  //   this.numbers = [...this.numbers, this.numbers.length+1];
-  //   this.investmentService.numbersChange(this.numbers);
-  // }
   
   ngOnInit() {
     
@@ -72,8 +62,8 @@ export class InvestmentBuyFormComponent implements OnInit {
       .subscribe(data => {
         let newHoldings: SecurityHolding[] = this.holdings.slice();
         newHoldings.push(data);
-        this.investmentService.holdingsChange(newHoldings);
         this.revert();
+        this.investmentService.holdingsChange(newHoldings);
       });
   }
 

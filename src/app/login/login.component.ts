@@ -5,6 +5,8 @@ import {CreateAccountService} from '../services/create-account.service'
 import {User} from '../models/User';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { UserService } from '../services/user-service.service';
 
 
 @Component({
@@ -19,11 +21,10 @@ export class LoginComponent implements OnInit {
   private userPassword: string;
   private userEmails: any;
   private allEmails: string[] = [];
-  loggedIn : boolean = false;
   myUser : User;
   notLoggedIn: boolean = true;
 
-  public constructor(private loginService: LoginService, private createAccountService : CreateAccountService, private router : Router) {
+  public constructor(private loginService: LoginService, private userService: UserService, private createAccountService : CreateAccountService, private router : Router) {
     this.loginForm = this.createFormGroup();
     this.userEmails = this.createAccountService.getAllEmails()
     .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
@@ -31,6 +32,8 @@ export class LoginComponent implements OnInit {
     
 
   ngOnInit() {
+    
+    
   }
 
   createFormGroup() {
@@ -43,20 +46,22 @@ export class LoginComponent implements OnInit {
   revert() {
     this.loginForm.reset();
   }
+
+  loginTest(): void {
+    this.userService.updateLoginStatus(true);
+
+  }
   
-  onSubmit(): boolean  {
+  onSubmit()  {
     this.userEmail = this.loginForm.controls.email.value;
     this.userPassword = this.loginForm.controls.password.value;
     console.log(this.userEmail);
     console.log(this.userPassword);
     if(this.validUserName(this.allEmails, this.userEmail)){
       this.loginService.verifyUser(this.userEmail,this.userPassword)
-      .subscribe(data => {this.loggedIn = data; console.log(data)});
+      .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data)});
       
       this.router.navigate(['/accounts']);
-
-      return this.loggedIn;
-
     }
   
     // this.loginService.findUserByEmail(this.userEmail).pipe(delay(5000))

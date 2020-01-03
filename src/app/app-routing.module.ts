@@ -11,12 +11,14 @@ import { TransactionFormComponent } from './transactions/transaction-form/transa
 import { AddGoalComponent } from './add-goal/add-goal.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
+import { TransfersComponent } from './transfers/transfers/transfers.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'transactions', component: TransactionListComponent },
     { path: 'goals', component: GoalsComponent },
     { path: 'accounts', component: AccountsComponent },
+    { path: 'transfers', component: TransfersComponent },
     { path: 'investments', component: InvestmentsComponent },
     { path: 'register', component: CreateAccountComponent },
     { path: 'transactions', component: TransactionFormComponent },

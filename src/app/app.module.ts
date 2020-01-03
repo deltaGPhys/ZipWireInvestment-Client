@@ -29,10 +29,11 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
-import {AddGoalComponent} from './add-goal/add-goal.component';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
+import { TransfersComponent } from './transfers/transfers/transfers.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { UserComponent } from './user/user.component';
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     AddGoalComponent,
-    UserComponent
+    UserComponent,
+    TransfersComponent
   ],
   imports: [
     BrowserModule,
