@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserService } from './services/user-service.service'
 
 
 @Component({
@@ -9,6 +11,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string = 'FinanceApp';
+  loggedIn: Observable<boolean> = this.userService.loggedIn;
+
+  constructor(private userService: UserService) {
+
+  }
 
   ngOnInit() {
       

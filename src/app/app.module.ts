@@ -22,7 +22,7 @@ import { SpendingReportComponent } from './spending-report/spending-report.compo
 import { DateRangeComponent } from './date-range/date-range.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
-import {AddGoalComponent} from './add-goal/add-goal.component';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 

@@ -72,8 +72,10 @@ export class InvestmentService {
 
     stockChange(data: [Security,string]) {
       let date = (data[1] != null) ? this.parseDate(data[1]): null;
-      this.getSecurityHistory(data[0], date).subscribe(data => {this.historyChange(new PriceHistory(data.id,data.dates,data.prices,data.startDate));});
-      this.stkChange.next(data);
+      if (data[0] != null) {
+        this.getSecurityHistory(data[0], date).subscribe(data => {this.historyChange(new PriceHistory(data.id,data.dates,data.prices,data.startDate));});
+        this.stkChange.next(data);
+      } 
     }
 
     parseDate(array) : string {
