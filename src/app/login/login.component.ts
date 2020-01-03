@@ -5,6 +5,8 @@ import {CreateAccountService} from '../services/create-account.service'
 import {User} from '../models/User';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { UserService } from '../services/user-service.service';
 
 
 @Component({
@@ -19,11 +21,10 @@ export class LoginComponent implements OnInit {
   private userPassword: string;
   private userEmails: any;
   private allEmails: string[] = [];
-  loggedIn : boolean = false;
   myUser : User;
   notLoggedIn: boolean = true;
 
-  public constructor(private loginService: LoginService, private createAccountService : CreateAccountService, private router : Router) {
+  public constructor(private loginService: LoginService, private userService: UserService, private createAccountService : CreateAccountService, private router : Router) {
     this.loginForm = this.createFormGroup();
     this.userEmails = this.createAccountService.getAllEmails()
     .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
@@ -31,6 +32,8 @@ export class LoginComponent implements OnInit {
     
 
   ngOnInit() {
+    
+    
   }
 
   createFormGroup() {
@@ -42,6 +45,11 @@ export class LoginComponent implements OnInit {
 
   revert() {
     this.loginForm.reset();
+  }
+
+  loginTest(): void {
+    this.userService.updateLoginStatus(true);
+
   }
   
   onSubmit(): boolean  {
