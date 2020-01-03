@@ -2,7 +2,6 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { TransactionListTestComponent } from './transactions/transaction-list-test/transaction-list-test.component';
 import { LoginComponent } from './login/login.component';
 import { GoalsComponent } from './goals/goals.component';
 import { AccountsComponent } from './accounts/accounts.component';

@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
-import { TransactionListTestComponent } from './transactions/transaction-list-test/transaction-list-test.component';
 
 import { LoginService } from './services/login.service';
 import { LoginComponent } from './login/login.component';
@@ -37,7 +36,6 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
 @NgModule({
   declarations: [
     AppComponent,
-    TransactionListTestComponent,
     TransactionListComponent,
     TransactionViewComponent,
     LoginComponent,
