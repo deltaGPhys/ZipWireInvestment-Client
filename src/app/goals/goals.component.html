@@ -11,11 +11,11 @@
         <th>End Date</th>
         <th>Description</th>
     </tr>
-    <tr *ngFor="let goal of goals; let i = index">
+    <tr *ngFor="let goal of goals | async; let i = index">
         <td>{{i + 1}}</td>
-        <td>{{goal.goalAmount}}</td>
+        <td>{{goal.goalAmount | currency}}</td>
         <td>{{goal.goalAccount}}</td>
-        <td>{{goal.endDate}}</td>
+        <td>{{goal.endDate | date : 'shortDate'}} </td>
         <td>{{goal.description}}</td>
     </tr>
 </table>

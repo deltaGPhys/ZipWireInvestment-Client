@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
-import { TransactionListTestComponent } from './transactions/transaction-list-test/transaction-list-test.component';
 
 import { LoginService } from './services/login.service';
 import { LoginComponent } from './login/login.component';
@@ -30,13 +29,14 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
-import {AddGoalComponent} from './add-goal/add-goal.component';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
+import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TransactionListTestComponent,
+    TransactionListComponent,
     TransactionViewComponent,
     LoginComponent,
     GoalsComponent,
@@ -50,7 +50,6 @@ import { GoalServiceService } from './services/goal-service.service';
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     AddGoalComponent
-    
   ],
   imports: [
     BrowserModule,

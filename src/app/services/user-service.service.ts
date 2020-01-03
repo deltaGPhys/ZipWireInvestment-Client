@@ -2,23 +2,32 @@ import { Injectable, Inject} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'; export const apiUrl = environment.apiUrl;
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class UserServiceService {
+export class UserService {
   
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+  
+  }
+
+  updateLoginStatus(status: boolean) {
+    this.isLoggedIn.next(status);
+    console.log(status);
+  }
 
 //Add a new user to the database
 //addUser(user: User): Observable<User>{

@@ -24,7 +24,6 @@ export class CreateAccountComponent implements OnInit {
     this.createUserForm = this.createFormGroup();
     this.userEmails = this.createAccountService.getAllEmails()
     .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
-  
   }
 
   ngOnInit() {
@@ -36,7 +35,7 @@ export class CreateAccountComponent implements OnInit {
         firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         lastName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl(''),
+        password: new FormControl('', [Validators.required]),
         rent: new FormControl('', [Validators.required, Validators.pattern('^[0-9.]+$')]),
         salary: new FormControl('', [Validators.required, Validators.pattern('^[0-9.]+$')])
   });
@@ -49,7 +48,6 @@ export class CreateAccountComponent implements OnInit {
   onSubmit() {
     this.userEmail = this.createUserForm.controls.email.value;
     if(this.checkForEmail(this.allEmails, this.userEmail)){
-    console.log("Trying to make a new user");
       let user: User = new User (
       null,
       this.createUserForm.controls.firstName.value,
@@ -75,8 +73,7 @@ export class CreateAccountComponent implements OnInit {
         this.router.navigate(['/register']);
     }
   }
-
-
+  
   checkForEmail(allEmails, email): boolean{
     for (let i = 0; i < allEmails.length; i++) {
       if(email === allEmails[i]){
