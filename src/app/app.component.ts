@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UserService } from './services/user-service.service'
 
 
@@ -11,13 +11,15 @@ import { UserService } from './services/user-service.service'
 })
 export class AppComponent {
   title: string = 'FinanceApp';
-  loggedIn: Observable<boolean> = this.userService.loggedIn;
+  isLoggedIn: boolean;
+  
 
   constructor(private userService: UserService) {
-
+    this.userService.isLoggedIn.subscribe(data => this.isLoggedIn = data);
   }
 
   ngOnInit() {
+      
       
   }
 }
