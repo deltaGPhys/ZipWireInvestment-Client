@@ -9,10 +9,11 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-export class UserServiceService {
+export class UserService {
   
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
+  loggedIn: Observable<boolean> = of(true);
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})

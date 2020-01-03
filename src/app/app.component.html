@@ -7,8 +7,8 @@
       </div>
       
     </div>
-  </nav>
-  <ul class="nav nav-tabs">
+  </nav >
+  <ul class="nav nav-tabs" *ngIf="loggedIn | async">
     <li role="tab" data-toggle="tab" class="active"><a routerLink="/">Login</a></li>
     <li role="tab" data-toggle="tab"><a routerLink="/transactions">Transactions</a></li>
     <li role="tab" data-toggle="tab"><a routerLink="/goals">Goals</a></li>
