@@ -13,7 +13,7 @@ export class SavingGoal {
         this.id = id;
         this.goalAmount = goalAmount;
         this.owner = owner;
-        this.account = account;
+        //this.account = account;
         this.endDate = endDate;
         this.description = description;
     }

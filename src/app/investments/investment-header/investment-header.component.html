@@ -12,7 +12,7 @@
           
         <ng-template #loss>
             <div>
-                Day change: -{{portfolioValues.dayChange | currency}}<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
+                Day change: {{portfolioValues.dayChange | currency}}<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
             </div>
         </ng-template>
     </div>
@@ -25,7 +25,7 @@
           
         <ng-template #cumLoss>
             <div>
-                Cumulative change: -{{portfolioValues.cumChange | currency}}<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
+                Cumulative change: {{portfolioValues.cumChange | currency}}<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" placement="top" ngbTooltip="Change from most recent trading day, assuming current portfolio"></span>
             </div>
         </ng-template>
     </div>

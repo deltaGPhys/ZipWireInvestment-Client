@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment'; export const apiUrl 
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class LoginService {
   
   @Inject(apiUrl) private apiUrl: string;
-  private registerUrl: string = apiUrl+"/login";
+  //private registerUrl: string = apiUrl+"/account/"+id;
+  private verifyUrl : string = apiUrl +"/login/verify/";
+  private getUserByEmail : string = apiUrl + "/login/users/";
+  loggedIn : boolean = false;
+  user: User;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -20,22 +25,21 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-//Get all users from the database
+  verifyUser (email:string, password:string) : Observable<boolean> {
+    return this.http.get<boolean>(this.verifyUrl+email+"/"+password, this.httpOptions)
+    .pipe(tap(data => console.log(data)),
+    catchError(this.handleError<boolean>('verification', false)));
+  }
 
-  //Add a new user to the database
-//addUser(user: User): Observable<User>{
-  //console.log(apiUrl);
-  //console.log(this.registerUrl);
-//   return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
-// }
+  findUserByEmail(email: string): Observable<User>{
+    return this.http.get<User>(this.getUserByEmail+email, this.httpOptions)
+    .pipe(tap(data => console.log(data)),
+    catchError(this.handleError<User>('verification', null)));
+  }
 
-
+  //getUser
 
 // getUser(id:number):Observable<User>{
-
-// }
-
-//saveUser()
 
 /**
    * Handle Http operation that failed.

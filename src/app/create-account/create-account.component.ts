@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import{User} from '../models/User';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {CreateAccountService} from '../services/create-account.service'
 import { Router } from '@angular/router';
 
@@ -12,16 +12,22 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent implements OnInit {
 
-  private userEmails: string []; 
+  private userEmails: any;
   private user: User;
+  allEmails: string[] = [];
   private createUserForm: FormGroup;
+  private userEmail: string = "";
+  //private allUsers: User [];
+  emailAlreadyTaken : boolean = false;
  
   constructor(private createAccountService: CreateAccountService, private router: Router) { 
     this.createUserForm = this.createFormGroup();
+    this.userEmails = this.createAccountService.getAllEmails()
+    .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
   }
 
   ngOnInit() {
-    let userEmails = this.createAccountService.getUserEmails;
+    
   }
 
   createFormGroup() {
@@ -29,7 +35,7 @@ export class CreateAccountComponent implements OnInit {
         firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         lastName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl(''),
+        password: new FormControl('', [Validators.required]),
         rent: new FormControl('', [Validators.required, Validators.pattern('^[0-9.]+$')]),
         salary: new FormControl('', [Validators.required, Validators.pattern('^[0-9.]+$')])
   });
@@ -40,9 +46,9 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    let email: string = this.createUserForm.controls.email.value;
-
-    let user : User = new User (
+    this.userEmail = this.createUserForm.controls.email.value;
+    if(this.checkForEmail(this.allEmails, this.userEmail)){
+      let user: User = new User (
       null,
       this.createUserForm.controls.firstName.value,
       this.createUserForm.controls.lastName.value,
@@ -50,6 +56,7 @@ export class CreateAccountComponent implements OnInit {
       this.createUserForm.controls.password.value,
       this.createUserForm.controls.rent.value,
       this.createUserForm.controls.salary.value);
+    
    
     console.log(user);
     
@@ -59,5 +66,21 @@ export class CreateAccountComponent implements OnInit {
       this.revert();
 
       this.router.navigate(['/accounts']);
+      }
+
+    else {
+        this.emailAlreadyTaken = true;
+        this.router.navigate(['/register']);
+    }
+  }
+  
+  checkForEmail(allEmails, email): boolean{
+    for (let i = 0; i < allEmails.length; i++) {
+      if(email === allEmails[i]){
+      console.log ("This email NOT available");
+      return false;
+      }
+    }
+    return true;
   }
 }
