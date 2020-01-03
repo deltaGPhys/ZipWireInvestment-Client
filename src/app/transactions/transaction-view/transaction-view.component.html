@@ -1,5 +1,5 @@
 
-<div class="list-group-item flex-column align-items-start" style="width:500px; display: inline-block; text-align: left;">
+<div class="list-group-item flex-column align-items-start" >
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{dateCreated | date: shortDate}} 
         <ng-template [ngIf]="transaction.amount > 0" [ngIfElse]="debit">

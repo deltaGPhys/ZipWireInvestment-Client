@@ -32,11 +32,13 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
 
 import {AddGoalComponent} from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
+import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TransactionListTestComponent,
+    TransactionListComponent,
     TransactionViewComponent,
     LoginComponent,
     GoalsComponent,
