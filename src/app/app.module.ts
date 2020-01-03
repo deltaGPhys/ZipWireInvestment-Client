@@ -22,6 +22,7 @@ import { InvestmentBuyFormComponent } from './investments/investment-buy-form/in
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
 import { LoginService } from './services/login.service';
 import { SpendingReportComponent } from './spending-report/spending-report.component';
+import { DateRangeComponent } from './date-range/date-range.component';
 
 
 
@@ -41,7 +42,8 @@ import { SpendingReportComponent } from './spending-report/spending-report.compo
     TransactionFormComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
-    SpendingReportComponent
+    SpendingReportComponent,
+    DateRangeComponent
   ],
   imports: [
     BrowserModule,
