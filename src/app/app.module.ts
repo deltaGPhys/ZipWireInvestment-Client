@@ -37,6 +37,7 @@ import { GoalServiceService } from './services/goal-service.service';
   declarations: [
     AppComponent,
     TransactionListTestComponent,
+    TransactionViewComponent,
     LoginComponent,
     GoalsComponent,
     AccountsComponent,
@@ -49,7 +50,6 @@ import { GoalServiceService } from './services/goal-service.service';
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     AddGoalComponent
-    
   ],
   imports: [
     BrowserModule,
