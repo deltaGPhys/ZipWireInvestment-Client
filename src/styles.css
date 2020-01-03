@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
+
+.transactionModalClass .modal-dialog {
+    width: 750px;
+}
+
+.modal-body {
+    overflow-y: auto !important;
+}

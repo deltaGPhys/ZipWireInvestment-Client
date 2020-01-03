@@ -19,7 +19,7 @@ export class TransactionFormComponent implements OnInit{
     
     this.newTransactionForm = this.formBuilder.group({
       id: null,
-      account: null,
+      account: 1,
       comment: "",
       amount: 0,
       type: ""
@@ -31,7 +31,7 @@ export class TransactionFormComponent implements OnInit{
 
   submitTransactionForm(form): void {
     console.log(form);
-    this.transactionService.addTransaction(form).subscribe(trans => {console.log(trans); this.transactions.push(trans);});
+    this.transactionService.addTransaction(form).subscribe(trans => {this.transactions.push(trans);});
   }
   
 

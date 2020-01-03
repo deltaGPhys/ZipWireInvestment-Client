@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
-import { TransactionListTestComponent } from './transactions/transaction-list-test/transaction-list-test.component';
 
 import { LoginService } from './services/login.service';
 import { LoginComponent } from './login/login.component';
@@ -32,11 +31,16 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
 
 import {AddGoalComponent} from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
+import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     TransactionListTestComponent,
+=======
+    TransactionListComponent,
+>>>>>>> 674b337035f77112d0b70dbab6cd539fc52a968c
     TransactionViewComponent,
     LoginComponent,
     GoalsComponent,

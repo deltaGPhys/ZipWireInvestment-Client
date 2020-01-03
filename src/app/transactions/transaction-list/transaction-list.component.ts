@@ -5,14 +5,16 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Transaction } from '../../models/Transaction';
 import { TransactionService } from '../../services/transaction.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-transaction-list-test',
-  templateUrl: './transaction-list-test.component.html',
-  styleUrls: ['./transaction-list-test.component.css']
+  selector: 'app-transaction-list',
+  templateUrl: './transaction-list.component.html',
+  styleUrls: ['./transaction-list.component.css'],
 })
-export class TransactionListTestComponent implements OnInit {
+export class TransactionListComponent implements OnInit {
 
+  closeResult: string;
   transactions: Transaction[];
   transTypes: Observable<string[]>;
 
@@ -21,7 +23,7 @@ export class TransactionListTestComponent implements OnInit {
   };
 
 
-  constructor(private transactionService: TransactionService) { 
+  constructor(private transactionService: TransactionService, private modalService: NgbModal) { 
     this.transactions = this.transactionService.transactions;
   }
 
@@ -30,6 +32,10 @@ export class TransactionListTestComponent implements OnInit {
     this.transactionService.getTransactions().subscribe(transactions => this.transactions = transactions);
     
     this.transTypes = this.transactionService.transTypes;
+  }
+
+  openScrollableContent(transactionReport) {
+    this.modalService.open(transactionReport, { windowClass : "transactionModalClass", scrollable: true });
   }
 
   // getTransactions() {
