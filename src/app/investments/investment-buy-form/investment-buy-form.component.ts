@@ -72,8 +72,8 @@ export class InvestmentBuyFormComponent implements OnInit {
       .subscribe(data => {
         let newHoldings: SecurityHolding[] = this.holdings.slice();
         newHoldings.push(data);
-        this.investmentService.holdingsChange(newHoldings);
         this.revert();
+        this.investmentService.holdingsChange(newHoldings);
       });
   }
 

@@ -29,18 +29,14 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
-import {AddGoalComponent} from './add-goal/add-goal.component';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    TransactionListTestComponent,
-=======
     TransactionListComponent,
->>>>>>> 674b337035f77112d0b70dbab6cd539fc52a968c
     TransactionViewComponent,
     LoginComponent,
     GoalsComponent,
