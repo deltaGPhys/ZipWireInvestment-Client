@@ -9,6 +9,9 @@
             <label for="loginInputPassword">Password</label>
             <input type="password" formControlName = "password" class="form-control" id="inputPassword1" required placeholder="Password">
             </div>
+            <div *ngIf="invalidLogin" class="alert alert-danger"> 
+                *The username or password you have entered is invalid!
+              </div> 
 
             <button type="submit" class="btn btn-primary">Submit</button>
 				<div>

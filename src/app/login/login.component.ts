@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   private userEmails: any;
   private allEmails: string[] = [];
   myUser : User;
-  notLoggedIn: boolean = true;
+  invalidLogin: boolean = false;
+  //notLoggedIn: boolean = true;
 
   public constructor(private loginService: LoginService, private userService: UserService, private createAccountService : CreateAccountService, private router : Router) {
     this.loginForm = this.createFormGroup();
@@ -58,6 +59,10 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data)});
       
       this.router.navigate(['/accounts']);
+    }
+    else {
+      this.invalidLogin = true;
+      this.router.navigate(['']);
     }
   
     // this.loginService.findUserByEmail(this.userEmail).pipe(delay(5000))
