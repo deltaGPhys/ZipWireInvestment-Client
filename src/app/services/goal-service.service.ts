@@ -14,7 +14,8 @@ export class GoalServiceService {
 
   @Inject(apiUrl) private apiUrl: string;
   private addGoalUrl: string = apiUrl+"/goals/add";
-  private goalsUrl: string = apiUrl+"/goals";
+  private userGoalsUrl: string = apiUrl+"/goals/show/";
+  private allGoalsUrl: string = apiUrl+"/goals";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -30,10 +31,16 @@ export class GoalServiceService {
             .pipe(tap(data => console.log(data)), catchError(this.handleError<SavingGoal>('addSavingGoal')));
   }
 
-  getAllGoals(id: number) : Observable<SavingGoal[]>{
-    return this.http.get<SavingGoal[]>(this.goalsUrl, this.httpOptions)
+  getAllGoalsForUser(userId: number) : Observable<SavingGoal[]>{
+    return this.http.get<SavingGoal[]>(this.userGoalsUrl + userId, this.httpOptions)
             .pipe(tap(data => console.log(data)), 
-            catchError(this.handleError<SavingGoal[]>('getSavingGoals', [])));
+            catchError(this.handleError<SavingGoal[]>('getSavingGoalsForUser', [])));
+  }
+
+  getAllGoals() : Observable<SavingGoal[]>{
+    return this.http.get<SavingGoal[]>(this.allGoalsUrl, this.httpOptions)
+        .pipe(tap(data => console.log(data)),
+        catchError(this.handleError<SavingGoal[]>('getAllGoalsInDB', [])));
   }
 
   parseDate(array) : string {
