@@ -22,18 +22,16 @@ export class LoginComponent implements OnInit {
   private userEmails: any;
   private allEmails: string[] = [];
   myUser : User;
-  notLoggedIn: boolean = true;
+  invalidLogin: boolean = false;
+  //notLoggedIn: boolean = true;
 
   public constructor(private loginService: LoginService, private userService: UserService, private createAccountService : CreateAccountService, private router : Router) {
     this.loginForm = this.createFormGroup();
     this.userEmails = this.createAccountService.getAllEmails()
     .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
    }  
-    
 
   ngOnInit() {
-    
-    
   }
 
   createFormGroup() {
@@ -49,7 +47,6 @@ export class LoginComponent implements OnInit {
 
   loginTest(): void {
     this.userService.updateLoginStatus(true);
-
   }
   
   onSubmit()  {
@@ -63,25 +60,15 @@ export class LoginComponent implements OnInit {
       
       this.router.navigate(['/accounts']);
     }
+    else {
+      this.invalidLogin = true;
+      this.router.navigate(['']);
+    }
   
     // this.loginService.findUserByEmail(this.userEmail).pipe(delay(5000))
     // .subscribe(data => {this.myUser = data; console.log(data)});
 
     //this.loginService.verifyUser(email,password).subscribe(data => {this.loggedIn = data; console.log(this.loggedIn)});
-    
-    
-
-    // if(loggedIn){
-
-    // }
-
-    
-    // this.createAccountService.addUser(user)
-    //   .subscribe(data => {this.user = data;});
-      
-    //   this.revert();
-
-    //   this.router.navigate(['/accounts']);
     
   }
   validUserName (allEmails, userEmail) : boolean {
