@@ -29,11 +29,8 @@ export class LoginComponent implements OnInit {
     this.userEmails = this.createAccountService.getAllEmails()
     .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
    }  
-    
 
   ngOnInit() {
-    
-    
   }
 
   createFormGroup() {
@@ -49,7 +46,6 @@ export class LoginComponent implements OnInit {
 
   loginTest(): void {
     this.userService.updateLoginStatus(true);
-
   }
   
   onSubmit()  {
@@ -68,20 +64,6 @@ export class LoginComponent implements OnInit {
     // .subscribe(data => {this.myUser = data; console.log(data)});
 
     //this.loginService.verifyUser(email,password).subscribe(data => {this.loggedIn = data; console.log(this.loggedIn)});
-    
-    
-
-    // if(loggedIn){
-
-    // }
-
-    
-    // this.createAccountService.addUser(user)
-    //   .subscribe(data => {this.user = data;});
-      
-    //   this.revert();
-
-    //   this.router.navigate(['/accounts']);
     
   }
   validUserName (allEmails, userEmail) : boolean {
