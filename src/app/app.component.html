@@ -10,10 +10,12 @@
   </nav >
   <ul class="nav nav-tabs" *ngIf="isLoggedIn">
     <li role="tab" data-toggle="tab" class="active"><a routerLink="/">Login</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/transactions">Transactions</a></li>
+    <li role="tab" data-toggle="tab"><a routerLink="/transactions">Trans (temp)</a></li>
     <li role="tab" data-toggle="tab"><a routerLink="/goals">Goals</a></li>
     <li role="tab" data-toggle="tab"><a routerLink="/accounts">Accounts</a></li>
+    <li role="tab" data-toggle="tab"><a routerLink="/transfers">Transfers</a></li>
     <li role="tab" data-toggle="tab"><a routerLink="/investments">Investments</a></li>
+    <li role="tab" data-toggle="tab"><a routerLink="/user">User</a></li>
   </ul>
   <div class="container" style="border: 1px solid #ddd; border-top: 0px; max-width: 100%; ">
     <router-outlet></router-outlet>
