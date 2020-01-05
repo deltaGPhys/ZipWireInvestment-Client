@@ -14,17 +14,22 @@ export class GoalsComponent implements OnInit {
  
   goals: SavingGoal;
   //allUserGoals : any;
-  id : number = 5;
+  userId : number = 5;
   allGoals: SavingGoal[];
   
 
   constructor(private goalService: GoalServiceService, private userService: UserService) { 
-    this.goalService.getAllGoalsForUser(this.id)
-        .subscribe(value => {this.allGoals = value; console.log(this.allGoals);});;
-    //console.log(this.goals);
-    //.subscribe(value => {this.allGoals = value; console.log(this.allGoals);});
-  
+    // this.goalService.getAllGoalsForUser(this.id)
+    //     .subscribe(value => {this.allGoals = value; console.log(this.allGoals);});;
     
+        //console.log(this.goals);
+    //.subscribe(value => {this.allGoals = value; console.log(this.allGoals);});
+    
+    this.goalService.updateSavingsGoals(this.userId);
+
+    this.goalService.getAllGoals()
+    .subscribe(value => {this.allGoals = value; console.log(this.allGoals);});;
+
   }
 
   ngOnInit() {
