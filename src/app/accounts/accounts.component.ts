@@ -1,32 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import{User} from '../models/User';
+
 
 @Component({
   selector: 'app-accounts',
-  template: `<h2>
-  Welcome {{name}} Account # {{myId}}</h2>
-
-<header>
-    <h1>Account Summary</h1>
-</header>
-<aside>
-
-    <h2>Checking & Savings</h2>
-    <ul>
-        <li><a href="#">Checking</a></li>
-        <li><a href="#">Savings</a></li>
-        <li><a href="#">Goal Account</a></li>
-
-    </ul>
-</aside>`,
-
+  templateUrl:'./accounts.component.html',
   styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent implements OnInit {
-public name = "Charlotte Beale";
-public myId = "675472";
-  constructor() { }
+    id: number;
+    balance : number;
+    openingDate : number;
+    owner: string;
+    acctName : string;
 
-  ngOnInit() {
-  }
+    constructor(id:number, balance:number, openingDate:number, owner:string, acctName:string){
+        this.id = id;
+        this.balance = balance;
+        this.openingDate = openingDate;
+        this.owner = owner;
+        this.acctName = acctName;
+      
+    }
 
 }

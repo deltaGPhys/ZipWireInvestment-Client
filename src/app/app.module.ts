@@ -34,6 +34,7 @@ import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TransfersComponent } from './transfers/transfers/transfers.component';
     SecurityGraphComponent,
     AddGoalComponent,
     UserComponent,
-    TransfersComponent
+    TransfersComponent,
+    DeleteAccountComponent
   ],
   imports: [
     BrowserModule,
