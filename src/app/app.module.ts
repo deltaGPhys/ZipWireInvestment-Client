@@ -33,6 +33,7 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { AddAccountComponent } from './add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { DeleteAccountComponent } from './delete-account/delete-account.componen
     AddGoalComponent,
     UserComponent,
     TransfersComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    AddAccountComponent
   ],
   imports: [
     BrowserModule,
