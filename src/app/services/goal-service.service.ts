@@ -2,7 +2,7 @@ import { Injectable, Inject} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'; export const apiUrl = environment.apiUrl;
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { SavingGoal} from '../models/Saving-goal.model';
 
@@ -14,7 +14,9 @@ export class GoalServiceService {
 
   @Inject(apiUrl) private apiUrl: string;
   private addGoalUrl: string = apiUrl+"/goals/add";
-  private goalsUrl: string = apiUrl+"/goals";
+  private userGoalsUrl: string = apiUrl+"/goals/show/";
+  private allGoalsUrl: string = apiUrl+"/goals/showAll";
+  savingGoals$ : BehaviorSubject<any> = new BehaviorSubject<any>([]);  
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -30,11 +32,26 @@ export class GoalServiceService {
             .pipe(tap(data => console.log(data)), catchError(this.handleError<SavingGoal>('addSavingGoal')));
   }
 
-  getAllGoals(id: number) : Observable<SavingGoal[]>{
-    return this.http.get<SavingGoal[]>(this.goalsUrl, this.httpOptions)
+  getAllGoalsForUser(userId: number) : Observable<SavingGoal[]>{
+    return this.http.get<SavingGoal[]>(this.userGoalsUrl + userId, this.httpOptions)
             .pipe(tap(data => console.log(data)), 
-            catchError(this.handleError<SavingGoal[]>('getSavingGoals', [])));
+            catchError(this.handleError<SavingGoal[]>('getSavingGoalsForUser', [])));
   }
+
+  getAllGoals() : Observable<SavingGoal[]>{
+    return this.http.get<SavingGoal[]>(this.allGoalsUrl, this.httpOptions)
+        .pipe(tap(data => console.log(data)),
+        catchError(this.handleError<SavingGoal[]>('getAllGoalsInDB', [])));
+  }
+
+  updateSavingsGoals (userId:number) {
+    this.getAllGoalsForUser(userId).subscribe(data => this.savingGoals$.next(data));
+  }
+
+  // updateSavingsGoals2 () {
+  //   this.getAllGoals().subscribe(data => this.savingGoals$.next(data));
+  // }
+
 
   parseDate(array) : string {
     let result: string = array[0] + "-";

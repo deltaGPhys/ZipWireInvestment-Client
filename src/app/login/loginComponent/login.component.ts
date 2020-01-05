@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { LoginService} from 'src/app/services/login.service';
-import {CreateAccountService} from '../services/create-account.service'
-import {User} from '../models/User';
+import {CreateAccountService} from '../../services/create-account.service'
+import {User} from '../../models/User';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { UserService } from '../services/user-service.service';
+import { UserService } from '../../services/user-service.service';
 
 
 @Component({
