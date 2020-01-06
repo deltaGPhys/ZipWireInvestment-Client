@@ -57,15 +57,9 @@ import { AddAccountComponent } from './add-account/add-account.component';
     AddGoalComponent,
     UserComponent,
     TransfersComponent,
-<<<<<<< HEAD
-    //DeleteAccountComponent,
-    //AddAccountComponent
-   ],
-=======
     DeleteAccountComponent,
     AddAccountComponent
   ],
->>>>>>> d1c77a27bdfce1d5616483765fd4ae573a89a3f1
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit, Inject } from '@angular/core';
-import { UserService } from '../services/user-service.service';
-import { LoginComponent } from '../login/loginComponent/login.component';
-
-
-@Component({
-  selector: 'app-accounts',
-  templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.css']
-})
-
-export class AccountsComponent implements OnInit {
-public name = "Charlotte Beale";
-public myId = "675472";
-userId : any;
-
-  constructor(private userService: UserService,  ) {
-    
-    // this.userId = this.userService.getUser(this.loginComponent.userEmail)
-    //   console.log(this.userId);
-   }
-
-
-=======
 import {Component, Input, OnInit} from '@angular/core';
 import { Account } from '../models/account';
 import {AccountService} from '../services/account-service';
@@ -83,7 +58,6 @@ export class AccountsComponent implements OnInit {
     //         );
     //     this.createAccount = false;
     // }
->>>>>>> d1c77a27bdfce1d5616483765fd4ae573a89a3f1
 
 
     onSelectAccountType(accountType: Accounttype) {

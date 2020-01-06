@@ -27,14 +27,12 @@ export class UserService {
   
   }
 
-<<<<<<< HEAD
   getUser(userEmail: string) : Observable<any>{
     return this.http.get<any>(this.getUserByEmail, this.httpOptions).pipe(map(userData => {sessionStorage
         .setItem('userId', userData.userId)}));
-=======
-  getUser(): User{
+    }
+        getUser2(): User{
     return this.currentUser;
->>>>>>> d1c77a27bdfce1d5616483765fd4ae573a89a3f1
   }
 
   updateLoginStatus(status: boolean) {
