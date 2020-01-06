@@ -4,12 +4,14 @@ import { environment } from 'src/environments/environment'; export const apiUrl 
 
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserService {
+  currentUser: User;
   
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
@@ -24,9 +26,17 @@ export class UserService {
   
   }
 
+  getUser(): User{
+    return this.currentUser;
+  }
+
   updateLoginStatus(status: boolean) {
     this.isLoggedIn.next(status);
     console.log(status);
+  }
+
+  displayUser(): Observable<User>{
+    return null
   }
 
 //Add a new user to the database

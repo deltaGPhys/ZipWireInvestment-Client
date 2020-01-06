@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
-import {GoalServiceService} from '../services/goal-service.service';
+import {GoalServiceService} from '../../services/goal-service.service';
 import { Router } from '@angular/router';
-import{User} from '../models/User';
-import { SavingGoal } from '../models/Saving-goal.model';
+import{User} from '../../models/User';
+import { SavingGoal } from '../../models/Saving-goal.model';
 
 @Component({
   selector: 'app-add-goal',
@@ -48,7 +48,7 @@ export class AddGoalComponent implements OnInit {
       console.log(this.createSavingGoalForm.controls.endDate.value)
       console.log(this.savingGoal);
 
-      this.goalService.getAllGoals(3).subscribe(data => (console.log(data)));      
+      this.goalService.getAllGoals().subscribe(data => (console.log(data)));      
 
       this.goalService.addGoal(this.savingGoal)
         .subscribe(data => {this.savingGoal = data;});

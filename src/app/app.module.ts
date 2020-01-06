@@ -12,12 +12,11 @@ import { TransactionService } from './services/transaction.service';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
 
 import { LoginService } from './services/login.service';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/loginComponent/login.component';
 
-import { GoalsComponent } from './goals/goals.component';
+import { GoalsComponent } from './goals/goalsComponent/goals.component';
 
 import { AccountsComponent } from './accounts/accounts.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
 
 import { InvestmentsComponent } from './investments/investments.component';
 import { InvestmentHeaderComponent } from './investments/investment-header/investment-header.component';
@@ -25,14 +24,17 @@ import { HoldingsListComponent } from './investments/holdings-list/holdings-list
 import { InvestmentBuyFormComponent } from './investments/investment-buy-form/investment-buy-form.component';
 import { SecurityGraphComponent } from './investments/security-graph/security-graph.component';
 
-
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
-import { AddGoalComponent } from './add-goal/add-goal.component';
+import { AddGoalComponent } from './goals/add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
+import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
+
+import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { AddAccountComponent } from './add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -46,12 +48,14 @@ import { TransfersComponent } from './transfers/transfers/transfers.component';
     TransactionFormComponent,
     InvestmentHeaderComponent,
     HoldingsListComponent,
-    DashboardComponent,
-    CreateAccountComponent,
+    RegisterUserComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     AddGoalComponent,
-    TransfersComponent
+    UserComponent,
+    TransfersComponent,
+    DeleteAccountComponent,
+    AddAccountComponent
   ],
   imports: [
     BrowserModule,

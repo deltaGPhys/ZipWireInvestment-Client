@@ -1,5 +1,8 @@
 
 export class User {
+  userid(userid: any) {
+    throw new Error("Method not implemented.");
+  }
     id: number;
     firstName : string;
     lastName : string;

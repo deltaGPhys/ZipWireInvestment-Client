@@ -19,7 +19,7 @@ export class TransactionFormComponent implements OnInit{
     
     this.newTransactionForm = this.formBuilder.group({
       id: null,
-      account: 1,
+      account: 2,
       comment: "",
       amount: 0,
       type: ""

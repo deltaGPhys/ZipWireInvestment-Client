@@ -1,18 +1,19 @@
 import { Component, OnInit} from '@angular/core';
-import{User} from '../models/User';
+import{User} from '../../models/User';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
-import {CreateAccountService} from '../services/create-account.service'
+import {CreateAccountService} from '../../services/create-account.service'
 import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-create-account',
-  templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.css']
+  selector: 'app-register-user',
+  templateUrl: './register-user.component.html',
+  styleUrls: ['./register-user.component.css']
 })
-export class CreateAccountComponent implements OnInit {
+export class RegisterUserComponent implements OnInit {
 
   private userEmails: any;
+  userCheck: any;
   private user: User;
   allEmails: string[] = [];
   private createUserForm: FormGroup;
@@ -22,8 +23,9 @@ export class CreateAccountComponent implements OnInit {
  
   constructor(private createAccountService: CreateAccountService, private router: Router) { 
     this.createUserForm = this.createFormGroup();
+    
     this.userEmails = this.createAccountService.getAllEmails()
-    .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
+        .subscribe(value => {this.allEmails = value; console.log(this.allEmails);});;
   }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class CreateAccountComponent implements OnInit {
 
   onSubmit() {
     this.userEmail = this.createUserForm.controls.email.value;
+
     if(this.checkForEmail(this.allEmails, this.userEmail)){
       let user: User = new User (
       null,
@@ -83,4 +86,14 @@ export class CreateAccountComponent implements OnInit {
     }
     return true;
   }
+
+  // userEmailCheck(email:string) : boolean {
+  //   this.userCheck = this.createAccountService.userEmailCheck(email).subscribe(data => {this.emailAlreadyTaken = data; console.log(data);});
+  //   console.log("userEmail check " + this.emailAlreadyTaken);
+  //   return this.emailAlreadyTaken;
+  // }
+
+  // async delay(ms: number) {
+  //   await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+  // }
 }
