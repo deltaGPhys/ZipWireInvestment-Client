@@ -31,17 +31,10 @@ import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
-<<<<<<< HEAD
-import { RegisterUserComponent } from './login/register-user/register-user.component';
-import { DeleteAccountComponent } from './delete-account/delete-account.component';
-import { AddAccountComponent } from './add-account/add-account.component';
-=======
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { AddAccountComponent } from './add-account/add-account.component';
-
->>>>>>> 386cb24a21d29cbfb98aa4f06165bfd237454594
 
 @NgModule({
   declarations: [
