@@ -25,6 +25,8 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
 import { AddGoalComponent } from './add-goal/add-goal.component';
 import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
+import { UserComponent } from './user/user.component';
+import { TransfersComponent } from './transfers/transfers/transfers.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
     SecurityGraphComponent,
     SpendingReportComponent,
     DateRangeComponent,
-    AddGoalComponent
+    AddGoalComponent,
+    UserComponent,
+    TransfersComponent
   ],
   imports: [
     BrowserModule,

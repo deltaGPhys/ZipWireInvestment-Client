@@ -1,15 +1,4 @@
-<p>transaction-list-test works!</p>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainModal">
-    Add Transaction
-  </button>
-  <app-transaction-form
-  [transTypes]="transTypes"
-  [(transactions)]="transactions">
-  </app-transaction-form>
-  <br>
-
-
-  <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(transactionReport)">View transactions</button>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(transactionReport)">View Transactions</button>
 
 <ng-template #transactionReport let-modal class="transactionModalClass">
     <div class="modal-header">

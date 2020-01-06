@@ -9,9 +9,8 @@ import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class DateRangeComponent implements OnInit {
-  
-  hoveredDate: NgbDate;
 
+  hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;
 

@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit {
   onSubmit()  {
     this.userEmail = this.loginForm.controls.email.value;
     this.userPassword = this.loginForm.controls.password.value;
-
+    console.log(this.userEmail);
+    console.log(this.userPassword);
     if(this.validUserName(this.allEmails, this.userEmail)){
       this.loginService.verifyUser(this.userEmail,this.userPassword)
       .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data)});
