@@ -19,6 +19,7 @@ export class LoginService {
   loggedIn : boolean = false;
   user: User;
   userToDisplay$: BehaviorSubject<any> = new BehaviorSubject([]);
+  myUser = User;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -42,7 +43,7 @@ export class LoginService {
   //This ties in with the userToDisplay Behavior Subject Above
   updateLoggedInUser(user : User) {
     this.userToDisplay$.next(user);
-    console.log(status)
+    console.log(user)
   }
 
 // getUser(id:number):Observable<User>{

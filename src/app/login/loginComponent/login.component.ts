@@ -57,8 +57,12 @@ export class LoginComponent implements OnInit {
     if(this.validUserName(this.allEmails, this.userEmail)){
       this.loginService.verifyUser(this.userEmail,this.userPassword)
           .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data);});
-      this.loginService.findUserByEmail(this.userEmail)
-          .subscribe(info =>{this.myUser = info; console.log("Saved User: " + this.myUser);});
+      // this.loginService.findUserByEmail(this.userEmail)
+      //     .subscribe(info =>{this.loginService.updateLoggedInUser(info); console.log("Saved User: " + info);});
+      this.loginService.userToDisplay$.subscribe(info => this.myUser);
+      console.log(this.myUser);
+
+      
       
     
 

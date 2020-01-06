@@ -30,7 +30,7 @@ export class GoalsComponent implements OnInit {
     //this.goalService.updateSavingsGoals(this.userId);
 
     this.goalService.getAllGoals()
-    .subscribe(value => {this.allGoals = value; console.log(this.allGoals);});;
+    .subscribe(value => {this.allGoals = value; console.log(this.allGoals); this.ngOnInit();});;
 
   
   }

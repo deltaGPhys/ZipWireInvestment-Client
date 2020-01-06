@@ -11,11 +11,16 @@ import { LoginService } from '../services/login.service';
 
 export class UserComponent implements OnInit {
   
-  user: User;
+  currentUser: User;
+  data : any;
 
-  constructor(private loginService : LoginService) { }
+  constructor(private loginService : LoginService) {
+    
+   }
 
   ngOnInit() {
+    this.loginService.userToDisplay$.subscribe(data => this.currentUser = data);
+    console.log(this.data);
   }
 
   

@@ -1,19 +1,29 @@
-<div align='center'><h1>CRUD with Angular</h1></div>
+<div><h1>User Profile</h1></div>
 
 
-<table class ="table">
-  <tr *ngFor="let u of users">
-    <td>
-      {{u.id}}
-    </td>
-    <td>
-      {{u.name}}
-    </td>
-    <td>
-      {{u.age}}
-    </td>
+<div class="container">
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>User Name: </th>
+            <th>User Email: </th>
+            <th>User Rent: </th>
+            <th>User Salary: </th>
+          </tr>
+      </thead>
+      <tbody>
+        <!--<tr *ngFor="currentUser"> -->
+          
+          <tr >
+              <td>{{ currentUser.firstName| async }} </td>
+          <td>{{ currentUser.email}}</td>
+          <td>{{ currentUser.rent }}</td>
+          <td>{{ currentUser.salary }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
     <td>  
       <button class= 'btn btn-info' (click)="updateUser()"> UPDATE DATA</button>
     </td>
-  </tr>
-</table>
+
