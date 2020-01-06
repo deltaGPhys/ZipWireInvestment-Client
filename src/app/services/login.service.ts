@@ -20,6 +20,7 @@ export class LoginService {
   user: User;
   userToDisplay$: BehaviorSubject<any> = new BehaviorSubject([]);
   myUser = User;
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -27,10 +28,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  verifyUser (email:string, password:string) : Observable<boolean> {
-    return this.http.get<boolean>(this.verifyUrl+email+"/"+password, this.httpOptions)
-    .pipe(tap(data => console.log(data)),
-    catchError(this.handleError<boolean>('verification', false)));
+  verifyUser (email:string, password:string) : Observable<User> {
+    return this.http.get<User>(this.verifyUrl+email+"/"+password, this.httpOptions)
+    .pipe(tap(data => {console.log(data);}),
+    catchError(this.handleError<User>('verification', null)));
   }
 
   findUserByEmail(email: string): Observable<User>{
@@ -39,6 +40,11 @@ export class LoginService {
     catchError(this.handleError<User>('verification', null)));
   }
 
+  //This ties in to the isLoggedIn Behavior Subject above
+  updateLoginStatus(status: boolean) {
+    this.isLoggedIn.next(status);
+    console.log(status);
+  }
 
   //This ties in with the userToDisplay Behavior Subject Above
   updateLoggedInUser(user : User) {

@@ -35,6 +35,7 @@ import { TransfersComponent } from './transfers/transfers/transfers.component';
 import { RegisterUserComponent } from './login/register-user/register-user.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { AddAccountComponent } from './add-account/add-account.component';
+import { ExampleReportComponent } from './transactions/example-report/example-report.component';
 
 //import { DeleteAccountComponent } from './delete-account/delete-account.component';
 //import { AddAccountComponent } from './add-account/add-account.component';
@@ -58,7 +59,8 @@ import { AddAccountComponent } from './add-account/add-account.component';
     UserComponent,
     TransfersComponent,
     DeleteAccountComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    ExampleReportComponent
   ],
   imports: [
     BrowserModule,
