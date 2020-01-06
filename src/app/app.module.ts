@@ -31,12 +31,9 @@ import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
-<<<<<<< HEAD
 import { RegisterUserComponent } from './login/register-user/register-user.component';
-=======
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { AddAccountComponent } from './add-account/add-account.component';
->>>>>>> ca459e1881857ac5a05c9964bc1907e9f669e076
 
 @NgModule({
   declarations: [

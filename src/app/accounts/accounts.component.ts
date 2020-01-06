@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Account } from '../models/account';
-import { AccountService } from '../services/account-service';
+import {AccountService} from '../services/account-service';
 import {ActivatedRoute} from '@angular/router';
 import {Accounttype} from '../models/accounttype';
 
@@ -44,20 +44,20 @@ export class AccountsComponent implements OnInit {
       this.createAccount = !this.createAccount;
     }
 
-    add(name: string, balance: number, accountTypeId: number, userId: number): void {
-        name = name.trim();
+    // add(name: string, balance: number, accountTypeId: number, userId: number): void {
+    //     name = name.trim();
 
-        if (!this.validDeposit(name, balance)) {
-            return;
-        }
-        accountTypeId = this.accountTypeId;
-        userId = this.userId;
-        this.accountService.addAccount({name, balance, accountTypeId, userId} as Account)
-            .subscribe(
-                account => {this.accounts.push(account);}
-            );
-        this.createAccount = false;
-    }
+    //     if (!this.validDeposit(name, balance)) {
+    //         return;
+    //     }
+    //     accountTypeId = this.accountTypeId;
+    //     userId = this.userId;
+    //     this.accountService.addAccount({name, balance, accountTypeId, userId} as Account)
+    //         .subscribe(
+    //             account => {this.accounts.push(account);}
+    //         );
+    //     this.createAccount = false;
+    // }
 
 
     onSelectAccountType(accountType: Accounttype) {

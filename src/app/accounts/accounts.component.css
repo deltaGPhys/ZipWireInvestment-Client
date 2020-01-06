@@ -1,30 +1,30 @@
 .accounts {
-    color: #ff00f6;
+    color: white;
 }
 
 .plus {
-    background-color: black;
-    border-color: #ff00f6;
+    background-color: white;
+    border-color: black;
 }
 
 .text-muted {
-    solid-color: #ff00f6;
+    solid-color: black;
 }
 
 .ln {
     height: 1px;
-    background-color: #ff00f6;
+    background-color: #080808;
 }
 
 .create {
     border-radius: 10px;
-    background-image: linear-gradient(rgba(255, 0, 246, 0.21), rgba(0, 0, 0, 0.5));
+    background-image: linear-gradient(rgba(15, 14, 15, 0.21), rgba(0, 0, 0, 0.5));
 }
 
 .form {
     font-family: "Roboto", sans-serif;
-    outline: #ff00f6 1px;
-    background: #000000;
+    outline: white 1px;
+    background: white;
     border: 1px;
     margin: 0 0 1px;
     padding: 5px;
@@ -117,5 +117,5 @@
 .dropdown-item:hover {
     color: #16181b;
     text-decoration: none;
-    background-color: #ff00f6
+    background-color: #030303
 }

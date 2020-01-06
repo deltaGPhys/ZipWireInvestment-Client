@@ -1,5 +1,5 @@
 <div class="text-muted animate2 slideIn pt-3">
-    <h5>Accounts</h5>
+    <h1>Accounts</h1>
 </div>
 <div class="text-left animate2 slideIn" *ngFor="let account of accounts">
     <div class="ln animate2 slideIn"></div>
@@ -16,9 +16,10 @@
     </button>
     </h6>
 </li>
-
+<h2 id="AcctSummaryTitle">Account Summary</h2>
+<h3>Checking & Savings</h3>
 <div class="list-inline text-light pt-3 create animate2 slideIn" *ngIf="createAccount">
-    <h6 class="text-light text-center">Create New Account</h6>
+    <h4> class="text-light text-center">Create New Account</h4>
     <li align="center" class="pt-1 align-baseline animate2 slideIn">
         <input class="form text-light" placeholder="Name*" #accountName/>
     </li>
