@@ -1,10 +1,14 @@
-<div class = "container" style="width:400px;">
+<div class = "container-fluid sr-container">
     <div class="row">
-        <app-date-range></app-date-range>
-            <br>
-            <br>
-        <app-transaction-list></app-transaction-list>
+        <div class="col">
+            <app-date-range></app-date-range>
+                <br>
+                <br>
+            <app-transaction-list></app-transaction-list>
+        </div>
+        <div class="col-sm float-left">
+            <app-recent-transactions></app-recent-transactions>
+        </div>
     </div>
-
 </div>
 

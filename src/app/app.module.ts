@@ -27,6 +27,7 @@ import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
+import { RecentTransactionsComponent } from './recent-transactions/recent-transactions.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TransfersComponent } from './transfers/transfers/transfers.component';
     DateRangeComponent,
     AddGoalComponent,
     UserComponent,
-    TransfersComponent
+    TransfersComponent,
+    RecentTransactionsComponent
   ],
   imports: [
     BrowserModule,
