@@ -33,6 +33,8 @@ import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { AddAccountComponent } from './add-account/add-account.component';
 
 //import { DeleteAccountComponent } from './delete-account/delete-account.component';
 //import { AddAccountComponent } from './add-account/add-account.component';
@@ -55,9 +57,15 @@ import { RegisterUserComponent } from './login/register-user/register-user.compo
     AddGoalComponent,
     UserComponent,
     TransfersComponent,
+<<<<<<< HEAD
     //DeleteAccountComponent,
     //AddAccountComponent
    ],
+=======
+    DeleteAccountComponent,
+    AddAccountComponent
+  ],
+>>>>>>> d1c77a27bdfce1d5616483765fd4ae573a89a3f1
   imports: [
     BrowserModule,
     HttpClientModule,
