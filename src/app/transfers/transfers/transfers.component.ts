@@ -10,6 +10,18 @@ export class TransfersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
+    }
+     
+    makeTransfer(){
+
+    }
+
+    makeWithdraw(){
+
+    }
+
+    makeDeposit(){
+      
+    }
 
 }
