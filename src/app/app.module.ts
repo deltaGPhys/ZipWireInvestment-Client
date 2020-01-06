@@ -17,7 +17,6 @@ import { LoginComponent } from './login/loginComponent/login.component';
 import { GoalsComponent } from './goals/goalsComponent/goals.component';
 
 import { AccountsComponent } from './accounts/accounts.component';
-import { CreateAccountComponent } from './login/create-account/create-account.component';
 
 import { InvestmentsComponent } from './investments/investments.component';
 import { InvestmentHeaderComponent } from './investments/investment-header/investment-header.component';
@@ -32,8 +31,11 @@ import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
+
+import { RegisterUserComponent } from './login/register-user/register-user.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { AddAccountComponent } from './add-account/add-account.component';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { AddAccountComponent } from './add-account/add-account.component';
     TransactionFormComponent,
     InvestmentHeaderComponent,
     HoldingsListComponent,
-    CreateAccountComponent,
+    RegisterUserComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     AddGoalComponent,
