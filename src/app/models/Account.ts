@@ -2,6 +2,8 @@ export class Account {
     id: number;
     balance : number;
     openingDate : number;
+    accountTypeId: number;
+    userId: number;
     owner: string;
     acctName : string;
 
