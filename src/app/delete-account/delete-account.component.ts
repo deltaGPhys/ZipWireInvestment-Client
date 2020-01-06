@@ -21,14 +21,14 @@ export class DeleteAccountComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.userService.getUser();
-    this.accountService.getAccountsByUser(this.currentUser.id)
+    this.accountService.getAccountsById(this.currentUser.id)
     .subscribe(accounts => this.userAccounts = accounts);
   }
 
   deleteAccount(){
     this.accountService.deleteAccount(this.selectedAccount.id).
     subscribe(result => {this.accountDeleted = result; 
-      this.accountService.getAccountsByUser(this.currentUser.id)
+      this.accountService.getAccountsById(this.currentUser.id)
       .subscribe(accounts => this.userAccounts = accounts)});
     delete this.selectedAccount;
   }

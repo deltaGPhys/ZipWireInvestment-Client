@@ -11,6 +11,7 @@ import { User } from '../models/User';
 })
 
 export class UserService {
+  currentUser: User;
   
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
@@ -23,6 +24,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { 
   
+  }
+
+  getUser(): User{
+    return this.currentUser;
   }
 
   updateLoginStatus(status: boolean) {
