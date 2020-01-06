@@ -4,8 +4,8 @@ import { LoginService} from 'src/app/services/login.service';
 import {CreateAccountService} from '../../services/create-account.service'
 import {User} from '../../models/User';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { delay, subscribeOn } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { UserService } from '../../services/user-service.service';
 
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   private userPassword: string;
   private userEmails: any;
   private allEmails: string[] = [];
-  public myUserId : any;  //declare?
+  myUser : User;
   invalidLogin: boolean = false;
   //notLoggedIn: boolean = true;
 
@@ -56,8 +56,12 @@ export class LoginComponent implements OnInit {
     console.log(this.userPassword);
     if(this.validUserName(this.allEmails, this.userEmail)){
       this.loginService.verifyUser(this.userEmail,this.userPassword)
-      .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data);});
+          .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data);});
+      this.loginService.findUserByEmail(this.userEmail)
+          .subscribe(info =>{this.myUser = info; console.log("Saved User: " + this.myUser);});
       
+    
+
       this.router.navigate(['/accounts']);
 
       //this.loggedIn=true;
@@ -66,12 +70,6 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
       this.router.navigate(['']);
     }
-  
-    // this.loginService.findUserByEmail(this.userEmail).pipe(delay(5000))
-    // .subscribe(data => {this.myUser = data; console.log(data)});
-
-    //this.loginService.verifyUser(email,password).subscribe(data => {this.loggedIn = data; console.log(this.loggedIn)});
-    
   }
   validUserName (allEmails, userEmail) : boolean {
     for (let i = 0; i < allEmails.length; i++){
@@ -81,5 +79,10 @@ export class LoginComponent implements OnInit {
     }
     return false;
   }
+
+  // static getUser() {
+  //   const myUser = this.loginForm.controls.email.value;
+  //   return [myUser];
+  //  }
 
 }

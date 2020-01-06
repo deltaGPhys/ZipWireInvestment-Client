@@ -16,7 +16,10 @@ export class UserService {
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
   private getUserByEmail : string = apiUrl + "/login/users/";
+  private getuserById: string = apiUrl + "/login/users/id/{id}"
   isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  
+
 
 
   httpOptions = {
@@ -31,10 +34,10 @@ export class UserService {
     return this.http.get<any>(this.getUserByEmail, this.httpOptions).pipe(map(userData => {sessionStorage
         .setItem('userId', userData.userId)}));
     }
-        getUser2(): User{
-    return this.currentUser;
-  }
+       
+  
 
+  //This ties in to the isLoggedIn Behavior Subject above
   updateLoginStatus(status: boolean) {
     this.isLoggedIn.next(status);
     console.log(status);
