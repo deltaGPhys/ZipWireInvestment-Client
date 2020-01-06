@@ -31,7 +31,11 @@ import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
+
 import { RegisterUserComponent } from './login/register-user/register-user.component';
+
+//import { DeleteAccountComponent } from './delete-account/delete-account.component';
+//import { AddAccountComponent } from './add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +54,10 @@ import { RegisterUserComponent } from './login/register-user/register-user.compo
     SecurityGraphComponent,
     AddGoalComponent,
     UserComponent,
-    TransfersComponent
-  ],
+    TransfersComponent,
+    //DeleteAccountComponent,
+    //AddAccountComponent
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -17,11 +17,11 @@ import { UserService } from '../../services/user-service.service';
 export class LoginComponent implements OnInit {
   
   private loginForm: FormGroup;
-  private userEmail: string;
+  public userEmail: string;
   private userPassword: string;
   private userEmails: any;
   private allEmails: string[] = [];
-  myUser : User;
+  public myUserId : any;  //declare?
   invalidLogin: boolean = false;
   //notLoggedIn: boolean = true;
 
@@ -56,9 +56,11 @@ export class LoginComponent implements OnInit {
     console.log(this.userPassword);
     if(this.validUserName(this.allEmails, this.userEmail)){
       this.loginService.verifyUser(this.userEmail,this.userPassword)
-      .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data)});
+      .subscribe(data => {this.userService.updateLoginStatus(data); console.log(data);});
       
       this.router.navigate(['/accounts']);
+
+      //this.loggedIn=true;
     }
     else {
       this.invalidLogin = true;

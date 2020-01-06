@@ -6,7 +6,6 @@ import { LoginComponent } from './login/loginComponent/login.component';
 import { GoalsComponent } from './goals/goalsComponent/goals.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { InvestmentsComponent } from './investments/investments.component';
-import { CreateAccountComponent } from './login/create-account/create-user-account.component';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
 import { AddGoalComponent } from './goals/add-goal/add-goal.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';

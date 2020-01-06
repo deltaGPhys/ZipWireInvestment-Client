@@ -14,6 +14,7 @@ export class UserService {
   
   @Inject(apiUrl) private apiUrl: string;
   private registerUrl: string = apiUrl+"/login";
+  private getUserByEmail : string = apiUrl + "/login/users/";
   isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
@@ -23,6 +24,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { 
   
+  }
+
+  getUser(userEmail: string) : Observable<any>{
+    return this.http.get<any>(this.getUserByEmail, this.httpOptions).pipe(map(userData => {sessionStorage
+        .setItem('userId', userData.userId)}));
   }
 
   updateLoginStatus(status: boolean) {
