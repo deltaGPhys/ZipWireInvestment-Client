@@ -23,15 +23,11 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
 
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
-import { TransfersComponent } from './transfers/transfers/transfers.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
 import { ExampleReportComponent } from './transactions/example-report/example-report.component';
 
-import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
-
-//import { DeleteAccountComponent } from './delete-account/delete-account.component';
-//import { AddAccountComponent } from './add-account/add-account.component';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   declarations: [
@@ -47,7 +43,6 @@ import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     UserComponent,
-    TransfersComponent,
     ExampleReportComponent
   ],
   imports: [

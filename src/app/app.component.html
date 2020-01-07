@@ -1,23 +1,19 @@
 <div class="container">
   <nav class="navbar navbar-default">
-    <div class="container">
+    <div class="container" style="background-color:#6bde60;">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header" >
-        <img src="./assets/images/logo.png" style="height:50px;">
+        <img src="./assets/images/fullLogo.png" style="height:50px; float:left;">
       </div>
-      
     </div>
   </nav >
-  <ul class="nav nav-tabs" *ngIf="currentUser.id">
-    <li role="tab" data-toggle="tab" class="active"><a routerLink="/">Login</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/transactions">Trans (temp)</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/goals">Goals</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/accounts">Accounts</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/transfers">Transfers</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/investments">Investments</a></li>
-    <li role="tab" data-toggle="tab"><a routerLink="/user">User</a></li>
+  <ul class="nav nav-pills" *ngIf="currentUser.id">
+    <!-- <li class="pill"><a routerLink="/">Login</a></li> -->
+    <li class="pill"><a routerLink="/transactions" routerLinkActive="router-link-active">Trans (temp)</a></li>
+    <li class="pill"><a routerLink="/investments" routerLinkActive="router-link-active">Investments</a></li>
+    <li class="pill"><a routerLink="/user" routerLinkActive="router-link-active">User</a></li>
   </ul>
-  <div class="container" style="border: 1px solid #ddd; border-top: 0px; max-width: 100%; height: calc(100vh - 110px);">
+  <div class="container" style="background-color: rgba(0,123,255,0.3); border-top: 0px; max-width: 100%; height: calc(100vh - 110px); ">
     <router-outlet></router-outlet>
   </div>
   

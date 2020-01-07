@@ -7,13 +7,11 @@ import { InvestmentsComponent } from './investments/investments.component';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
-import { TransfersComponent } from './transfers/transfers/transfers.component';
 import { RegisterUserComponent } from './login/register-user/register-user.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'transactions', component: TransactionListComponent },
-    { path: 'transfers', component: TransfersComponent },
     { path: 'investments', component: InvestmentsComponent },
     { path: 'register', component: RegisterUserComponent },
     { path: 'transactions', component: TransactionFormComponent },

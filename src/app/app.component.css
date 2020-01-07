@@ -1,0 +1,20 @@
+.pill {
+    background-color:rgba(0,123,255,0.6);
+    
+    font-size: medium;
+}
+
+.pill {
+    background-color: rgba(38,97,40,0.5);
+    color:#fff;
+}
+
+.router-link-active{
+    color:#fff;
+    background-color: rgba(0,123,255,0.3);
+}
+
+
+.navbar {
+    background-color: rgba(38,97,40,.3);
+}

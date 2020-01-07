@@ -90,15 +90,17 @@ export class SecurityGraphComponent implements OnInit {
           }
         },
         ticks: {
-          
+          fontColor: 'rgba(255,255,255,0.8)'
         },
-        
+        gridLines: { color: 'rgba(255,255,255,0.1)' }
       }],
       yAxes: [
         {
           id: 'y-axis-0',
           position: 'left',
+          gridLines: { color: 'rgba(255,255,255,0.1)' },
           ticks: {
+            fontColor: 'rgba(255,255,255,0.8)',
             callback: function(value, index, values) {
               if(parseInt(value) >= 1000){
                 return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -118,13 +120,9 @@ export class SecurityGraphComponent implements OnInit {
   
 
   public lineChartColors: Color[] = [
-    { // blue
-      backgroundColor: 'rgba(0,0,255,0.3)',
-      borderColor: 'blue',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    { 
+      backgroundColor: 'rgba(107,222,96,0.3)',
+      borderColor: 'rgba(38,97,40,1)',
     }
   ];
   public lineChartType = 'line';

@@ -1,12 +1,11 @@
 
 <ngb-accordion [closeOthers]="true" >
     <ngb-panel id="static-{{holding.id}}" *ngFor="let holding of holdings">
-        <ng-template ngbPanelTitle style="width:100%;" >
-            <!-- <div class="card title" style="width:100%;"> -->
-                <span style="float:left;" (click)="selectedPanel(holding)">{{holding.security.symbol}} ({{holding.security.name}})</span> 
-            <!-- </div> -->
+        <ng-template ngbPanelTitle style="width:100%;" >  
+          <span style="float:left;" (click)="selectedPanel(holding)">{{holding.security.symbol}} ({{holding.security.name}})</span> 
         </ng-template>
-        <ng-template ngbPanelContent>
+        <ng-template ngbPanelContent >
+          <div class="info">
             <label>Shares Held</label>: {{holding.numShares}}<br>
             <label>Purchased on</label>: {{holding.purchaseDate | date: 'shortDate'}}<br>
             <label>Purchase Value</label>: {{holding.purchaseValue | currency}} ({{holding.purchaseCost | currency}}/share)<br>
@@ -19,7 +18,7 @@
               {{holding.security.dayChange | currency}}/share ({{holding.security.changePct}}%)<span style="color:#a11414" class="glyphicon glyphicon-arrow-down" ></span>
             </ng-template>
             <br>
-
+          </div>
             <button type="button" class="btn btn-primary" (click)="sellHolding(holding.id)">
               Liquidate Position
             </button>

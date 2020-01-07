@@ -42,37 +42,37 @@ export class TransactionService {
       );
     }
 
-  /** POST: add a new Transaction to the server */
-  addTransaction (transaction: Transaction): Observable<Transaction> {
+    /** POST: add a new Transaction to the server */
+    addTransaction (transaction: Transaction): Observable<Transaction> {
 
-    console.log(transaction);
-    
-    return this.http.post<Transaction>(this.transactionsUrl, transaction, this.httpOptions)
-    .pipe(
-      catchError(this.handleError('addTransaction', transaction))
-    );
+      console.log(transaction);
+      
+      return this.http.post<Transaction>(this.transactionsUrl, transaction, this.httpOptions)
+      .pipe(
+        catchError(this.handleError('addTransaction', transaction))
+      );
 
-  }
+    }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.log('error');
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+    /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     * @param operation - name of the operation that failed
+     * @param result - optional value to return as the observable result
+     */
+    private handleError<T> (operation = 'operation', result?: T) {
+      return (error: any): Observable<T> => {
+        console.log('error');
+        // TODO: send the error to remote logging infrastructure
+        console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
+        // TODO: better job of transforming error for user consumption
+        console.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
+        // Let the app keep running by returning an empty result.
+        return of(result as T);
+      };
+    }
 
 
 }
