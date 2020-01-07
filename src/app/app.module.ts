@@ -13,10 +13,6 @@ import { TransactionFormComponent } from './transactions/transaction-form/transa
 
 import { LoginComponent } from './login/loginComponent/login.component';
 
-import { GoalsComponent } from './goals/goalsComponent/goals.component';
-
-import { AccountsComponent } from './accounts/accounts.component';
-
 import { InvestmentsComponent } from './investments/investments.component';
 import { InvestmentHeaderComponent } from './investments/investment-header/investment-header.component';
 import { HoldingsListComponent } from './investments/holdings-list/holdings-list.component';
@@ -25,15 +21,11 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
-import { AddGoalComponent } from './goals/add-goal/add-goal.component';
-import { GoalServiceService } from './services/goal-service.service';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user.component';
 import { TransfersComponent } from './transfers/transfers/transfers.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
-import { DeleteAccountComponent } from './delete-account/delete-account.component';
-import { AddAccountComponent } from './add-account/add-account.component';
 import { ExampleReportComponent } from './transactions/example-report/example-report.component';
 
 import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
@@ -47,8 +39,6 @@ import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
     TransactionListComponent,
     TransactionViewComponent,
     LoginComponent,
-    GoalsComponent,
-    AccountsComponent,
     InvestmentsComponent,
     TransactionFormComponent,
     InvestmentHeaderComponent,
@@ -56,11 +46,8 @@ import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
     RegisterUserComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
-    AddGoalComponent,
     UserComponent,
     TransfersComponent,
-    DeleteAccountComponent,
-    AddAccountComponent,
     ExampleReportComponent
   ],
   imports: [
@@ -73,7 +60,7 @@ import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
     ChartsModule,
     RxReactiveFormsModule,
   ],
-  providers: [TransactionService, GoalServiceService, Title],
+  providers: [TransactionService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

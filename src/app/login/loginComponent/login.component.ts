@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { CreateAccountService } from '../../services/create-account.service'
 import { User } from '../../models/User';
 import { Router } from '@angular/router';
 import { delay, subscribeOn } from 'rxjs/operators';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { PriceHistory } from 'src/app/models/PriceHistory';
+import { CreateAccountService } from 'src/app/services/create-account.service'
 
 
 @Component({
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
             this.revert();
           } else {
             this.userService.updateCurrentUser(data);
-            this.router.navigate(['/accounts']);
+            this.router.navigate(['/investments']);
           }
         });
     
