@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user-service.service';
 import { AccountService } from '../services/account-service';
 import { User } from '../models/User';
 import { Account } from '../models/account';
-import { LoginService } from '../services/login.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-delete-account',
@@ -17,10 +16,10 @@ export class DeleteAccountComponent implements OnInit {
   selectedAccount: Account;
   accountDeleted: boolean = false;
 
-  constructor(private userService: UserService, private accountService: AccountService, private loginService: LoginService) { }
+  constructor(private userService: UserService, private accountService: AccountService) { }
 
   ngOnInit() {
-    this.loginService.userToDisplay$.subscribe(data => this.currentUser = data);
+    this.userService.currentUser$.subscribe(data => this.currentUser = data);
     this.accountService.getAccountsById(this.currentUser.id)
     .subscribe(accounts => this.userAccounts = accounts);
   }
