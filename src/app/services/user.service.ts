@@ -30,13 +30,14 @@ export class UserService {
     catchError(this.handleError<User>('verification', null)));
   }
 
-  checkForEmail(email): Observable<boolean> {
+  checkEmailAvailability(email: string): Observable<boolean> {
     let reqData: Object = {"email": email};
-    return this.http.post(this.loginUrl+"/checkEmail/", reqData, this.httpOptions)
+    return this.http.post<boolean>(this.loginUrl+"/checkEmail", reqData, this.httpOptions)
       .pipe(tap(data => console.log(data)));
   }
   
   updateCurrentUser(user : User) {
+    console.log(user);
     this.currentUser$.next(user);
   }
 

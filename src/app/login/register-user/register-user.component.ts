@@ -34,7 +34,7 @@ export class RegisterUserComponent implements OnInit {
         firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         lastName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
         email: new FormControl('', [Validators.required,  Validators.email]),
-        password: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!_.@$%^&*-]).{8,}$')]),
         rent: new FormControl('', [Validators.required, Validators.pattern('^[0-9.]+$')]),
         salary: new FormControl('', [Validators.required, Validators.pattern('^[0-9.]+$')])
   });
@@ -61,43 +61,34 @@ export class RegisterUserComponent implements OnInit {
   } 
 
   onSubmit() {
+    
     this.userEmail = this.createUserForm.controls.email.value;
-    this.userService.checkForEmail(this.userEmail).subscribe(data => {
-      console.log("data: ", data);
+    console.log(this.userEmail);
+    this.userService.checkEmailAvailability(this.userEmail).subscribe(data => {
+      console.log("taken: ", data);
       if(data){
+        this.emailAlreadyTaken = false;
         let user: User = new User (
-        null,
-        this.createUserForm.controls.firstName.value,
-        this.createUserForm.controls.lastName.value,
-        this.createUserForm.controls.email.value,
-        this.createUserForm.controls.password.value,
-        this.createUserForm.controls.rent.value,
-        this.createUserForm.controls.salary.value);
+          null,
+          this.createUserForm.controls.firstName.value,
+          this.createUserForm.controls.lastName.value,
+          this.createUserForm.controls.email.value,
+          this.createUserForm.controls.password.value,
+          this.createUserForm.controls.rent.value,
+          this.createUserForm.controls.salary.value
+          );
       
-      this.createAccountService.addUser(user)
-        .subscribe(data => {this.user = data;});
-        
-        this.revert();
-
-        this.router.navigate(['/accounts']);
-        }
-
-      else {
+        this.createAccountService.addUser(user)
+          .subscribe(data => {
+            this.user = data;
+            this.userService.updateCurrentUser(this.user);
+            this.revert();
+            this.router.navigate(['/investments']);
+            }
+          );
+      } else {
           this.emailAlreadyTaken = true;
-          this.router.navigate(['/register']);
       }
     });
   }
-  
-  
-
-  // userEmailCheck(email:string) : boolean {
-  //   this.userCheck = this.createAccountService.userEmailCheck(email).subscribe(data => {this.emailAlreadyTaken = data; console.log(data);});
-  //   console.log("userEmail check " + this.emailAlreadyTaken);
-  //   return this.emailAlreadyTaken;
-  // }
-
-  // async delay(ms: number) {
-  //   await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
-  // }
 }
