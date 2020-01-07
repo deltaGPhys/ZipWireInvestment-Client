@@ -11,6 +11,7 @@ import { SecurityHolding } from '../models/SecurityHolding';
 import { PriceHistory } from '../models/PriceHistory';
 
 import { SecurityGraphComponent } from '../investments/security-graph/security-graph.component'
+import { PortfolioValues } from '../models/portfolio-values';
 
 @Injectable({ providedIn: 'root' })
 export class InvestmentService {
@@ -61,7 +62,7 @@ export class InvestmentService {
 
     portfolioValuesChange(data: SecurityHolding[]) {
       console.log(typeof data);
-      let portData: Object = {
+      let portData: PortfolioValues = {
         'current':this.calculatePortfolioValue(data),
         'dayChange':this.calculatePortfolioValueChange(data),
         'cumChange':this.calculatePortfolioGains(data)

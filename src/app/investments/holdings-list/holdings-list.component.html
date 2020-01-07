@@ -1,20 +1,3 @@
-<!-- <div id="accordion" *ngFor="let holding of account.holdings" >
-    <div class="card">
-      <div class="card-header" id="heading{{holding.id}}">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{holding.id}}" (click)="collapsed = !collapsed">
-            {{holding.security.symbol}} {{holding.security.name}}
-          </button>
-        </h5>
-      </div>
-  
-      <div id="collapse{{holding.id}}" class="collapse show" data-parent="#accordion" >
-        <div class="card-body">
-            {{holding.numShares}}
-        </div>
-      </div>
-    </div>
-</div> -->
 
 <ngb-accordion [closeOthers]="true" >
     <ngb-panel id="static-{{holding.id}}" *ngFor="let holding of holdings">
@@ -25,7 +8,7 @@
         </ng-template>
         <ng-template ngbPanelContent>
             <label>Shares Held</label>: {{holding.numShares}}<br>
-            <label>Purchased on</label>: {{holding.purchaseDate | date: shortDate}}<br>
+            <label>Purchased on</label>: {{holding.purchaseDate | date: 'shortDate'}}<br>
             <label>Purchase Value</label>: {{holding.purchaseValue | currency}} ({{holding.purchaseCost | currency}}/share)<br>
             <label>Current Position Value</label>: {{holding.value | currency}} ({{holding.security.currentPrice | currency}}/share)<br>
             <label>Activity</label>: 
@@ -43,7 +26,3 @@
         </ng-template>
     </ngb-panel>
 </ngb-accordion>
-<!-- <p>{{numbers}}</p>
-<button type="button" class="btn btn-primary" (click)="acctTest()">
-  Test
-</button> -->

@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 
 export class UserComponent implements OnInit {
   
-  private currentUser: User;
+  currentUser: User;
 
   constructor(private userService: UserService) { 
     this.userService.currentUser$.subscribe(data => this.currentUser = data);
