@@ -6,6 +6,7 @@ import { InvestmentService } from '../services/investment.service';
 import { Investment } from '../models/Investment';
 import { SecurityHolding } from '../models/SecurityHolding';
 import { Security } from '../models/Security';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -21,32 +22,16 @@ export class InvestmentsComponent implements OnInit {
   holdings: SecurityHolding[];
   numbers: number[];
   selectedStock: Security;
+  currentUser: User;
 
-  constructor(private investmentService: InvestmentService) { 
-    // this.investmentService.numsChange.subscribe(value => this.numbers= value);
-    this.investmentService.hldgsChange.subscribe(value => {this.holdings= value;});
+  constructor(private investmentService: InvestmentService, private userService: UserService) { 
+    this.investmentService.hldgsChange.subscribe(value => this.holdings = value);
+    this.userService.currentUser$.subscribe(value => {this.currentUser = value;console.log('ready to get acct in comp',this.currentUser);this.investmentService.getAccountForUser(this.currentUser.id);this.investmentService.initialHoldings();});
+    this.investmentService.acctChange.subscribe(data => {this.account = data;console.log("account",data);});
+    this.investmentService.getSecurities().subscribe(x => this.securities = x);
   }
 
   ngOnInit() {
-    console.log("investments init");
-    this.investmentService.getAccount(27)
-      .subscribe(account => {
-        this.account = account; 
-      });
-    this.investmentService.getSecurities()
-      .subscribe(x => this.securities = x);
-    
-    
+   
   }
-
-  // acctTest():void {
-  //   if (this.numbers == null) {
-  //     console.log('null');
-  //     this.numbers = [1];
-  //   }
-  //   this.numbers = [...this.numbers, this.numbers.length+1];
-  //   this.investmentService.numbersChange(this.numbers);
-  // }
-
-
 }

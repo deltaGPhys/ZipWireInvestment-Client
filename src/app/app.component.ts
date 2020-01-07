@@ -17,7 +17,7 @@ export class AppComponent {
   
 
   constructor(private userService: UserService) {
-    this.userService.currentUser$.subscribe(data => {this.currentUser = data; console.log("user:",data);});
+    this.userService.currentUser$.subscribe(data => this.currentUser = data);
   }
 
   ngOnInit() {

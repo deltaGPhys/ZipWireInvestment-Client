@@ -26,18 +26,18 @@ export class UserService {
   verifyUser (email:string, password:string) : Observable<User> {
     let reqData: Object = {"email": email, "password": password};
     return this.http.post<User>(this.loginUrl+"/verify", reqData, this.httpOptions)
-    .pipe(tap(data => {console.log(data);}),
+    .pipe(//tap(data => {console.log(data);}),
     catchError(this.handleError<User>('verification', null)));
   }
 
   checkEmailAvailability(email: string): Observable<boolean> {
     let reqData: Object = {"email": email};
-    return this.http.post<boolean>(this.loginUrl+"/checkEmail", reqData, this.httpOptions)
-      .pipe(tap(data => console.log(data)));
+    return this.http.post<boolean>(this.loginUrl+"/checkEmail", reqData, this.httpOptions);
+      //.pipe(tap(data => console.log(data)));
   }
   
   updateCurrentUser(user : User) {
-    console.log(user);
+    console.log("user update in service",user);
     this.currentUser$.next(user);
   }
 
