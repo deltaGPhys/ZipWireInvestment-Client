@@ -27,6 +27,8 @@ export class InvestmentService {
     histChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     currentUser: User;
     account: Account;
+    graphWidth$: BehaviorSubject<any> = new BehaviorSubject([]);
+    graphHeight$: BehaviorSubject<any> = new BehaviorSubject([]);
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })

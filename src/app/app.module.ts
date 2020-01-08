@@ -26,6 +26,7 @@ import { UserComponent } from './user/user.component';
 import { RegisterUserComponent } from './login/register-user/register-user.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { AngularResizedEventModule } from 'angular-resize-event';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     ReactiveFormsModule,
     ChartsModule,
     RxReactiveFormsModule,
+    AngularResizedEventModule,
   ],
   providers: [TransactionService, Title],
   bootstrap: [AppComponent]

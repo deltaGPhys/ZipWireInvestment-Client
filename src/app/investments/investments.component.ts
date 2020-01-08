@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { formatCurrency } from '@angular/common';
+import { ResizedEvent } from 'angular-resize-event';
 
 import { User } from '../models/User';
 import { InvestmentService } from '../services/investment.service';
@@ -7,6 +8,7 @@ import { Investment } from '../models/Investment';
 import { SecurityHolding } from '../models/SecurityHolding';
 import { Security } from '../models/Security';
 import { UserService } from '../services/user.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class InvestmentsComponent implements OnInit {
   numbers: number[];
   selectedStock: Security;
   currentUser: User;
+  
 
   constructor(private investmentService: InvestmentService, private userService: UserService) { 
     this.investmentService.hldgsChange.subscribe(value => this.holdings = value);
@@ -33,5 +36,10 @@ export class InvestmentsComponent implements OnInit {
 
   ngOnInit() {
    
+  }
+
+  onGraphResize(event: ResizedEvent) {
+    this.investmentService.graphWidth$.next(event.newWidth);
+    this.investmentService.graphHeight$.next(event.newWidth);
   }
 }

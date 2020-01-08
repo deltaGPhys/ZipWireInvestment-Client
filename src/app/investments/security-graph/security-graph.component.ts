@@ -16,11 +16,15 @@ export class SecurityGraphComponent implements OnInit {
   priceHistory: PriceHistory = this.investmentService.histChange.getValue();
   chartData: boolean = true;
   dataStartDate = null;
+  graphWidth: number = 0;
+  graphHeight: number = 0;
   
   @ViewChild(BaseChartDirective, { static: true }) 
   chart: BaseChartDirective;
 
   constructor(private investmentService: InvestmentService) { 
+    this.investmentService.graphHeight$.subscribe(data => this.graphHeight = data);
+    this.investmentService.graphWidth$.subscribe(data => this.graphWidth = data);
     this.investmentService.stkChange.subscribe(value => {
       this.selectedStock = value[0];
       this.dataStartDate = (value[1] != null) ? this.investmentService.parseDate(value[1]) : null;

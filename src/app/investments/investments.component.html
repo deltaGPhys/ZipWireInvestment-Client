@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="row" style="max-width: 100%; margin:10px;">
-        <div class="col-md-12 box col" style="height:300px;">
+        <div id="graphBox" class="col-md-12 box col" style="height:calc(100vh - 345px);" (resized)="onGraphResize($event)">
             <app-security-graph>
             </app-security-graph>
         </div>
