@@ -38,7 +38,7 @@
     <div class="row" style="max-width: 100%; margin:10px;" *ngIf="account">
         <div class="col-md-12 box col" style="max-height: calc(100vh - 130px);" >
             <h3>Security Holdings</h3>
-            <div style="max-height: 95%;">
+            <div style="max-height: 95%; overflow-y: auto;">
                 <app-holdings-list
                 [account]="account">
                 </app-holdings-list>
