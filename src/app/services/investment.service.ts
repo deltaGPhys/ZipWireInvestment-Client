@@ -27,6 +27,9 @@ export class InvestmentService {
     histChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     currentUser: User;
     account: Account;
+    graphWidth$: BehaviorSubject<any> = new BehaviorSubject([]);
+    graphHeight$: BehaviorSubject<any> = new BehaviorSubject([]);
+    infoWindow$: BehaviorSubject<any> = new BehaviorSubject([]);
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -34,6 +37,7 @@ export class InvestmentService {
 
   
     constructor(private http: HttpClient, private userService: UserService) { 
+      this.infoWindow$.next('portfolio');
       this.acctChange.subscribe(data => {this.account = data; console.log("inv service gets account",data, !(data));});
       this.userService.currentUser$
         .subscribe(data => {
@@ -107,6 +111,10 @@ export class InvestmentService {
       if (data) {
         this.initialHoldings();
       }
+    }
+
+    toggleDisplay(view: string) {
+      this.infoWindow$.next(view);
     }
 
     // /** GET Account from the server */

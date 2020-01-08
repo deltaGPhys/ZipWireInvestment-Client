@@ -1,23 +1,16 @@
 
-
-<div style="text-align:center"><h1>Welcome, {{currentUser.firstName}}</h1></div>
-<div style = "text-align:left"><h2>User Details:</h2></div>
-<hr size = "12" color = "black">
-    
+<h2>User Information</h2>
+<a (click)="toggleDisplay('portfolio')"><span style="font-size:small; color:#ccc">(Portfolio <span class="glyphicon glyphicon-stats"></span>)</span></a><br><br>
 
 <div class = "userInfo" *ngIf="currentUser; else noUser">
+    <label>First Name:</label> {{currentUser.firstName}}<br>
     
-    <h2>
-        <p>First Name: {{currentUser.firstName}}</p>
-        
-        <p>Last Name: {{currentUser.lastName}}  </p>  
+    <label>Last Name:</label> {{currentUser.lastName}}  <br>
 
-        <p>Email: {{currentUser.email}}   </p>
-    </h2>
+    <label>Email:</label> {{currentUser.email}} <br>
 
-        <div [ngStyle]="{'font-size': '21px'}"><p>Password:
-            <a routerLink = "/update-password" routerLink = "active">Update Password</a></p></div>
-    
+    <label>Password:</label> ******** <br>
+
 </div>
 
 <ng-template #noUser>
@@ -25,10 +18,4 @@
 </ng-template>
 
 
-<div>
-    <p><a class="btn btn-primary btn-md" (click)="displayEdit()" role="button">Update Profile</a></p>
-</div>
-
-<div>
-    <p><a class="btn btn-primary btn-md" (click)="returnToInvestments()" role="button">Investments</a></p>
-</div>
+<a (click)="toggleDisplay('editInfo')"><span style="font-size:small; color:#ccc">(Edit Info <span class="glyphicon glyphicon-edit"></span>)</span></a>

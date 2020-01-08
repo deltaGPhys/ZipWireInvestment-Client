@@ -24,9 +24,12 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
 import { UserComponent } from './user/user-details/user.component';
 
 import { RegisterUserComponent } from './user/register-user/register-user.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import { UpdateUserComponent } from './user/update-user/update-user.component';
+import { AngularResizedEventModule } from 'angular-resize-event';
+
+
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { UpdateUserComponent } from './user/update-user/update-user.component';
     ReactiveFormsModule,
     ChartsModule,
     RxReactiveFormsModule,
+    AngularResizedEventModule,
   ],
   providers: [TransactionService, Title],
   bootstrap: [AppComponent]

@@ -3,10 +3,17 @@
 <div class="row" style="max-width: 100%; margin-right:0px; ">
   <div class="col-md-8 col">
     <div class="row" style="max-width: 100%; margin:10px;">
-        <div class="col-md-7 box col">
+        <div class="col-md-7 box col" [ngSwitch]="infoWindow">
             <app-investment-header
+            *ngSwitchCase="'portfolio'"
             [account]="account">
             </app-investment-header>
+            <app-user
+            *ngSwitchCase="'userInfo'">
+            </app-user>
+            <app-update-user
+            *ngSwitchCase="'editInfo'">
+            </app-update-user>
         </div>
 
         <div class="col-md-1 col">
@@ -20,7 +27,7 @@
         </div>
     </div>
     <div class="row" style="max-width: 100%; margin:10px;">
-        <div class="col-md-12 box col" style="height:300px;">
+        <div id="graphBox" class="col-md-12 box col" style="height:calc(100vh - 345px);"> <!--(resized)="onGraphResize($event)">-->
             <app-security-graph>
             </app-security-graph>
         </div>
@@ -29,9 +36,9 @@
   
   <div class="col-md-4 col">
     <div class="row" style="max-width: 100%; margin:10px;" *ngIf="account">
-        <div class="col-md-12 box col" style="max-height: calc(100vh - 130px)" >
+        <div class="col-md-12 box col" style="max-height: calc(100vh - 130px);" >
             <h3>Security Holdings</h3>
-            <div style="max-height: 95%; overflow-y:auto">
+            <div style="max-height: 95%; overflow-y: auto;">
                 <app-holdings-list
                 [account]="account">
                 </app-holdings-list>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { InvestmentService } from 'src/app/services/investment.service';
 
 
 
@@ -17,7 +18,7 @@ export class UserComponent implements OnInit {
   
   currentUser: User;
 
-  constructor(private userService: UserService, private router: Router) { 
+  constructor(private userService: UserService, private router: Router, private investmentService: InvestmentService) { 
     this.userService.currentUser$.subscribe(data => this.currentUser = data);
     
   }
@@ -29,8 +30,8 @@ export class UserComponent implements OnInit {
     this.router.navigate(['/update-user']);
   }
 
-  returnToInvestments() : void{
-    this.router.navigate(["/investments"]);
+  toggleDisplay(view: string) {
+    this.investmentService.toggleDisplay(view);
   }
   
 }
