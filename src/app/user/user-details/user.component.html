@@ -5,18 +5,24 @@
 <hr size = "12" color = "black">
     
 
-<div class ="userInfo" *ngIf=currentUser>
+<div class = "userInfo" *ngIf="currentUser; else noUser">
+    <h2>
 
-    <h2>First Name: {{currentUser.firstName}}</h2>
+    
+        <p>First Name: {{currentUser.firstName}}</p>
         
-    <h2>Last Name: {{currentUser.lastName}}</h2>    
+        <p>Last Name: {{currentUser.lastName}}  </p>  
 
-    <h2>Email: {{currentUser.email}} </h2>
+        <p>Email: {{currentUser.email}} </p>
 
-    <h2>Password: {{currentUser.email}}</h2>
-
+        <p>Password: ******** </p>
+    
+    </h2>
 </div>
 
+<ng-template #noUser>
+    <h1>*Please Log In To View Your User Details</h1>
+</ng-template>
 
 
 <div>
