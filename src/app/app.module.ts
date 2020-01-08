@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
-import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
+//import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
 
 import { LoginComponent } from './login/loginComponent/login.component';
 
@@ -25,7 +25,7 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
 import { UserComponent } from './user/user-details/user.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
-import { ExampleReportComponent } from './transactions/example-report/example-report.component';
+//import { ExampleReportComponent } from './transactions/example-report/example-report.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
@@ -37,14 +37,14 @@ import { UpdateUserComponent } from './user/update-user/update-user.component';
     TransactionViewComponent,
     LoginComponent,
     InvestmentsComponent,
-    TransactionFormComponent,
+    //TransactionFormComponent,
     InvestmentHeaderComponent,
     HoldingsListComponent,
     RegisterUserComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     UserComponent,
-    ExampleReportComponent,
+    //ExampleReportComponent,
     UpdateUserComponent
   ],
   imports: [
