@@ -1,7 +1,7 @@
 
 
-<div class="row" style="max-width: 100%; margin:10px;">
-  <div class="col-md-7 col">
+<div class="row" style="max-width: 100%; margin-right:0px; ">
+  <div class="col-md-8 col">
     <div class="row" style="max-width: 100%; margin:10px;">
         <div class="col-md-7 box col">
             <app-investment-header
@@ -26,18 +26,16 @@
         </div>
     </div>
   </div>
-
-  <div class="col-md-1 col">
-
-  </div>  
   
   <div class="col-md-4 col">
     <div class="row" style="max-width: 100%; margin:10px;" *ngIf="account">
-        <div class="col-md-12 box col" >
+        <div class="col-md-12 box col" style="max-height: calc(100vh - 130px)" >
             <h3>Security Holdings</h3>
-            <app-holdings-list
-            [account]="account">
-            </app-holdings-list>
+            <div style="max-height: 95%; overflow-y:auto">
+                <app-holdings-list
+                [account]="account">
+                </app-holdings-list>
+            </div>
         </div>
     </div>
   </div>
