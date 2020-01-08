@@ -28,5 +28,9 @@ export class UserComponent implements OnInit {
   displayEdit() : void {
     this.router.navigate(['/update-user']);
   }
+
+  returnToInvestments() : void{
+    this.router.navigate(["/investments"]);
+  }
   
 }
