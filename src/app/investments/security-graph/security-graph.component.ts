@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
 import { Security } from 'src/app/models/Security';
 import { InvestmentService } from 'src/app/services/investment.service';
 import { ChartDataSets, ChartOptions } from 'chart.js';
@@ -16,14 +16,14 @@ export class SecurityGraphComponent implements OnInit {
   priceHistory: PriceHistory = this.investmentService.histChange.getValue();
   chartData: boolean = true;
   dataStartDate = null;
-  graphWidth: number = 0;
-  graphHeight: number = 0;
+  graphWidth: number = 300;
+  graphHeight: number = 180;
   
   @ViewChild(BaseChartDirective, { static: true }) 
   chart: BaseChartDirective;
 
   constructor(private investmentService: InvestmentService) { 
-    this.investmentService.graphHeight$.subscribe(data => {this.graphHeight = data; console.log(this.graphHeight);this.chartUpdate();});
+    this.investmentService.graphHeight$.subscribe(data => {this.graphHeight = data; this.chartUpdate();});
     this.investmentService.graphWidth$.subscribe(data => {this.graphWidth = data; this.chartUpdate();});
     this.investmentService.stkChange.subscribe(value => {
       this.selectedStock = value[0];
@@ -32,6 +32,8 @@ export class SecurityGraphComponent implements OnInit {
     this.investmentService.histChange.subscribe(value => {
       this.priceHistory = value;
       this.chartUpdate();
+      
+
     });
   }
 
@@ -52,6 +54,10 @@ export class SecurityGraphComponent implements OnInit {
       // }
       this.chartData = false;
       this.chartData = true;
+      if (this.chart) {
+        this.chart.chart.update();
+        
+      }
     }
   }
 
@@ -61,6 +67,7 @@ export class SecurityGraphComponent implements OnInit {
   public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions) = {
     responsive: true,
+    maintainAspectRatio: false,
     elements: 
     { 
       point: 

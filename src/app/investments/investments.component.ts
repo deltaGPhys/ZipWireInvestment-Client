@@ -18,7 +18,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class InvestmentsComponent implements OnInit {
 
-  user: User = new User(1,"Jim","Jones","aol@aol.com","salty",1000.0,2000.0);
   account: Investment;
   securities: Security[];
   holdings: SecurityHolding[];
@@ -38,9 +37,10 @@ export class InvestmentsComponent implements OnInit {
    
   }
 
-  onGraphResize(event: ResizedEvent) {
-    console.log(event.newHeight);
-    this.investmentService.graphWidth$.next(event.newWidth);
-    this.investmentService.graphHeight$.next(event.newHeight-100);
-  }
+  // onGraphResize(event: ResizedEvent) {
+  //   let height: number = event.newHeight-100;
+  //   console.log(height);
+  //   this.investmentService.graphWidth$.next(event.newWidth);
+  //   this.investmentService.graphHeight$.next(height);
+  // }
 }
