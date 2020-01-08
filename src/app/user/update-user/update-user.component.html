@@ -1,0 +1,26 @@
+<!-- If user is loaded show the form, else show the loading template -->
+<form *ngIf="currentUser; else loading" [formGroup]="updateUser" (ngSubmit)="submit()">
+    <label for="firstname">First Name</label>
+    <input id="firstname" formControlName="firstName" />
+    <div *ngIf="form.controls.firstName.errors?.required && form.controls.firstName.touched" class="error">
+      *Required
+    </div>
+  
+    <label for="lastname">Last Name</label>
+    <input id="lastname" formControlName="lastName" />
+    <div *ngIf="form.controls.lastName.errors?.required && form.controls.lastName.touched" class="error">
+      *Required
+    </div>
+  
+    <!--<label for="about">About</label>
+    <textarea id="about" formControlName="about"></textarea>
+    -->
+  
+    <div>
+        <a class="btn btn-primary btn-md" (click)="update()" role="button">Save Profile</a>
+    </div>
+  </form>
+  
+  <ng-template #loading>
+    <h1>Loading User...</h1>
+  </ng-template>

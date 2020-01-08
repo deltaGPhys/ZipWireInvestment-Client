@@ -24,18 +24,21 @@ export class InvestmentsComponent implements OnInit {
   numbers: number[];
   selectedStock: Security;
   currentUser: User;
-  
+  infoWindow: string = 'portfolio';
 
   constructor(private investmentService: InvestmentService, private userService: UserService) { 
     this.investmentService.hldgsChange.subscribe(value => this.holdings = value);
     this.userService.currentUser$.subscribe(value => {this.currentUser = value;});
     this.investmentService.acctChange.subscribe(data => {this.account = data;});
-    this.investmentService.getSecurities().subscribe(x => this.securities = x);
+    this.investmentService.getSecurities().subscribe(data => this.securities = data);
+    this.investmentService.infoWindow$.subscribe(data => this.infoWindow = data);
   }
 
   ngOnInit() {
-   
+    
   }
+
+  
 
   // onGraphResize(event: ResizedEvent) {
   //   let height: number = event.newHeight-100;

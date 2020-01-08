@@ -5,15 +5,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginComponent/login.component';
 import { InvestmentsComponent } from './investments/investments.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/user-details/user.component';
 import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'transactions', component: TransactionListComponent },
     { path: 'investments', component: InvestmentsComponent },
     { path: 'register', component: RegisterUserComponent },
-    { path: 'user', component: UserComponent}
+    { path: 'user', component: UserComponent},
+    { path: 'update-user', component: UpdateUserComponent}
 ];
 
 @NgModule({

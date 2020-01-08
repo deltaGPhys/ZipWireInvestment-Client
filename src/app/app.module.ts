@@ -21,12 +21,15 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/user-details/user.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { AngularResizedEventModule } from 'angular-resize-event';
+
+
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     UserComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

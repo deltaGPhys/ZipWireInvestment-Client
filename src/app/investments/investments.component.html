@@ -3,10 +3,17 @@
 <div class="row" style="max-width: 100%; margin-right:0px; ">
   <div class="col-md-8 col">
     <div class="row" style="max-width: 100%; margin:10px;">
-        <div class="col-md-7 box col">
+        <div class="col-md-7 box col" [ngSwitch]="infoWindow">
             <app-investment-header
+            *ngSwitchCase="'portfolio'"
             [account]="account">
             </app-investment-header>
+            <app-user
+            *ngSwitchCase="'userInfo'">
+            </app-user>
+            <app-update-user
+            *ngSwitchCase="'editInfo'">
+            </app-update-user>
         </div>
 
         <div class="col-md-1 col">
