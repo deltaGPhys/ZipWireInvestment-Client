@@ -1,20 +1,24 @@
 
 
 <div style="text-align:center"><h1>Welcome, {{currentUser.firstName}}</h1></div>
-<div style = "text-align:left"><h1>User Details:</h1></div>
+<div style = "text-align:left"><h2>User Details:</h2></div>
 <hr size = "12" color = "black">
     
-<div class ="userInfo">
 
-    <p><h1>First Name: {{currentUser.firstName}} {{currentUser.lastName}}</h1></p>
+<div class ="userInfo" *ngIf=currentUser>
 
-    <p><h1>Email: {{currentUser.email}} <a [routerLink] ="/update-password">      Update Password</a></h1></p>
+    <h2>First Name: {{currentUser.firstName}}</h2>
+        
+    <h2>Last Name: {{currentUser.lastName}}</h2>    
 
-    <p><h1>Password: {{currentUser.email}}</h1></p>
+    <h2>Email: {{currentUser.email}} </h2>
+
+    <h2>Password: {{currentUser.email}}</h2>
 
 </div>
 
 
+
 <div>
-    <a class="btn btn-primary btn-sm" (click)="displayEdit()" role="button">Update Profile</a>
+    <a class="btn btn-primary btn-md" (click)="displayEdit()" role="button">Update Profile</a>
 </div>

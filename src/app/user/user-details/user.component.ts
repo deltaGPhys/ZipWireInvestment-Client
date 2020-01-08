@@ -18,7 +18,8 @@ export class UserComponent implements OnInit {
   currentUser: User;
 
   constructor(private userService: UserService, private router: Router) { 
-    this.userService.currentUser$.subscribe(data => this.currentUser = data);
+    this.userService.currentUser$.subscribe(data => {this.currentUser = data; console.log(this.currentUser);});
+    
   }
 
   ngOnInit() {
