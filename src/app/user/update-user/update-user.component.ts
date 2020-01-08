@@ -18,8 +18,11 @@ export class UpdateUserComponent implements OnInit {
     this.userService.currentUser$.subscribe(data => {this.currentUser = data; console.log(this.currentUser);});
    }
   
-
   ngOnInit() {
+  }
+
+  update() : void {
+    this.router.navigate(['/user']);
   }
 
 }

@@ -1,5 +1,5 @@
 <!-- If user is loaded show the form, else show the loading template -->
-<form *ngIf="currentUser | async; else loading" [formGroup]="updateUser" (ngSubmit)="submit()">
+<form *ngIf="currentUser; else loading" [formGroup]="updateUser" (ngSubmit)="submit()">
     <label for="firstname">First Name</label>
     <input id="firstname" formControlName="firstName" />
     <div *ngIf="form.controls.firstName.errors?.required && form.controls.firstName.touched" class="error">
@@ -16,7 +16,9 @@
     <textarea id="about" formControlName="about"></textarea>
     -->
   
-    <button [disabled]="!form.valid">Save Profile</button>
+    <div>
+        <a class="btn btn-primary btn-md" (click)="update()" role="button">Save Profile</a>
+    </div>
   </form>
   
   <ng-template #loading>
