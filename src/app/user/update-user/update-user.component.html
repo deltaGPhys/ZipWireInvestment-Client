@@ -1,23 +1,45 @@
 <!-- If user is loaded show the form, else show the loading template -->
-<form *ngIf="currentUser; else loading" [formGroup]="updateUser" (ngSubmit)="submit()">
-    <label for="firstname">First Name</label>
-    <input id="firstname" formControlName="firstName" />
-    <div *ngIf="form.controls.firstName.errors?.required && form.controls.firstName.touched" class="error">
-      *Required
-    </div>
+<form [formGroup]="updateUserForm" #it="ngForm" (ngSubmit)="submit()">
+    <div *ngIf="currentUser; else loading">
+        
+       <!-- <div><p>
+            <label for="firstname">First Name</label>
+            <input type = "text" type="firstname" name = "firstname" class = "form-control"  [(ngModel)]="currentUser.firstName"
+                #firstName="ngModel" required></p></input>
+            *Required
+        </div>
   
-    <label for="lastname">Last Name</label>
-    <input id="lastname" formControlName="lastName" />
-    <div *ngIf="form.controls.lastName.errors?.required && form.controls.lastName.touched" class="error">
-      *Required
-    </div>
+        </div>
+            <label for="lastname">Last Name</label>
+            <input id="lastname" formControlName="lastName" />
+            <div *ngIf="form.controls.lastName.errors?.required && form.controls.lastName.touched" class="error">
+            *Required
+     </div>
+     -->
   
     <!--<label for="about">About</label>
     <textarea id="about" formControlName="about"></textarea>
+    [disabled]="!it.form.valid"
     -->
+
+        <div [ngStyle]="{'font-size': '14px', 'color': 'white'}">
+            <label for="firstName">First Name:</label>
+            <input type="text" type="firstname" formControlName = "firstName" class="form-control" id="firstName"  placeholder="First Name">
+            <div *ngIf="firstName.errors?.required">*First name required</div>
+            <div *ngIf="firstName.errors?.pattern">*First name not valid</div>
+        </div>
+
+        <div [ngStyle]="{'font-size': '14px', 'color': 'white'}">
+            <label for="lastName">Last Name:</label>
+            <input type="text" type="lastname" formControlName = "lastName" class="form-control" id="lastName"  placeholder="Last Name">
+            <div *ngIf="lastName.errors?.required">*Last name required</div>
+            <div *ngIf="lastName.errors?.pattern">*Last name not valid</div>
+        </div>
+
+    </div>  
   
     <div>
-        <a class="btn btn-primary btn-md" (click)="update()" role="button">Save Profile</a>
+        <a class="btn btn-primary btn-md" (click)="update()" type="button" >Save Profile</a>
     </div>
   </form>
   

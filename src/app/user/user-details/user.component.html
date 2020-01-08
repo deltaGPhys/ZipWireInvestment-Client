@@ -6,18 +6,18 @@
     
 
 <div class = "userInfo" *ngIf="currentUser; else noUser">
-    <h2>
-
     
+    <h2>
         <p>First Name: {{currentUser.firstName}}</p>
         
         <p>Last Name: {{currentUser.lastName}}  </p>  
 
-        <p>Email: {{currentUser.email}} </p>
-
-        <p>Password: ******** </p>
-    
+        <p>Email: {{currentUser.email}}   </p>
     </h2>
+
+        <div [ngStyle]="{'font-size': '21px'}"><p>Password:
+            <a routerLink = "/update-password" routerLink = "active">Update Password</a></p></div>
+    
 </div>
 
 <ng-template #noUser>

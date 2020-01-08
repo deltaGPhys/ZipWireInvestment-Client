@@ -6,7 +6,7 @@ import { LoginComponent } from './login/loginComponent/login.component';
 import { InvestmentsComponent } from './investments/investments.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user-details/user.component';
-import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { RegisterUserComponent } from './user/register-user/register-user.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 const routes: Routes = [

@@ -23,7 +23,7 @@ import { TransactionViewComponent } from './transactions/transaction-view/transa
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { UserComponent } from './user/user-details/user.component';
 
-import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { RegisterUserComponent } from './user/register-user/register-user.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
