@@ -34,12 +34,16 @@ export class InvestmentService {
 
   
     constructor(private http: HttpClient, private userService: UserService) { 
-      this.acctChange.subscribe(data => {this.account = data; console.log("inv service gets account",data); this.initialHoldings();});
+      this.acctChange.subscribe(data => {this.account = data; console.log("inv service gets account",data, !(data));});
       this.userService.currentUser$
         .subscribe(data => {
           this.currentUser = data; 
           this.getSecurities();
           this.historyChange(null);
+          console.log('getting account for user',this.currentUser.id);
+          if (this.currentUser.id) {
+            this.getAccountForUser(this.currentUser.id).subscribe(data => this.accountChange(data));
+          }
         });
       
     }
@@ -100,6 +104,9 @@ export class InvestmentService {
 
     accountChange(data: Investment) {
       this.acctChange.next(data);
+      if (data) {
+        this.initialHoldings();
+      }
     }
 
     // /** GET Account from the server */
@@ -112,13 +119,11 @@ export class InvestmentService {
     // }
 
     /** GET Account from the server for user*/
-    getAccountForUser (userId) {
+    getAccountForUser (userId): Observable<Investment> {
       console.log("GET FOR USER,", userId, this.investmentUrl+"user/"+userId);
-      this.http.get<Investment>(this.investmentUrl+"user/"+userId)
+      return this.http.get<Investment>(this.investmentUrl+"user/"+userId, this.httpOptions)
           .pipe(
               tap(data => console.log('fetched InvAcct', data)),
-              tap(data => this.accountChange(data)),
-              tap(data => console.log('retreved account',data)),
               catchError(this.handleError<Investment>('getAcct'))
           );
     }

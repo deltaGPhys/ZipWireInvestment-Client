@@ -26,8 +26,8 @@ export class InvestmentsComponent implements OnInit {
 
   constructor(private investmentService: InvestmentService, private userService: UserService) { 
     this.investmentService.hldgsChange.subscribe(value => this.holdings = value);
-    this.userService.currentUser$.subscribe(value => {this.currentUser = value;console.log('ready to get acct in comp',this.currentUser);this.investmentService.getAccountForUser(this.currentUser.id);this.investmentService.initialHoldings();});
-    this.investmentService.acctChange.subscribe(data => {this.account = data;console.log("account",data);});
+    this.userService.currentUser$.subscribe(value => {this.currentUser = value;});
+    this.investmentService.acctChange.subscribe(data => {this.account = data;});
     this.investmentService.getSecurities().subscribe(x => this.securities = x);
   }
 
