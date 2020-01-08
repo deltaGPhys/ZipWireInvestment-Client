@@ -39,7 +39,8 @@ export class InvestmentsComponent implements OnInit {
   }
 
   onGraphResize(event: ResizedEvent) {
+    console.log(event.newHeight);
     this.investmentService.graphWidth$.next(event.newWidth);
-    this.investmentService.graphHeight$.next(event.newWidth);
+    this.investmentService.graphHeight$.next(event.newHeight-100);
   }
 }
