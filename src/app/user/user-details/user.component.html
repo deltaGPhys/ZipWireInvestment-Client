@@ -6,10 +6,9 @@
     
 <div class ="userInfo">
 
-
     <p><h1>First Name: {{currentUser.firstName}} {{currentUser.lastName}}</h1></p>
 
-    <p><h1>Email: {{currentUser.email}}</h1></p>
+    <p><h1>Email: {{currentUser.email}} <a [routerLink] ="/update-password">      Update Password</a></h1></p>
 
     <p><h1>Password: {{currentUser.email}}</h1></p>
 
@@ -17,6 +16,5 @@
 
 
 <div>
-    <a class="btn btn-primary" (click)="displayEdit()" role="button">Link</a>
+    <a class="btn btn-primary btn-sm" (click)="displayEdit()" role="button">Update Profile</a>
 </div>
-
