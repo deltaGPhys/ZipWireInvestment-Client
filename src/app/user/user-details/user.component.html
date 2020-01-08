@@ -1,20 +1,30 @@
 
 
 <div style="text-align:center"><h1>Welcome, {{currentUser.firstName}}</h1></div>
-<div style = "text-align:left"><h1>User Details:</h1></div>
+<div style = "text-align:left"><h2>User Details:</h2></div>
 <hr size = "12" color = "black">
     
-<div class ="userInfo">
 
-    <p><h1>First Name: {{currentUser.firstName}} {{currentUser.lastName}}</h1></p>
+<div class = "userInfo" *ngIf="currentUser; else noUser">
+    <h2>
 
-    <p><h1>Email: {{currentUser.email}} <a [routerLink] ="/update-password">      Update Password</a></h1></p>
+    
+        <p>First Name: {{currentUser.firstName}}</p>
+        
+        <p>Last Name: {{currentUser.lastName}}  </p>  
 
-    <p><h1>Password: {{currentUser.email}}</h1></p>
+        <p>Email: {{currentUser.email}} </p>
 
+        <p>Password: ******** </p>
+    
+    </h2>
 </div>
+
+<ng-template #noUser>
+    <h1>*Please Log In To View Your User Details</h1>
+</ng-template>
 
 
 <div>
-    <a class="btn btn-primary btn-sm" (click)="displayEdit()" role="button">Update Profile</a>
+    <a class="btn btn-primary btn-md" (click)="displayEdit()" role="button">Update Profile</a>
 </div>
