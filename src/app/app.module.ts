@@ -22,12 +22,13 @@ import { SecurityGraphComponent } from './investments/security-graph/security-gr
 import { TransactionViewComponent } from './transactions/transaction-view/transaction-view.component';
 
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/user-details/user.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
 import { ExampleReportComponent } from './transactions/example-report/example-report.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     UserComponent,
-    ExampleReportComponent
+    ExampleReportComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

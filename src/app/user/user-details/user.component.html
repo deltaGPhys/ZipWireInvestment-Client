@@ -1,0 +1,22 @@
+
+
+<div style="text-align:center"><h1>Welcome, {{currentUser.firstName}}</h1></div>
+<div style = "text-align:left"><h1>User Details:</h1></div>
+<hr size = "12" color = "black">
+    
+<div class ="userInfo">
+
+
+    <p><h1>First Name: {{currentUser.firstName}} {{currentUser.lastName}}</h1></p>
+
+    <p><h1>Email: {{currentUser.email}}</h1></p>
+
+    <p><h1>Password: {{currentUser.email}}</h1></p>
+
+</div>
+
+
+<div>
+    <a class="btn btn-primary" (click)="displayEdit()" role="button">Link</a>
+</div>
+
