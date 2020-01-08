@@ -9,7 +9,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TransactionService } from './services/transaction.service';
+<<<<<<< HEAD
 //import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
+=======
+>>>>>>> 879238809d31f111ccb22a430b1cac91602eceaf
 
 import { LoginComponent } from './login/loginComponent/login.component';
 
@@ -25,7 +28,10 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
 import { UserComponent } from './user/user-details/user.component';
 
 import { RegisterUserComponent } from './login/register-user/register-user.component';
+<<<<<<< HEAD
 //import { ExampleReportComponent } from './transactions/example-report/example-report.component';
+=======
+>>>>>>> 879238809d31f111ccb22a430b1cac91602eceaf
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
@@ -37,15 +43,21 @@ import { UpdateUserComponent } from './user/update-user/update-user.component';
     TransactionViewComponent,
     LoginComponent,
     InvestmentsComponent,
+<<<<<<< HEAD
     //TransactionFormComponent,
+=======
+>>>>>>> 879238809d31f111ccb22a430b1cac91602eceaf
     InvestmentHeaderComponent,
     HoldingsListComponent,
     RegisterUserComponent,
     InvestmentBuyFormComponent,
     SecurityGraphComponent,
     UserComponent,
+<<<<<<< HEAD
     //ExampleReportComponent,
     UpdateUserComponent
+=======
+>>>>>>> 879238809d31f111ccb22a430b1cac91602eceaf
   ],
   imports: [
     BrowserModule,
