@@ -13,6 +13,7 @@ export class UserService {
 
   @Inject(apiUrl) private apiUrl: string;
   private loginUrl : string = apiUrl +"/login";
+  private updateUserProfileUrl: string = apiUrl + "/dashboard/user/update"; 
   currentUser$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   httpOptions = {
@@ -26,7 +27,7 @@ export class UserService {
   verifyUser (email:string, password:string) : Observable<User> {
     let reqData: Object = {"email": email, "password": password};
     return this.http.post<User>(this.loginUrl+"/verify", reqData, this.httpOptions)
-    .pipe(//tap(data => {console.log(data);}),
+    .pipe(tap(data => {console.log(data);}),
     catchError(this.handleError<User>('verification', null)));
   }
 
@@ -39,6 +40,18 @@ export class UserService {
   updateCurrentUser(user : User) {
     console.log("user update in service",user);
     this.currentUser$.next(user);
+  }
+
+  // updateUserProfile(user: User): Observable<User>{
+  //   //console.log(apiUrl);
+  //   //console.log(this.registerUrl);
+  //   return this.http.post<User>(this.registerUrl, user, this.httpOptions).pipe(tap(data => console.log(data)), catchError(this.handleError<User>('addUser')));
+  // }
+  
+  updateUserProfile(user: User) :Observable<User>{
+    //let reqData: Object = {"id": userId, "firstName": firstName, "lastName": lastName};
+    return this.http.post<User>(this.updateUserProfileUrl, user, this.httpOptions)
+        .pipe(tap(data => {console.log(data);catchError(this.handleError<User>('updateProfile', null))}));
   }
 
 /**
