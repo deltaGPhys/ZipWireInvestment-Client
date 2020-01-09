@@ -58,6 +58,9 @@ export class UpdateUserComponent implements OnInit {
     console.log(this.userEmail);
     this.userService.checkEmailAvailability(this.userEmail).subscribe(data => {
        console.log("taken: ", data);
+    if(this.userEmail === this.currentUser.email){
+      data = true;
+    }
     if(data) {
     console.log("inside submit");
     this.emailAlreadyTaken = false;
@@ -81,7 +84,7 @@ export class UpdateUserComponent implements OnInit {
     }
   }
   )}
-  
+
   toggleDisplay(view: string) {
     this.investmentService.toggleDisplay(view);
   }
