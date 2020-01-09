@@ -36,7 +36,7 @@ export class UpdateUserComponent implements OnInit {
     return new FormGroup({  
       firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
       lastName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
-      //email: new FormControl('', [Validators.required,  Validators.email])
+      email: new FormControl('', [Validators.required,  Validators.email])
       //password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!_.@$%^&*-]).{8,}$')]),      
     });
   }
@@ -54,44 +54,34 @@ export class UpdateUserComponent implements OnInit {
   } 
 
   submit(): void {
+    this.userEmail = this.updateUserForm.controls.email.value;
+    console.log(this.userEmail);
+    this.userService.checkEmailAvailability(this.userEmail).subscribe(data => {
+       console.log("taken: ", data);
+    if(data) {
     console.log("inside submit");
+    this.emailAlreadyTaken = false;
     this.userFirstName = this.updateUserForm.controls.firstName.value;
     this.userLastName = this.updateUserForm.controls.lastName.value;
     this.currentUser.firstName = this.userFirstName;
     this.currentUser.lastName = this.userLastName;
+    this.currentUser.email = this.userEmail;
     console.log(this.currentUser);
     this.userService.updateUserProfile(this.currentUser)
-    this.updateUserForm.reset();
-    this.router.navigate(['/user']);
-
-    // this.userService.updateUserProfile(this.currentUser)
-    // .subscribe(data => {
-    //       this.user = data;
-    //       this.userService.updateCurrentUser(this.user);
-    //       this.updateUserForm.reset();
-    //       //console.log("User: " , this.user);
-    //       this.router.navigate(['/user']);
-    //      });   
-    
+      .subscribe(data => {
+        this.user = data;
+        this.userService.updateCurrentUser(this.user);
+        this.updateUserForm.reset();
+        console.log("User: " , this.user);
+        this.toggleDisplay("userInfo");
+     });
+    }
+    else {
+      this.emailAlreadyTaken = true;
+    }
   }
-
-  // submitToChangeEmail() : void {
-  //   console.log("inside submit")
-  //   this.userService.checkEmailAvailability(this.userEmail).subscribe(data => {
-  //     console.log("taken: ", data);
-  //     if(!data){
-  //       this.emailAlreadyTaken = false;
-  //       this.updateProfile();
-  //       this.updateUserForm.reset();
-  //       this.investmentService.toggleDisplay('portfolio');    
-  //     }
-  //     else {
-  //       this.emailAlreadyTaken = true;
-  //     }
-  //   });
-  // }
+  )}
   
-
   toggleDisplay(view: string) {
     this.investmentService.toggleDisplay(view);
   }

@@ -15,6 +15,7 @@ export class UserService {
   private loginUrl : string = apiUrl +"/login";
   private updateUserProfileUrl: string = apiUrl + "/dashboard/user/update"; 
   currentUser$: BehaviorSubject<any> = new BehaviorSubject([]);
+  isEmailAvailable$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json'})

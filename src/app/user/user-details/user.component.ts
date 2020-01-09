@@ -15,7 +15,6 @@ import { InvestmentService } from 'src/app/services/investment.service';
 export class UserComponent implements OnInit {
 
   updateUser : boolean = false;
-  
   currentUser: User;
 
   constructor(private userService: UserService, private router: Router, private investmentService: InvestmentService) { 

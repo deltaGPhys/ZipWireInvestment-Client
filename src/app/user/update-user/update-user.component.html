@@ -1,5 +1,5 @@
-<!-- If user is loaded show the form, else show the loading template -->
-    <form [formGroup]="updateUserForm" #it="ngForm" (ngSubmit)="submit()">
+<!-- If user is loaded show the form, else show the loading template #it="ngForm" -->
+    <form [formGroup]="updateUserForm" (ngSubmit)="submit()">
         <div *ngIf="currentUser; else loading">
       
         <div [ngStyle]="{'font-size': '10px', 'color': 'white'}">
@@ -18,22 +18,21 @@
             <!--<div *ngIf="firstNameEmpty">*Last name required</div>-->
         </div>
 
-       <!-- <div [ngStyle]="{'font-size': '10px', 'color': 'white'}">
-            <label for="email">Last Name:</label>
-            <input type="text" type="email" formControlName = "email" class="form-control" id="email"  value={{currentUser.email}}>
+        <div [ngStyle]="{'font-size': '10px', 'color': 'white'}">
+            <label for="email">Email:</label>
+            <input type="text" type="email" formControlName = "email" class="form-control" id="email"  placeholder="Email">
             <div *ngIf="email.errors?.required">*Email required</div>
             <div *ngIf="email.errors?.pattern">*Email not valid</div>
-            <div *ngIf="emailEmpty">*Email required</div>
+          <!--  <div *ngIf="emailEmpty">*Email required</div>  -->
         </div>
         <div *ngIf="emailAlreadyTaken" class="alert alert-danger"> 
             *This username already exists!
           </div>
-        -->
 
     </div>  
 
     <div>
-        <a class="btn btn-primary btn-md" (click)="submit()" type="button" >Save Profile</a>
+        <button type="button" class="btn btn-primary btn-md" [disabled]="!updateUserForm.valid" (click)="submit()">Save Profile</button>
     </div>
 
     </form>

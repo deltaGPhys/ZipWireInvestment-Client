@@ -28,6 +28,7 @@ import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { AngularResizedEventModule } from 'angular-resize-event';
+import { UserService } from './services/user.service';
 
 
 
@@ -57,7 +58,7 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     RxReactiveFormsModule,
     AngularResizedEventModule,
   ],
-  providers: [TransactionService, Title],
+  providers: [TransactionService, UserService,Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
