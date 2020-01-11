@@ -8,3 +8,5 @@
 * Requires [ZipWireInvestment-Server](https://github.com/deltaGPhys/ZipWireInvestment-Server), a Spring Boot application
 
 ### Screenshots
+<img src="zwss1.png" width="300">
+<img src="zwss2.png" width="300">
