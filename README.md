@@ -1,5 +1,5 @@
 # ZipWire
-## Mock Investment Management Micro Web Application - Client
+## Mock Investment Management Micro Web Application - Client 
 
 ### Running on your local machine
 * Clone the repository
